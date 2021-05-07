@@ -1,5 +1,5 @@
-const Blockauction = artifacts.require("Auction");
+const Auction = artifacts.require("Auction");
 
 module.exports = function(deployer) {
-  deployer.deploy(Blockauction);
+  deployer.deploy(Auction);
 };

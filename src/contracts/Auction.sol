@@ -53,12 +53,7 @@ contract Auction {
         );
     
     modifier Auctionactive (uint _id){
-        require(block.timestamp - products[_id].createdAt <= 3600  );
-        _;
-    }
-    
-    modifier validBid(uint _id, uint _bid){
-        require (_bid > products[_id].currentBid);
+        require(block.timestamp - products[_id].createdAt <= 1 minutes  );
         _;
     }
     
@@ -84,17 +79,31 @@ contract Auction {
         _;
     }
     
-    function placeBid (uint _id, uint _bid, address payable _buyer) validBid(_id, _bid) Auctionactive(_id)
+    function placeBid (uint _id) Auctionactive(_id)
     public payable{
-        products[_id].currentBid = _bid;
-        products[_id].currentBidder = _buyer;
+        products[_id].currentBid = products[_id].currentBid + 0.5*1000000000000000000 ;
+        products[_id].currentBidder = msg.sender;
         
         emit bidplaced(_id,products[_id].name,products[_id].baseprice,products[_id].owner,products[_id].purchased,block.timestamp,
         products[_id].currentBid,products[_id].currentBidder );
         
     }
+
+    function Auctionstatus(uint _id) public returns(bool){
+        if (block.timestamp - products[_id].createdAt < 1 minutes){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
     
-    function closeAuction(uint _id) Auctionactive(_id) validAuction(_id) public payable {
+    function closeAuction(uint _id) validAuction(_id) public payable {
+
+         if (Auctionstatus(_id)){
+            return;
+        }
+
         //fetch the product
         Product memory _product = products[_id];
         
@@ -125,7 +134,7 @@ contract Auction {
         address(_seller).transfer(msg.value);
         
         
-        emit closeauction(_product.Id,_product.name ,_product.baseprice,true,_product.currentBid,msg.sender );
+        emit closeauction(_product.Id,_product.name ,_product.baseprice,true,_product.currentBid, _product.owner  );
 
     }
     
