@@ -4,6 +4,10 @@
   "description": "An Ethereum Marketplace",
   "author": "gregory@dappuniversity.com",
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.35",
+    "@fortawesome/free-regular-svg-icons": "^5.15.3",
+    "@fortawesome/free-solid-svg-icons": "^5.15.3",
+    "@fortawesome/react-fontawesome": "^0.1.14",
     "babel-polyfill": "6.26.0",
     "babel-preset-env": "1.7.0",
     "babel-preset-es2015": "6.24.1",
@@ -14,11 +18,15 @@
     "chai": "4.2.0",
     "chai-as-promised": "7.1.1",
     "chai-bignumber": "3.0.0",
+    "ipfs-http-client": "^33.1.1",
+    "jquery": "^3.6.0",
     "react": "16.8.4",
     "react-bootstrap": "1.0.0-beta.5",
     "react-dom": "16.8.4",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "2.1.3",
     "truffle": "5.3.3",
+    "web-vitals": "^1.1.2",
     "web3": "1.0.0-beta.55"
   },
   "scripts": {
@@ -37,4 +45,3 @@
     "not op_mini all"
   ]
 }
-

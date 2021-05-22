@@ -1,0 +1,17 @@
+#Categories{
+    background-color: #ffffff !important;
+    color: #5AA0FF;
+    border: none !important;
+}
+.addPostform{
+    background-color: #ffffff !important;
+    padding: 1em;
+    width: 70%;
+}
+.Field{
+    border: 2px solid #5AA0FF;
+    border-radius: 10px;
+}
+#AddPost{
+   background-color:  #5AA0FF;
+}

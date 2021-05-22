@@ -1,0 +1,17 @@
+.userBox{
+    background-color: white;
+}
+.userPic{
+    width: 1.6em;
+}
+.searchBox{
+    width: 160%;
+}
+.Content{
+    text-align: start;
+    padding: 1em;
+}
+#dropdownMenuButton {
+    border: none;
+    
+}

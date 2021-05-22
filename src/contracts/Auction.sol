@@ -2,8 +2,19 @@ pragma solidity ^0.5.16;
 
 
 contract Auction {
+
     
     uint public productCount = 0;
+    string hash;
+
+     function set(string memory _hash) public {
+        hash = _hash;
+    }
+
+    //read function
+    function get() public view returns (string memory) {
+    return hash;
+  }
     
     mapping(uint => Product)public products;
     
@@ -22,6 +33,10 @@ contract Auction {
         uint createdAt;
         uint currentBid;
         address payable currentBidder;
+        uint currentbidtime;
+        string discription;
+        uint bidcount;
+        string category;
     }
     
     event ProductCreated(
@@ -29,7 +44,10 @@ contract Auction {
         string name,
         uint baseprice,
         address owner,
-        bool purchased
+        bool purchased,
+        string discription,
+        uint bidcount,
+        string category
     );
     
     event bidplaced(
@@ -40,7 +58,9 @@ contract Auction {
         bool purchased,
         uint createdAt,
         uint currentBid,
-        address payable currentBidder
+        address payable currentBidder,
+        uint bidcount,
+        string category
         );
         
     event closeauction (
@@ -49,7 +69,9 @@ contract Auction {
         uint baseprice,
         bool purchased,
         uint currentBid,
-        address payable currentBidder
+        address payable currentBidder,
+        uint bidcount,
+        string category
         );
     
     modifier Auctionactive (uint _id){
@@ -58,7 +80,7 @@ contract Auction {
     }
     
     
-    function createProduct(string memory _name, uint _baseprice) public payable{
+    function createProduct(string memory _name, uint _baseprice, string memory _discription, string memory _category) public payable{
         //verify the product
         require(bytes(_name).length > 0);
         require(_baseprice >0);
@@ -67,10 +89,10 @@ contract Auction {
         productCount++;
 
         //create the product
-        products[productCount] = Product(productCount,_name,_baseprice,msg.sender,false, block.timestamp,_baseprice,msg.sender);
+        products[productCount] = Product(productCount,_name,_baseprice,msg.sender,false, block.timestamp,_baseprice,msg.sender,block.timestamp, _discription,0, _category);
        
         //trigger an event
-        emit ProductCreated(productCount,_name,_baseprice,msg.sender,false);
+        emit ProductCreated(productCount,_name,_baseprice,msg.sender,false,_discription,0, _category);
     
     }
     
@@ -78,14 +100,22 @@ contract Auction {
         products[_id].Id <= productCount;
         _;
     }
+
+    modifier validbid(uint _id){
+        require (block.timestamp - products[_id].currentbidtime >= 15 seconds);
+        _;
+    }
     
-    function placeBid (uint _id) Auctionactive(_id)
+    function placeBid (uint _id) Auctionactive(_id) validbid(_id)
     public payable{
         products[_id].currentBid = products[_id].currentBid + 0.5*1000000000000000000 ;
         products[_id].currentBidder = msg.sender;
+        products[_id].currentbidtime = block.timestamp;
+        products[_id].bidcount = products[_id].bidcount + 1;
+    
         
         emit bidplaced(_id,products[_id].name,products[_id].baseprice,products[_id].owner,products[_id].purchased,block.timestamp,
-        products[_id].currentBid,products[_id].currentBidder );
+        products[_id].currentBid,products[_id].currentBidder,products[_id].bidcount, products[_id].category  );
         
     }
 
@@ -134,7 +164,7 @@ contract Auction {
         address(_seller).transfer(msg.value);
         
         
-        emit closeauction(_product.Id,_product.name ,_product.baseprice,true,_product.currentBid, _product.owner  );
+        emit closeauction(_product.Id,_product.name ,_product.baseprice,true,_product.currentBid, _product.owner ,products[_id].bidcount ,products[_id].category);
 
     }
     

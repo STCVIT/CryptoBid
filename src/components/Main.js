@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
+// const ipfsClient = require('ipfs-http-client')
+// const ipfs = ipfsClient({ host: 'ipfs.infura.io', port: 5001, protocol: 'https', apiPath: '/ipfs/api/v0' }) // leaving out the arguments will default to these values
 
+// const hashes = []
+// console.log(hashes)
 class Main extends Component {
 
+  
 
     // constructor(props) {
     //     super(props);
@@ -26,8 +31,68 @@ class Main extends Component {
     //     console.log(this.state.value)
         
     //   }
-    
+
+    // constructor(props) {
+    //   super(props)
+    //   this.state = {
+    //     hash: '',
+    //     buffer: null,
+    //     hashes:[]
+    //   }
+
+    // }
+
+    // Capturefile = (event) => {
+    //   event.preventDefault();
+    //   const file = event.target.files[0]
+    //   const reader = new window.FileReader()
+    //   reader.readAsArrayBuffer(file)
+    //   reader.onloadend = () => {
+    //     this.setState({buffer : Buffer.from(reader.result)})
+    //     console.log('buffer', Buffer(reader.result))
+    //     // console.log("Submitting the form...")
+    //   // ipfs.add(this.state.buffer, (error, result) => {
+    //   //      console.log('IPFS result',result[0].hash)
+    //   //     //  this.setState({hash: result[0].hash})
+    //   //       if(error) {
+    //   //          console.error(error)
+    //   //          return
+    //   //       }
+    //   //       this.setState({hash: result[0].hash}) 
+    //   //       this.setState({
+    //   //         hashes: [...this.state.hashes , result[0].hash]
+    //   //       })
+  
+    //   //       // store file on blockhain
+    //   //  })
+        
+    //   }
+    // }
+  
+    // createhash =  (event) => {
+    //   event.preventDefault()
+    //   console.log("Submitting the form...")
+    //   ipfs.add(this.state.buffer, (error, result) => {
+    //        console.log('IPFS result',result[0].hash)
+    //       //  this.setState({hash: result[0].hash})
+    //         if(error) {
+    //            console.error(error)
+    //            return
+    //         }
+    //         this.setState({hash: result[0].hash})
+           
+    //         this.setState({
+    //           hashes: [result[0].hash,...this.state.hashes ]
+    //         })
+    //         // hashes.push(result[0].hash)
+    //         console.log(this.state.hashes)
+    //         console.log(this.state.hash)
+  
+    //         //store file on blockhain
+    //    })
+    //   }
    
+
     
 
   render() {
@@ -58,7 +123,18 @@ class Main extends Component {
               placeholder="Product Price"
               required />
           </div>
-          <button type="submit" className="btn btn-primary">Add Product</button>
+          <div>
+            <input 
+            id = "file"
+            type="file"
+            ref={(input) => {this.file = input}  }
+            className="form-control"
+            placeholder="Product Price"
+            onChange={this.props.Capturefile}
+            />
+          </div>
+          <button  onClick={this.props.createhash} className="btn btn-primary">Add Image</button>
+          <button  type="submit"  className="btn btn-primary">Add Product</button>
         </form>
         <p>&nbsp;</p>
         <h2>Buy Product</h2>
@@ -66,6 +142,7 @@ class Main extends Component {
           <thead>
             <tr>
               <th scope="col">#</th>
+              <th scope="col">Picture</th>
               <th scope="col">Name</th>
               <th scope="col">BasePrice</th>
               <th scope="col">Current Bid</th>
@@ -79,6 +156,7 @@ class Main extends Component {
               return(
                 <tr key={key}>
                   <th scope="row">{product.Id.toString()}</th>
+                  <td> <img src= { `https://ipfs.infura.io/ipfs/${this.props.hash}` } className="App-logo" alt="logo" />  </td>
                   <td>{product.name}</td>
                   <td>{window.web3.utils.fromWei(product.baseprice.toString(), 'Ether')} Eth</td>
                   <td>{window.web3.utils.fromWei(product.currentBid.toString(), 'Ether')} Eth</td>
@@ -117,7 +195,7 @@ class Main extends Component {
                           onClick={(event) => {this.props.closeAuction(event.target.name , event.target.value)}
                         }
                         >
-                        close
+                        Pay
                         </button>
                     }
                     </td>
