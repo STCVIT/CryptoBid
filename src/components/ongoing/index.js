@@ -4,10 +4,8 @@ import './postCard.css';
 import { faShare } from '@fortawesome/free-solid-svg-icons';
 import {CardDeck} from 'react-bootstrap';
 function Ongoing(props) {
-  
     return(
-  <div id="content">
-    
+  <div id="content">   
     <div><h1>Your Products</h1></div>
     {props.products.map((product, key) => {
       return (
@@ -35,7 +33,6 @@ function Ongoing(props) {
                         Bid
                         </button>
                       : null}
-
                     {!product.purchased
                       ? 
                       <button className="btn btn-secondary"
@@ -53,8 +50,6 @@ function Ongoing(props) {
         </CardDeck>
       )
     })}
-
-
 <p>&nbsp;</p>
     <div><h1>Your Biddings</h1></div>
     {props.products.map((product,key) => {
@@ -103,5 +98,4 @@ function Ongoing(props) {
            </div>
     )
 }
-
 export default Ongoing
