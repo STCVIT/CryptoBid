@@ -62,7 +62,7 @@ function Post(props) {
     <div><h1>All Posts</h1></div>
     {props.products.map((product,key) => {
         return(
-            <div key={key} className="card col">
+            <div key={key} className="card col pb-2">
             {/* <img className="card-img-top" src="sofa.jpg" alt="ProductImage" /> */}
             <div className="card-body">
                <img src= { `https://ipfs.infura.io/ipfs/${props.hashes[key]}` } className="App-logo" alt="logo" />           

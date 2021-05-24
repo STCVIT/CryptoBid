@@ -16,7 +16,7 @@ import Auction from '../abis/Auction.json'
 
 const ipfsClient = require('ipfs-http-client')
 const ipfs = ipfsClient({ host: 'ipfs.infura.io', port: 5001, protocol: 'https', apiPath: '/ipfs/api/v0' }) // leaving out the arguments will default to these values
-let hashing = []
+// let hashing = []
 class App extends Component {
 
 
@@ -61,21 +61,39 @@ class App extends Component {
           products: [...this.state.products, product]
           
         })
-        
         const hash = await auction.methods.get().call()
-        hashing.push(hash)
         this.setState({ hash })
-        this.setState({
-          hashes: [...this.state.hashes,hash ]
-        })
-      }
-      // const hash = await auction.methods.get().call()
-      // this.setState({ hash })
-      // this.setState({
-      //   hashes: [...this.state.hashes,this.state.hash ]
+
+
+      //   const hashes = await auction.methods.hashes(i).call()
+      //   console.log(hashes)
+      //   this.setState({
+      //   hashes: [...this.state.hashes, hashes]
       // })
-      hashing.push(this.state.hash)
-      console.log(hashing)
+        
+        // const hash = await auction.methods.get().call()
+        // // hashing.push(hash)
+        // this.setState({ hash })
+        // this.setState({
+        //   hashes: [...this.state.hashes,hash ]
+        // })
+      }
+      for (var y = 0; y< productCount;y++){
+          const hashes = await auction.methods.arrayhashes(y).call()
+          console.log(hashes)
+          this.setState({
+          hashes: [...this.state.hashes, hashes]
+        })
+        console.log(hashes)
+        
+      }
+      const hash = await auction.methods.get().call()
+      this.setState({ hash })
+      // this.setState({
+      //   hashes: [...this.state.hashes, this.state.hash ]
+      // })
+      // hashing.push(this.state.hash)
+      // console.log(hashing)
       console.log(this.state.products)
       console.log(this.state.hashes)
     }else {
@@ -130,7 +148,6 @@ class App extends Component {
     } )
   }
 
-
   Capturefile = (event) => {
     event.preventDefault();
     const file = event.target.files[0]
@@ -139,22 +156,6 @@ class App extends Component {
     reader.onloadend = () => {
       this.setState({buffer : Buffer.from(reader.result)})
       console.log('buffer', Buffer(reader.result))
-      // console.log("Submitting the form...")
-    // ipfs.add(this.state.buffer, (error, result) => {
-    //      console.log('IPFS result',result[0].hash)
-    //     //  this.setState({hash: result[0].hash})
-    //       if(error) {
-    //          console.error(error)
-    //          return
-    //       }
-    //       this.setState({hash: result[0].hash}) 
-    //       this.setState({
-    //         hashes: [...this.state.hashes , result[0].hash]
-    //       })
-
-    //       // store file on blockhain
-    //  })
-      
     }
   }
 
@@ -169,26 +170,21 @@ class App extends Component {
              return
           }
           this.setState({hash: result[0].hash})
-         
-          // this.setState({
-          //   hashes: [result[0].hash,...this.state.hashes ]
-          // })
-          // hashes.push(result[0].hash)
+          // hashing.push(result[0].hash)
           console.log(this.state.hashes[0])
           console.log(this.state.hash)
+          this.setState({
+            hashes: [...this.state.hashes, result[0].hash]
+          })
           this.state.auction.methods.set(result[0].hash).send({ from: this.state.account }).then((r) => {
             return this.setState({ hash: result[0].hash })
           })
-          
-
-          //store file on blockhain
      })
     }
  
 
   render() {
     return (
-
       <Router>
         {/* <Loginpg />  */}
       <div className="App"></div>
@@ -196,32 +192,14 @@ class App extends Component {
           <div className="flex-fill sidebar">
             <Header 
             account={this.state.account} products={this.state.products} hashes={this.state.hashes} hash={this.state.hash}  createProduct={this.createProduct} placeBid={this.placeBid} closeAuction={this.closeAuction} AuctionExpiry={this.AuctionExpiry} createhash={this.createhash} Capturefile={this.Capturefile}  
-            />
-          
-            
+            /> 
           </div>
           <div className="flex-fill col-sm-12 main">
             <Main Data= 'prerit' 
               account={this.state.account} products={this.state.products} hashes={this.state.hashes} hash={this.state.hash}  createProduct={this.createProduct} placeBid={this.placeBid} closeAuction={this.closeAuction} AuctionExpiry={this.AuctionExpiry} createhash={this.createhash} Capturefile={this.Capturefile}  
               />
-           
-             
-       
       </div>
  </div>      
-         {/* <Switch > <Route exact path="/" component={Addpost}> </Route> </Switch> 
-         <div className="container-fluid mt-5">
-          <div className="row">
-            <main role="main" className="col-lg-12 d-flex">
-              { this.state.loading
-                ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div>
-                : <Addpost
-                products={this.state.products} hashes={this.state.hashes} hash={this.state.hash}  createProduct={this.createProduct} placeBid={this.placeBid} closeAuction={this.closeAuction} AuctionExpiry={this.AuctionExpiry} createhash={this.createhash} Capturefile={this.Capturefile}    />
-              }
-            </main>
-          </div> 
-        </div> */}
-        
         </Router>
     );
   }

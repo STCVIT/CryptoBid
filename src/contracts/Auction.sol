@@ -3,12 +3,15 @@ pragma solidity ^0.5.16;
 
 contract Auction {
 
-    
+    string[] public arrayhashes;
+
+
     uint public productCount = 0;
     string hash;
 
      function set(string memory _hash) public {
         hash = _hash;
+        arrayhashes.push(_hash);
     }
 
     //read function
