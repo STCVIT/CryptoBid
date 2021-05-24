@@ -10,14 +10,15 @@ import Web3 from 'web3'
 import Auction from '../abis/Auction.json'
 // import Navbar from './Navbar'
 // import Main from './Main'
-import Post from "./Card";
-import Search from './Search'
+// import Post from "./Card";
+// import Search from './Search'
 
 
 const ipfsClient = require('ipfs-http-client')
 const ipfs = ipfsClient({ host: 'ipfs.infura.io', port: 5001, protocol: 'https', apiPath: '/ipfs/api/v0' }) // leaving out the arguments will default to these values
-
+let hashing = []
 class App extends Component {
+
 
   async componentWillMount() {
     await this.loadWeb3()
@@ -58,15 +59,25 @@ class App extends Component {
         const product = await auction.methods.products(i).call()
         this.setState({
           products: [...this.state.products, product]
+          
+        })
+        
+        const hash = await auction.methods.get().call()
+        hashing.push(hash)
+        this.setState({ hash })
+        this.setState({
+          hashes: [...this.state.hashes,hash ]
         })
       }
-      const hash = await auction.methods.get().call()
-      this.setState({ hash })
-      this.setState({
-        hashes: [...this.state.hashes,this.state.hash ]
-      })
+      // const hash = await auction.methods.get().call()
+      // this.setState({ hash })
+      // this.setState({
+      //   hashes: [...this.state.hashes,this.state.hash ]
+      // })
+      hashing.push(this.state.hash)
+      console.log(hashing)
       console.log(this.state.products)
-      console.log(this.state.hash)
+      console.log(this.state.hashes)
     }else {
       window.alert('Auction contract not deployed to detected network.')
     }
@@ -159,11 +170,11 @@ class App extends Component {
           }
           this.setState({hash: result[0].hash})
          
-          this.setState({
-            hashes: [result[0].hash,...this.state.hashes ]
-          })
+          // this.setState({
+          //   hashes: [result[0].hash,...this.state.hashes ]
+          // })
           // hashes.push(result[0].hash)
-          console.log(this.state.hashes)
+          console.log(this.state.hashes[0])
           console.log(this.state.hash)
           this.state.auction.methods.set(result[0].hash).send({ from: this.state.account }).then((r) => {
             return this.setState({ hash: result[0].hash })

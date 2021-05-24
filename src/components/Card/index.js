@@ -4,6 +4,7 @@ import './postCard.css';
 import { faShare } from '@fortawesome/free-solid-svg-icons';
 import {CardDeck} from 'react-bootstrap';
 function Post(props) {
+  
     return(
   <div id="content">
     
@@ -41,28 +42,16 @@ function Post(props) {
                     {!product.purchased
                       ? 
                       <button className="btn btn-secondary"
-                            // type="submit"
-                            // value="Submit"
-                            // onSubmit={this.handleSubmit}
                           name={product.Id}
                           value = {product.currentBid}
-                          // bid =  {this.state.value}
                           onClick={(event) => {props.closeAuction(event.target.name , event.target.value)}
                         }
                         >
                         Pay
                         </button>
-                      : null}
-                     
-                    
-
-
+                      : null} 
              </div>
-
-
-           </div>
-          
-          
+           </div>      
           : null }
         </CardDeck>
       )
@@ -76,12 +65,12 @@ function Post(props) {
             <div key={key} className="card col">
             {/* <img className="card-img-top" src="sofa.jpg" alt="ProductImage" /> */}
             <div className="card-body">
+               <img src= { `https://ipfs.infura.io/ipfs/${props.hashes[key]}` } className="App-logo" alt="logo" />           
               <h5 className="card-title conatina">{product.name}</h5>
               <p className="card-text">{product.discription}</p>
               <p className="card-text">BasePrice : {window.web3.utils.fromWei(product.baseprice.toString(), 'Ether')} Eth </p>
               <p className="card-text">Current Bid :{window.web3.utils.fromWei(product.currentBid.toString(), 'Ether')}  Eth </p>
-              <p className="card-text">Product discription : {product.discription}</p>
-              
+              <p className="card-text">Product discription : {product.discription}</p>              
              {!product.purchased
                       ? 
                       <button
@@ -96,7 +85,6 @@ function Post(props) {
                         Bid
                         </button>
                       : null}
-
                     {!product.purchased
                       ? 
                       <button
@@ -111,8 +99,7 @@ function Post(props) {
                         >
                         Pay
                         </button>
-                      : null}
-                    
+                      : null}     
               <p href="#" className="conatina rupee">{product.productPrice}</p>
               
               <div className="card-footer d-flex">
@@ -122,15 +109,12 @@ function Post(props) {
           <p>&nbsp;</p>
             </div>
             <p>&nbsp;</p>
-          </div>
-          
+          </div>   
           )
            })}
 
            </div>
-   
     )
-  
 }
 
 

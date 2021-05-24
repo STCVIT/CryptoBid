@@ -17,12 +17,7 @@ contract Auction {
   }
     
     mapping(uint => Product)public products;
-    
-    struct User{
-        uint id;
-        string name;
-    }
-    
+   
     
     struct Product {
         uint Id;

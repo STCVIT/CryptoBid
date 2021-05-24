@@ -70,8 +70,8 @@ class Header extends Component{
               icon: "addnew",
             },
             {
-              link: "transaction",
-              text: "Transactions",
+              link: "ongoing",
+              text: "Ongoing",
               icon: "transactions",
             },
             {

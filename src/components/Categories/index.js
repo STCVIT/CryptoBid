@@ -85,7 +85,7 @@ function Categories(props) {
           })}
         </div>
         <div>
-          <Search Category={CurrentCategory} products={props.products} placeBid={props.placeBid} closeAuction={props.closeAuction}  />
+          <Search Category={CurrentCategory} hashes={props.hashes} hash={props.hash} products={props.products} placeBid={props.placeBid} closeAuction={props.closeAuction}  />
         </div>
     </div>
   )

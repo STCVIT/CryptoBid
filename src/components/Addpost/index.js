@@ -71,6 +71,16 @@ function Addpost(props) {
               ref={(input) => { obj.discription = input }}
             />
           </Form.Group>
+          <div>
+            <input 
+            id = "file"
+            type="file"
+            // ref={(input) => {this.file = input}  }
+            className="form-control"
+            placeholder="Product Price"
+            onChange={props.Capturefile}
+            />
+          </div>
         
           {/* <Form.File
             id="custom-file"

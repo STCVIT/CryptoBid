@@ -17,7 +17,7 @@ function Search(props) {
                             <div key={key} className="card col">
                                 <div className="card-body">
                                 <div className="p-0">
-                                    <img src={itemimg} alt="item-img" className="item-img" />
+                                <img src= { `https://ipfs.infura.io/ipfs/${props.hashes[key]}` } className="App-logo" alt="logo" />  
                                 </div>
                                     <h5 className="card-title conatina">{product.name}</h5>
                                     <p className="card-text">{product.discription}</p>

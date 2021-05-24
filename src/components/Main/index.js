@@ -11,7 +11,7 @@ import Categories from "../Categories";
 import Post from '../Card';
 import Assests from '../assests'
 import Search from '../Search'
-
+import Ongoing from '../ongoing'
 
 function Main(props) {
   return (
@@ -80,13 +80,16 @@ function Main(props) {
               <Addpost   hashes={props.hashes} hash={props.hash}  createProduct={props.createProduct}  closeAuction={props.closeAuction} AuctionExpiry={props.AuctionExpiry} createhash={props.createhash} Capturefile={props.Capturefile}  />
             </Route>
             <Route exact path="/home">
-              <Post account={props.account} products={props.products} createProduct={props.createProduct}  closeAuction={props.closeAuction} placeBid={props.placeBid} AuctionExpiry={props.AuctionExpiry}  />
+              <Post   hashes={props.hashes} hash={props.hash} account={props.account} products={props.products} createProduct={props.createProduct}  closeAuction={props.closeAuction} placeBid={props.placeBid} AuctionExpiry={props.AuctionExpiry}  />
             </Route>
             <Route exact path="/categories"> 
-            <Categories  account={props.account} products={props.products} placeBid={props.placeBid} closeAuction={props.closeAuction} />
+            <Categories hashes={props.hashes} hash={props.hash}  account={props.account} products={props.products} placeBid={props.placeBid} closeAuction={props.closeAuction} />
+         </Route>
+         <Route exact path="/ongoing"> 
+            <Ongoing hashes={props.hashes} hash={props.hash} account={props.account} products={props.products}  />
          </Route>
          <Route exact path="/assests"> 
-            <Assests  account={props.account} products={props.products}  />
+            <Assests  hashes={props.hashes} hash={props.hash} account={props.account} products={props.products}  />
          </Route>
          {/* <Route>
          <Search products={props.products} placeBid={props.placeBid} closeAuction={props.closeAuction}/>
