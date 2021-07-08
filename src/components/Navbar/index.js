@@ -16,7 +16,7 @@ const NavItem = ({ navItem }) => {
   };
   return (
     <Link
-      className="py-2 px-4 d-flex m-2 rounded-pill list-group-item list-group-item-action border-0"
+      className="py-2 px-4 d-flex m-2 rounded-pill list-group-item list-group-item-action border-0 "
       to={`/${navItem.link}`}
     >
       <FontAwesomeIcon className="m-1"
@@ -79,6 +79,11 @@ class Header extends Component{
               text: "Assests",
               icon: "ongoing",
             },
+            {
+              link: "signup",
+              text: "Signup",
+              icon: "ongoing",
+            }
           ].map((navItem, index) => {
             return <NavItem key={index} navItem={navItem} />;
           })}

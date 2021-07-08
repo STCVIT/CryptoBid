@@ -6,7 +6,7 @@ import {CardDeck} from 'react-bootstrap';
 function Ongoing(props) {
     return(
   <div id="content">   
-    <div><h1>Your Products</h1></div>
+    <div className="light" ><h1>Your Products</h1></div>
     {props.products.map((product, key) => {
       return (
         <CardDeck>
@@ -51,7 +51,7 @@ function Ongoing(props) {
       )
     })}
 <p>&nbsp;</p>
-    <div><h1>Your Biddings</h1></div>
+    <div className="light" ><h1>Your Biddings</h1></div>
     {props.products.map((product,key) => {
         return(
             <CardDeck>

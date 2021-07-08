@@ -2,12 +2,20 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import 'bootstrap/dist/js/bootstrap.bundle';
 import {Switch,Route, BrowserRouter as Router } from "react-router-dom";
 import Header from './Navbar/index'
+import NavigationBar from './navigation'
 import Main from './Main/index'
-import Loginpg from './Login'
+import { Crypt, RSA } from 'hybrid-crypto-js';
+// import Loginpg from './Login'
 import React, { Component } from 'react';
 import './App.css';
 import Web3 from 'web3'
 import Auction from '../abis/Auction.json'
+// import generateKeyPairSync from "crypto"
+var crypt = new Crypt();
+var rsa = new RSA();
+// const k = localStorage.getItem("publicKey");
+// const { generateKeyPairSync } = require('crypto')
+
 // import Navbar from './Navbar'
 // import Main from './Main'
 // import Post from "./Card";
@@ -17,12 +25,15 @@ import Auction from '../abis/Auction.json'
 const ipfsClient = require('ipfs-http-client')
 const ipfs = ipfsClient({ host: 'ipfs.infura.io', port: 5001, protocol: 'https', apiPath: '/ipfs/api/v0' }) // leaving out the arguments will default to these values
 // let hashing = []
+// const ethereumButton = document.querySelector('.enableEthereumButton');
+
 class App extends Component {
 
 
   async componentWillMount() {
     await this.loadWeb3()
     await this.loadBlockchainData()
+
   }
 
 
@@ -78,6 +89,17 @@ class App extends Component {
         //   hashes: [...this.state.hashes,hash ]
         // })
       }
+      const userCount = await auction.methods.usercount().call()
+      for (var z = 1; z <= userCount; z++) {
+        const user = await auction.methods.user(z).call()
+        this.setState({
+          users: [...this.state.users, user]
+        })
+        console.log(this.state.users)
+     
+      }
+
+
       for (var y = 0; y< productCount;y++){
           const hashes = await auction.methods.arrayhashes(y).call()
           console.log(hashes)
@@ -95,10 +117,12 @@ class App extends Component {
       // hashing.push(this.state.hash)
       // console.log(hashing)
       console.log(this.state.products)
+      console.log(this.state.users)
       console.log(this.state.hashes)
     }else {
       window.alert('Auction contract not deployed to detected network.')
     }
+    
   }
 
   constructor(props) {
@@ -109,23 +133,54 @@ class App extends Component {
       products: [],
       hash:'',
       hashes: [],
-      buffer:null
+      buffer:null,
+      users:[]
     }
     this.createProduct = this.createProduct.bind(this)
+    this.createUser = this.createUser.bind(this)
     this.placeBid = this.placeBid.bind(this)
     this.closeAuction = this.closeAuction.bind(this)
     this.AuctionExpiry = this.AuctionExpiry.bind(this)
     this.Capturefile = this.Capturefile.bind(this)
     this.createhash = this.createhash.bind(this)
+    this.checkvalidity = this.checkvalidity.bind(this)
+    // this.metamaskbutton = this.metamaskbutton.bind(this)
   }
-  createProduct(name , baseprice, discription, category) {
-    this.state.auction.methods.createProduct(name,baseprice, discription, category).send({from: this.state.account})
+
+  // async metamaskbutton() {
+  //   const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+  //   const accountts = accounts[0];
+  //   console.log("account", accountts)
+    
+  // }
+
+  
+
+  createProduct(name , baseprice, discription, category, key) {
+    this.state.auction.methods.createProduct(name,baseprice, discription, category, key).send({from: this.state.account})
     .once('receipt',(receipt) => {
       this.setState.loading({loading:false })
       console.log(receipt)
     })
   }
+  
 
+  createUser(name,email,address,productname){
+    // const a = this.state.account
+    const k = localStorage.getItem("publicKey");
+    this.state.auction.methods.createUser(crypt.encrypt(k,name),crypt.encrypt(k,email),crypt.encrypt(k,address), productname).send({from: this.state.account})
+    .once('receipt',(receipt) => {
+      console.log(receipt)
+    })
+
+    //updated
+    // this.state.auction.methods.createUser(encrypt(name,a), encrypt(password,a), encrypt(email,a),encrypt(address,a)).send({from: this.state.account})
+    // .once('receipt',(receipt) => {
+    //   console.log(receipt)
+    // })
+  }
+
+  
   placeBid(id){
     this.state.auction.methods.placeBid(id).send({from: this.state.account})
     .once('receipt',(receipt) => {
@@ -143,6 +198,14 @@ class App extends Component {
   AuctionExpiry(id) {
     this.setState({loading: true})
     this.state.auction.methods.closeAuction(id).send({from: this.state.account})
+    .once('receipt',(receipt) => {
+      return true
+    } )
+  }
+
+  checkvalidity(account1, newaccount) {
+    this.setState({loading: true})
+    this.state.auction.methods.checkvalidity(account1, newaccount).send({from: this.state.account})
     .once('receipt',(receipt) => {
       return true
     } )
@@ -188,17 +251,15 @@ class App extends Component {
       <Router>
         {/* <Loginpg />  */}
       <div className="App"></div>
-        <div className="d-flex container-fluid">
+        {/* <div className="d-flex container-fluid"> */}
           <div className="flex-fill sidebar">
-            <Header 
+            <NavigationBar 
             account={this.state.account} products={this.state.products} hashes={this.state.hashes} hash={this.state.hash}  createProduct={this.createProduct} placeBid={this.placeBid} closeAuction={this.closeAuction} AuctionExpiry={this.AuctionExpiry} createhash={this.createhash} Capturefile={this.Capturefile}  
             /> 
-          </div>
-          <div className="flex-fill col-sm-12 main">
             <Main Data= 'prerit' 
-              account={this.state.account} products={this.state.products} hashes={this.state.hashes} hash={this.state.hash}  createProduct={this.createProduct} placeBid={this.placeBid} closeAuction={this.closeAuction} AuctionExpiry={this.AuctionExpiry} createhash={this.createhash} Capturefile={this.Capturefile}  
+              account={this.state.account} products={this.state.products} users={this.state.users} hashes={this.state.hashes} hash={this.state.hash}  createProduct={this.createProduct} createUser={this.createUser} checkvalidity= {this.checkvalidity} placeBid={this.placeBid} closeAuction={this.closeAuction} AuctionExpiry={this.AuctionExpiry} createhash={this.createhash} Capturefile={this.Capturefile}  
               />
-      </div>
+      
  </div>      
         </Router>
     );

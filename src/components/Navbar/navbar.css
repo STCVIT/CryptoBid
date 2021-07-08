@@ -1,52 +1,52 @@
 
 #sidebar-wrapper {
-    min-height: 100vh;
-    margin-left: -15rem;
-    transition: margin 0.25s ease-out;
-  }
-  
-  #sidebar-wrapper .sidebar-heading {
-    padding: 0.875rem 1.25rem;
-    font-size: 1.2rem;
-  }
-  
-  #sidebar-wrapper .list-group {
-    width: 15rem;
-  }
-  
-  #page-content-wrapper {
-    min-width: 100vw;
-  }
-  
-  #wrapper.toggled #sidebar-wrapper {
+  min-height: 100vh;
+  margin-left: -15rem;
+  transition: margin 0.25s ease-out;
+}
+
+#sidebar-wrapper .sidebar-heading {
+  padding: 0.875rem 1.25rem;
+  font-size: 1.2rem;
+}
+
+#sidebar-wrapper .list-group {
+  width: 15rem;
+}
+
+#page-content-wrapper {
+  min-width: 100vw;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+  margin-left: 0;
+}
+
+@media (min-width: 768px) {
+  #sidebar-wrapper {
     margin-left: 0;
   }
-  
-  @media (min-width: 768px) {
-    #sidebar-wrapper {
-      margin-left: 0;
-    }
-  
-    #page-content-wrapper {
-      min-width: 0;
-      width: 100%;
-    }
-  
-    #wrapper.toggled #sidebar-wrapper {
-      margin-left: -15rem;
-    }
+
+  #page-content-wrapper {
+    min-width: 0;
+    width: 100%;
   }
-  .list-group-item-action{
-    background-color : white;
-    color: black;
-    width: 80%;
-    border-radius: 10px 10px;
+
+  #wrapper.toggled #sidebar-wrapper {
+    margin-left: -15rem;
   }
-  .list-group > a:hover{  
-    background-color : #5AA0FF !important;
-    color:white !important;
-  }
-  .list-group > a:focus-within{
-    background-color : #5AA0FF !important;
-    color:white !important;
-  }
+}
+.list-group-item-action{
+  background-color : white;
+  color: black;
+  width: 80%;
+  border-radius: 10px 10px;
+}
+.list-group > a:hover{  
+  background-color : #5AA0FF !important;
+  color:white !important;
+}
+.list-group > a:focus-within{
+  background-color : #5AA0FF !important;
+  color:white !important;
+}

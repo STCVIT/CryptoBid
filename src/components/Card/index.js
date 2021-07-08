@@ -5,7 +5,9 @@ import { faShare } from '@fortawesome/free-solid-svg-icons';
 import {CardDeck} from 'react-bootstrap';
 function Post(props) {
   
+  
     return(
+      <div class="container">
   <div id="content">
     
     <div><h1>Trending</h1></div>
@@ -71,7 +73,7 @@ function Post(props) {
               <p className="card-text">BasePrice : {window.web3.utils.fromWei(product.baseprice.toString(), 'Ether')} Eth </p>
               <p className="card-text">Current Bid :{window.web3.utils.fromWei(product.currentBid.toString(), 'Ether')}  Eth </p>
               <p className="card-text">Product discription : {product.discription}</p>              
-             {!product.purchased
+             {!product.purchased && props.account !== product.currentBidder
                       ? 
                       <button
                             // type="submit"
@@ -85,7 +87,7 @@ function Post(props) {
                         Bid
                         </button>
                       : null}
-                    {!product.purchased
+                    {!product.purchased && props.account === product.currentBidder && props.account !== product.owner
                       ? 
                       <button
                             // type="submit"
@@ -114,7 +116,11 @@ function Post(props) {
            })}
 
            </div>
+
+           </div>
     )
+
+   
 }
 
 
