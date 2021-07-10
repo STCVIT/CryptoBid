@@ -18,6 +18,7 @@ function Assests(props){
         <div id="content">
             <div className="light" ><h1>Assests Bought</h1></div>
             {props.products.map((product, key) => {
+                
                 return(
                     <CardDeck>
                         {product.currentBidder === props.account && product.purchased  ?
@@ -62,7 +63,7 @@ function Assests(props){
                                     <p className="card-text">Product discription : {product.discription}</p>
 
 
-                                    <h3>Buyer details</h3> 
+                                    <h3 className="b">Buyer details</h3> 
                                   {props.users.map((user ,key) => {
                                       return (
                                         <div key = {key}  >
@@ -80,7 +81,9 @@ function Assests(props){
                                       )
                                   })}
                                  </div>
-                            </div>:null
+                            </div>
+                            
+                            :null
                     }
                     </CardDeck>
                 )

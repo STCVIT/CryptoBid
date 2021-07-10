@@ -1,0 +1,65 @@
+.main {
+  background-color: #050121;
+  color: aliceblue;
+  padding: 2%;
+}
+
+.backbtn {
+  background-color: #140d4a;
+  border-color: #140d4a;
+  color: #a469ff;
+  margin-left: 2%;
+}
+
+.fromto {
+  padding: 5%;
+  margin-right: 8%;
+  margin-left: 20%;
+  display: flex;
+  margin-top: 0%;
+}
+
+#date {
+  background-color: #2d396b;
+  border-color: #2d396b;
+  color: #fff;
+  margin-right: 0%;
+}
+
+.toggle {
+  margin-left: 26%;
+  margin-bottom: 2%;
+}
+
+.vm {
+  background-color: #6d28d9;
+  margin-left: 45%;
+  margin-top: 5%;
+  color: #fff;
+}
+
+.active {
+  background-color: #6d28d9 !important;
+}
+
+.btnSecondary {
+  background-color: #140d4a ;
+}
+.cont {
+  background-color: #2d396b;
+  border-radius: 14px;
+  width: 50%;
+}
+.ListCont {
+  border-radius: 1em !important;
+  padding: 1em !important;
+}
+
+.abc {
+  background-color: white;
+}
+.toggleButton{
+  min-width: 40% ;
+  margin-right: 1em;
+  border-radius: 1em !important;
+}

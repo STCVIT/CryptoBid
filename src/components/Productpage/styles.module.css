@@ -1,0 +1,69 @@
+.product{
+  background-color: #050121;
+  color: aliceblue;
+  padding: 2%;
+}
+
+.backbtn {
+  background-color: #140D4A;
+  border-color: #140D4A;
+  color:#A469FF ;
+  margin-left: 2%;
+}
+
+.container{
+  padding: 2%;
+}
+
+.productimg{
+  width: 80%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.purpletext{
+  color: #A469FF;
+}
+
+h1{
+  margin-bottom: 8%;
+}
+
+.price{
+  color: aqua;  
+}
+
+.plcbid{
+  background-color: #6D28D9;
+  padding: 2%;
+  width: 50%;
+
+  margin-right: 20rem;
+  
+  border-style: none;
+}
+
+.like{
+  background-color: #140D4A;
+  border-color: #A469FF;
+  margin-left: 2%;
+}
+
+.tags{
+  margin-top: 5%;
+}
+.tag{
+  border-radius: 20%;
+  padding: 1%;
+}
+.desc{
+  margin-top: 8%;
+  margin-bottom: 3%;
+}
+h5{
+  margin-top: 2%;
+}
+.disclaimer {
+  color:#A469FF
+}

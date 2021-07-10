@@ -13,7 +13,7 @@ import Assests from '../assests'
 import Search from '../Search'
 import Ongoing from '../ongoing'
 import Signup from '../signup'
-
+import Productpg from "../Productpage"
 // function Main(props) {
 //   return (
 //     <div>
@@ -131,6 +131,10 @@ function Main(props) {
          <Route exact path="/signup"> 
             <Signup   hashes={props.hashes} hash={props.hash} account={props.account} products={props.products} users={props.users} createUser={props.createUser} />
          </Route>
+         <Route exact path="/product/:id">
+              <Productpg hashes={props.hashes} hash={props.hash} account={props.account} products={props.products} createProduct={props.createProduct}  closeAuction={props.closeAuction} placeBid={props.placeBid} AuctionExpiry={props.AuctionExpiry}  />
+            </Route>
+         {/* <Route exact path='/product/:id' component={Productpg} />
          {/* <Route>
          <Search products={props.products} placeBid={props.placeBid} closeAuction={props.closeAuction}/>
          </Route> */}

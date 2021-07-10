@@ -49,6 +49,7 @@ contract Auction {
     struct Information {
         string discription;
         string category;
+        uint bidinc;
     }
     
     event ProductCreated(
@@ -98,7 +99,7 @@ contract Auction {
 
     
     
-    function createProduct(string memory _name, uint _baseprice, string memory _discription, string memory _category, string memory _publickey) public payable{
+    function createProduct(string memory _name, uint _baseprice, string memory _discription, string memory _category, string memory _publickey, uint _bidinc) public payable{
         //verify the product
         require(bytes(_name).length > 0);
         require(_baseprice >0);
@@ -118,6 +119,7 @@ contract Auction {
         products[productCount].infoArray.category =_category;
         products[productCount].bidcount = 0;
         products[productCount].publickey = _publickey;
+        products[productCount].infoArray.bidinc = _bidinc;
 
         //create the product
         //products[productCount] = Product(productCount,_name,_baseprice,msg.sender,false, block.timestamp,_baseprice,msg.sender,block.timestamp, _discription,0, _category);
@@ -148,7 +150,7 @@ contract Auction {
     
     function placeBid (uint _id) Auctionactive(_id) validbid(_id)
     public payable{
-        products[_id].currentBid = products[_id].currentBid + 0.5*1000000000000000000 ;
+        products[_id].currentBid = products[_id].currentBid + (products[productCount].infoArray.bidinc) ;
         products[_id].currentBidder = msg.sender;
         products[_id].currentbidtime = block.timestamp;
         products[_id].bidcount = products[_id].bidcount + 1;
@@ -173,6 +175,7 @@ contract Auction {
          if (Auctionstatus(_id)){
             return;
         }
+        require(block.timestamp - products[_id].createdAt >= 1 minutes  );
 
         //fetch the product
         Product memory _product = products[_id];

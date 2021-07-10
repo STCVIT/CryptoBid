@@ -1,9 +1,16 @@
 
   @media (max-width: 768px) {
-  .main {
-
-  }
-  }
-  .main{
-    background-color: #3f5580;
-  }
+    .main {
+  
+    }
+    }
+    .main{
+      background-color: #EAF1FF;
+    }
+    body {
+      background-color:#050121;
+      color: white;
+      font-family: "Metropolis";
+    }
+  
+    

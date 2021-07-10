@@ -1,0 +1,13 @@
+.mainFooter {
+  color: white;
+  height: auto;
+  background-color: #131B40;
+  padding-top: 3em;
+  position: relative;
+  width: 100%;
+}
+.last{
+  color: #A469FF;
+  font-size: 1.1rem;
+}
+

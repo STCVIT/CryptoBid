@@ -1,5 +1,5 @@
 import React from "react";
-import "./styles.css";
+import styles from "./styles.module.css";
 import styleimg from "./login_img.png";
 // import {abc} from "../encrypt/index"
 import { Crypt, RSA } from 'hybrid-crypto-js';
@@ -45,16 +45,10 @@ function Signup(props) {
             }} >
           <h1>Sign Up</h1>
           <div className="text-center mb-4">
-            <button className="btn btn-outline-dark google">
-              <img
-                src="https://img.icons8.com/fluent/48/000000/google-logo.png"
-                alt=""
-              />
-              Sign in with Google
-            </button>
+            
           </div>
-
-          <label htmlFor="inputName">
+            <div className="text-center" >
+          <label   htmlFor="inputName">
             Name
             <div className="form-label-group">
               <input
@@ -68,7 +62,10 @@ function Signup(props) {
               />
             </div>
           </label>
-          <label htmlFor="inputEmail">
+          </div>
+          
+          <div className="text-center">
+          <label  htmlFor="inputEmail">
             Email address
             <div className="form-label-group">
               <input
@@ -82,6 +79,8 @@ function Signup(props) {
               />
             </div>
           </label>
+          </div>
+          <div className="text-center">
           <label htmlFor="inputPassword">
             Password
             <div className="form-label-group">
@@ -94,7 +93,10 @@ function Signup(props) {
                 required
               />
             </div>
-          </label><label htmlFor="inputPassword">
+          </label>
+          </div>
+          <div className="text-center">
+          <label htmlFor="inputPassword">
             Address
             <div className="form-label-group">
               <input
@@ -107,12 +109,14 @@ function Signup(props) {
               />
             </div>
           </label>
-
+          </div>
+            <div className="text-center">
           <div className="checkbox mb-3">
             <label>
               <input type="checkbox" value="termsAndCondition" required />
                 I agree to the Terms and Conditions
             </label>
+          </div>
           </div>
           <button className="btn btn-lg btn-primary btn-block" type="submit" >
             Sign in

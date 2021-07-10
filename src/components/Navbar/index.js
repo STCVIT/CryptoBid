@@ -83,7 +83,8 @@ class Header extends Component{
               link: "signup",
               text: "Signup",
               icon: "ongoing",
-            }
+            },
+            
           ].map((navItem, index) => {
             return <NavItem key={index} navItem={navItem} />;
           })}

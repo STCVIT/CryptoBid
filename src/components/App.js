@@ -10,6 +10,8 @@ import React, { Component } from 'react';
 import './App.css';
 import Web3 from 'web3'
 import Auction from '../abis/Auction.json'
+import Footer from './footer/Footer.js'
+import Productpg from './Productpage'
 // import generateKeyPairSync from "crypto"
 var crypt = new Crypt();
 var rsa = new RSA();
@@ -156,14 +158,17 @@ class App extends Component {
 
   
 
-  createProduct(name , baseprice, discription, category, key) {
-    this.state.auction.methods.createProduct(name,baseprice, discription, category, key).send({from: this.state.account})
+  createProduct(name , baseprice, discription, category, key, bidinc) {
+    this.state.auction.methods.createProduct(name,baseprice, discription, category, key, bidinc).send({from: this.state.account})
     .once('receipt',(receipt) => {
       this.setState.loading({loading:false })
       console.log(receipt)
     })
   }
   
+  async exportData() {
+    return this.state.products;
+  }
 
   createUser(name,email,address,productname){
     // const a = this.state.account
@@ -245,8 +250,12 @@ class App extends Component {
      })
     }
  
+   
+  
+  
 
   render() {
+    console.log("Hello",this.state.products)
     return (
       <Router>
         {/* <Loginpg />  */}
@@ -259,11 +268,15 @@ class App extends Component {
             <Main Data= 'prerit' 
               account={this.state.account} products={this.state.products} users={this.state.users} hashes={this.state.hashes} hash={this.state.hash}  createProduct={this.createProduct} createUser={this.createUser} checkvalidity= {this.checkvalidity} placeBid={this.placeBid} closeAuction={this.closeAuction} AuctionExpiry={this.AuctionExpiry} createhash={this.createhash} Capturefile={this.Capturefile}  
               />
-      
- </div>      
+ </div>     
+          <Footer />
+          <Route exact path="/product" component={Productpg} />
+        
+          {/* {JSON.stringify(this.state.products)} */}
         </Router>
     );
   }
 }
+
 
 export default App;
