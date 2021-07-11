@@ -160,16 +160,15 @@ class App extends Component {
 
   createProduct(name , baseprice, discription, category, key, bidinc) {
     this.state.auction.methods.createProduct(name,baseprice, discription, category, key, bidinc).send({from: this.state.account})
-    .once('receipt',(receipt) => {
+    .on('receipt',(receipt) => {
       this.setState.loading({loading:false })
-      console.log(receipt)
+      console.log( "reciept",receipt)
+    }).once('receipt', () => {
+      console.log('hello')
     })
   }
   
-  async exportData() {
-    return this.state.products;
-  }
-
+ 
   createUser(name,email,address,productname){
     // const a = this.state.account
     const k = localStorage.getItem("publicKey");
@@ -186,15 +185,19 @@ class App extends Component {
   }
 
   
-  placeBid(id){
-    this.state.auction.methods.placeBid(id).send({from: this.state.account})
+  placeBid(id, value){
+    // const price = prompt("enter bid")
+    // console.log(price)
+    // const price1 = parseInt(price)
+    // const price2 =  window.web3.utils.toWei(price, 'ether');
+    this.state.auction.methods.placeBid(id).send({from: this.state.account, value: value})
     .once('receipt',(receipt) => {
       console.log(receipt)
     })
   }
 
-  closeAuction(id, price){
-    this.state.auction.methods.closeAuction(id).send({from: this.state.account , value: price})
+  closeAuction(id){
+    this.state.auction.methods.closeAuction(id).send({from: this.state.account })
     .once('receipt',(receipt) => {
       window.location.reload()
     })

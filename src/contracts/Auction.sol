@@ -1,4 +1,4 @@
-pragma solidity ^0.5.16;
+pragma solidity ^0.8.4;
 pragma experimental ABIEncoderV2;
 contract Auction {
 
@@ -50,6 +50,7 @@ contract Auction {
         string discription;
         string category;
         uint bidinc;
+        uint endtime;
     }
     
     event ProductCreated(
@@ -86,9 +87,11 @@ contract Auction {
         uint bidcount,
         string category
         );
+        
+    event ProductEvent (Product);
     
     modifier Auctionactive (uint _id){
-        require(block.timestamp - products[_id].createdAt <= 1 minutes  );
+        require(block.timestamp - products[_id].createdAt <= 200  );
         _;
     }
 
@@ -109,23 +112,26 @@ contract Auction {
         products[productCount].Id = productCount;
         products[productCount].name =_name;
         products[productCount].baseprice =_baseprice;
-        products[productCount].owner =msg.sender;
+        products[productCount].owner = payable(msg.sender);
         products[productCount].purchased =false;
-        products[productCount].createdAt =block.timestamp;
-        products[productCount].currentBid =_baseprice;
-        products[productCount].currentBidder =msg.sender;
+        products[productCount].createdAt =block.timestamp*1000;
+        products[productCount].currentBid = _baseprice ;
+        products[productCount].currentBidder = payable(0);
         products[productCount].currentbidtime =block.timestamp;
         products[productCount].infoArray.discription =_discription;
         products[productCount].infoArray.category =_category;
         products[productCount].bidcount = 0;
         products[productCount].publickey = _publickey;
         products[productCount].infoArray.bidinc = _bidinc;
+        products[productCount].infoArray.endtime =  block.timestamp*1000+100000;
 
         //create the product
         //products[productCount] = Product(productCount,_name,_baseprice,msg.sender,false, block.timestamp,_baseprice,msg.sender,block.timestamp, _discription,0, _category);
        
         //trigger an event
-        emit ProductCreated(productCount,_name,_baseprice,msg.sender,false,_discription,0, _category);
+        //emit ProductCreated(productCount,_name,_baseprice,msg.sender,false,_discription,0, _category);
+        
+        emit ProductEvent(products[productCount]);
     
     }
     
@@ -135,7 +141,7 @@ contract Auction {
     }
 
     modifier validbid(uint _id){
-        require (block.timestamp - products[_id].currentbidtime >= 15 seconds);
+        require (block.timestamp*1000 - products[_id].currentbidtime >= 15 seconds);
         _;
     }
 
@@ -148,67 +154,84 @@ contract Auction {
         return true;
     }
     
-    function placeBid (uint _id) Auctionactive(_id) validbid(_id)
-    public payable{
-        products[_id].currentBid = products[_id].currentBid + (products[productCount].infoArray.bidinc) ;
-        products[_id].currentBidder = msg.sender;
-        products[_id].currentbidtime = block.timestamp;
-        products[_id].bidcount = products[_id].bidcount + 1;
+    function placeBid (uint _id)  payable public{
+        
+        Product storage product = products[_id];
+
+        //difference between bids should be greater than 15 seconds
+        require(block.timestamp*1000 - product.currentbidtime >= 15 seconds);
+        
+        
+        
+         // bid should be greater than minPrice
+        require(msg.value>=product.baseprice,"bid value shouldn't be less than the reserve value");
+        
+        // you should not be the last bidder , no point in outdoing your own bid
+        require(msg.sender != product.currentBidder,"bidder can't out so their own bid");
+        
+        // the incoming value should be greater than previous bid
+        require(msg.value >= product.currentBid,"big value not greater than previous bid"); 
+        
+        
+        
+        if(product.currentBid>0){
+            product.currentBidder.transfer(product.currentBid -    (products[productCount].infoArray.bidinc)  );
+        }
+        
+        product.currentBid =  product.currentBid +   (products[productCount].infoArray.bidinc)   ;
+        
+        
+
+        
+        product.currentBidder = payable(msg.sender);
+        product.currentbidtime = block.timestamp;
+        product.bidcount = products[_id].bidcount + 1;
+        
+        
+        emit ProductEvent(product);
     
         
-        emit bidplaced(_id,products[_id].name,products[_id].baseprice,products[_id].owner,products[_id].purchased,block.timestamp,
-        products[_id].currentBid,products[_id].currentBidder,products[_id].bidcount, products[_id].infoArray.category  );
+        //emit bidplaced(_id,products[_id].name,products[_id].baseprice,products[_id].owner,products[_id].purchased,block.timestamp,
+        //products[_id].currentBid,products[_id].currentBidder,products[_id].bidcount, products[_id].infoArray.category  );
         
-    }
-
-    function Auctionstatus(uint _id) public returns(bool){
-        if (block.timestamp - products[_id].createdAt < 1 minutes){
-            return true;
-        }
-        else{
-            return false;
-        }
     }
     
-    function closeAuction(uint _id) validAuction(_id) public payable {
+    function closeAuction(uint _id) payable public  {
 
-         if (Auctionstatus(_id)){
-            return;
-        }
-        require(block.timestamp - products[_id].createdAt >= 1 minutes  );
+         
+        //require(block.timestamp - products[_id].createdAt >= 120, "auction not ended"  );
 
-        //fetch the product
-        Product memory _product = products[_id];
         
-        //fetch the owner
-        address payable _seller = _product.owner;
-        
-        // Require that there is enough Ether in the transaction
-        require(msg.value >= _product.currentBid);
-        
-         // Require that the product has not been purchased already
-        require(!_product.purchased);
-        
-         // Require that the buyer is not the seller
-        require(_seller != msg.sender);
 
-        // Transfer ownership to the buyer
-        //_product.owner = msg.sender;
+         Product storage product = products[_id];
+        
+        //bidding time
+        require(product.infoArray.endtime < block.timestamp*1000,"bidding for product is not over yet");
+        
+        //claimer must be bidder
+        
+        require(msg.sender == product.currentBidder,"you are not eligible to claim this product");
+        
+        product.currentBid = product.currentBid  -   (products[productCount].infoArray.bidinc) ;
+        
+        // money sent to seller
+        product.owner.transfer(product.currentBid);
+        
+        // set product status sold to true
+        product.purchased = true;
         
         
-        // Mark as purchased
-        _product.purchased = true;
+        emit ProductEvent(product);
+         
         
         
-        // Update the product
-        products[_id] = _product;
+        //emit closeauction(_product.Id,_product.name ,_product.baseprice,true,_product.currentBid, _product.owner,products[_id].bidcount ,products[_id].infoArray.category);
 
-        // Pay the seller by sending them Ether
-        address(_seller).transfer(msg.value);
-        
-        
-        emit closeauction(_product.Id,_product.name ,_product.baseprice,true,_product.currentBid, _product.owner,products[_id].bidcount ,products[_id].infoArray.category);
+    }
 
+    
+    function getnow()view public returns(uint) {
+        return block.timestamp*1000;
     }
     
     

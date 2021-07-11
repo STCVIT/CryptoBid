@@ -15,6 +15,7 @@ const Productpg = (props)=>  {
     {props.products.map((product,key)=> {
       const d1 = moment.unix(parseInt(product.createdAt))
       const dz = moment(d1).format("hh:mm:ss")
+      console.log(dz)
       
       const a1 = moment.unix(parseInt(product.currentbidtime))
       const az = moment(a1).format("hh:mm:ss")
@@ -27,38 +28,6 @@ const Productpg = (props)=>  {
 
       console.log(new Date(parseInt(product.createdAt)).toTimeString())
       console.log(parseInt(product.bidcount))
-    //   return (
-    //     <div className={styles.product}>
-    //     <button className="btn btn-dark backbtn"> <span>&#60;</span> Back</button>
-    //     <div className="container">
-    //     <div className="row">
-    //     <div className="col-md">
-    //       <img src={exampleimg} alt="" className={styles.productimg}/>
-    //     </div>
-    //     <div className="col-md">
-    //        <span className={styles.purpletext}><h5>{props.category} </h5></span> 
-    //        <h1>{props.name}</h1>
-    //        <h6>Time left <span className={styles.purpletext}>{props.time}</span></h6>
-    //        <h6>Minimum bids <span className={styles.purpletext}>{props.minbids}</span></h6>
-    //        <p className="desc">{props.desc}</p>
-    //        <h4>
-    //        <svg width="26" height="35" viewBox="0 0 26 42" fill="none" xmlns="http://www.w3.org/2000/svg">
-    //           <path d="M12.9044 31.4462L0.0117188 23.8376L12.8965 42.0013L25.7958 23.8376L12.8965 31.4462H12.9044ZM13.096 0L0.208594 21.3898L13.096 29.0115L25.9887 21.3977L13.096 0Z" fill="#BE95FF"/>
-    //        </svg><span className="price">{props.prc} ETH </span></h4> 
-    //        <p>Deliverable to <b>{props.lc}</b> in <b>{props.dt} days</b> </p>
-    //        <button className="btn btn-dark plcbid"><b>Place Bid</b></button> <button className="btn btn-dark like">♡ {props.likes}</button>
-    //        <div className="tags">
-    //           <button className={`btn btn-dark ${styles.backbtn} ${styles.tag}`}>#{tagarray[0]}</button>
-    //           <button className={`btn btn-dark ${styles.backbtn} ${styles.tag}`}>#{tagarray[1]}</button>
-              
-    //        </div>
-          
-    //     </div>
-    //     </div>
-    //     </div>
-    //     <h3>Explore more</h3>
-    //   </div> 
-    //   )
       return(
         <div>
         {key === productid[2]-1 ? 
@@ -91,38 +60,6 @@ const Productpg = (props)=>  {
            </svg><span className="price">{window.web3.utils.fromWei(
                   product.currentBid.toString(),
                   "Ether")} ETH </span></h4> 
-          {/* {!product.purchased ?
-
-          <button className="btn btn-dark plcbid" 
-              // type="submit"
-                            // value="Submit"
-                            // onSubmit={this.handleSubmit}
-                            name={parseInt(product.Id)}
-                            // bid =  {this.state.value}
-                            onClick={(event) => {props.placeBid(event.target.name)}
-                          }
-                      >
-              <b>Place Bid</b>
-          </button>
-          :null}
-
-          {!product.purchased && props.account === product.currentBidder ?
-
-            <button className="btn btn-dark plcbid" 
-                  // type="submit"
-                  // value="Submit"
-                  // onSubmit={this.handleSubmit}
-                  name={product.Id}
-                  value = {product.currentBid}
-                  // bid =  {this.state.value}
-                  onClick={(event) => {props.closeAuction(event.target.name , event.target.value)}
-                }
-            >
-                 <b>Pay</b>
-            </button>
-            :null}
-           */}
-           
                     <div className="pb-2">
                     {!product.purchased && product.currentBidder !== props.account && product.owner !== props.account // && ( (dz.getSeconds() - d3.getSeconds() <= 60 && dz.getMinutes() === d3.getMinutes() ) || (d3.getSeconds() - dz.getSeconds() <= 60 && dz.getMinutes() - d3.getMinutes()) )
                       ? 
@@ -131,8 +68,9 @@ const Productpg = (props)=>  {
                             // value="Submit"
                             // onSubmit={this.handleSubmit}
                           name={product.Id}
+                          value = {product.currentBid}
                           // bid =  {this.state.value}
-                          onClick={(event) => {props.placeBid(event.target.name)}
+                          onClick={(event) => {props.placeBid(event.target.name, event.target.value)}
                         }
                         >
                         Place Bid
@@ -146,7 +84,7 @@ const Productpg = (props)=>  {
                       <button className="btn btn-dark plcbid"
                           name={product.Id}
                           value = {product.currentBid}
-                          onClick={(event) => {props.closeAuction(event.target.name , event.target.value)}
+                          onClick={(event) => {props.closeAuction(event.target.name)}
                         }
                         >
                         Pay

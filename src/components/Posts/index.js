@@ -1,15 +1,8 @@
-import React , { useState }  from "react";
+import React from "react";
 import styles from "./postCards.module.css";
-import { render } from "@testing-library/react";
 import { AiFillThunderbolt } from "react-icons/ai";
-import { AiOutlineHeart } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import Productpg from "../Productpage"
-import { Switch, Route } from "react-router-dom";
-
-
 function Post(props) {
-  const [View, setView] = useState("");
 
   return (
     <div className={styles.card + " card"} >
