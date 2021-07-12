@@ -12,7 +12,8 @@ import Post from '../Card';
 import Assests from '../assests'
 import Search from '../Search'
 import Ongoing from '../ongoing'
-import Signup from '../signup'
+//import Signup from '../signup'
+import UserInfo from "../UserInfo"
 import Productpg from "../Productpage"
 // function Main(props) {
 //   return (
@@ -129,7 +130,7 @@ function Main(props) {
             <Assests  hashes={props.hashes} hash={props.hash} account={props.account} products={props.products} users={props.users} checkvalidity={props.checkvalidity} createUser={props.createUser}  />
          </Route>
          <Route exact path="/signup"> 
-            <Signup   hashes={props.hashes} hash={props.hash} account={props.account} products={props.products} users={props.users} createUser={props.createUser} />
+            <UserInfo  hashes={props.hashes} hash={props.hash} account={props.account} products={props.products} users={props.users} createUser={props.createUser} />
          </Route>
          <Route exact path="/product/:id">
               <Productpg hashes={props.hashes} hash={props.hash} account={props.account} products={props.products} createProduct={props.createProduct}  closeAuction={props.closeAuction} placeBid={props.placeBid} AuctionExpiry={props.AuctionExpiry}  />

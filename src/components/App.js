@@ -169,10 +169,10 @@ class App extends Component {
   }
   
  
-  createUser(name,email,address,productname){
+  createUser(name,email,address,location,productname){
     // const a = this.state.account
     const k = localStorage.getItem("publicKey");
-    this.state.auction.methods.createUser(crypt.encrypt(k,name),crypt.encrypt(k,email),crypt.encrypt(k,address), productname).send({from: this.state.account})
+    this.state.auction.methods.createUser(crypt.encrypt(k,name),crypt.encrypt(k,email),crypt.encrypt(k,address),  crypt.encrypt(k,location),productname).send({from: this.state.account})
     .once('receipt',(receipt) => {
       console.log(receipt)
     })

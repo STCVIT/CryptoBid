@@ -10,7 +10,7 @@ var rsa = new RSA();
 const name = localStorage.getItem("name");
 const email = localStorage.getItem("email")
 const address = localStorage.getItem("address")
-
+const location = localStorage.getItem("location")
 const pk = localStorage.getItem("privateKey")
 
 function Assests(props){
@@ -35,7 +35,7 @@ function Assests(props){
                                  
                                      <button onClick= {(event) => {
                                          event.preventDefault();
-                                         props.createUser(name,email,address,product.name) 
+                                         props.createUser(name,email,address,location,product.name) 
                                         }
                                          }   >
                                          Share Details
@@ -70,8 +70,9 @@ function Assests(props){
                                        {user.productname === product.name ?
                                        <div>
                                             <p>Name : {crypt.decrypt(pk, user.name).message}</p> 
-                                            <p>Name : {crypt.decrypt(pk, user.addres).message}</p>  
-                                            <p>Name : {crypt.decrypt(pk, user.email).message}</p>   
+                                            <p>Address : {crypt.decrypt(pk, user.addres).message}</p>  
+                                            <p>Email : {crypt.decrypt(pk, user.location).message}</p> 
+                                            <p>Email : {crypt.decrypt(pk, user.email).message}</p>     
                                             {/* <p>Email: {decrypt(user.email)} </p>
                                             <p>Address: {decrypt(user.addres)}</p> */}
                                        </div>

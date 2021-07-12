@@ -28,6 +28,7 @@ contract Auction {
         string name;
         string email;
         string addres;
+        string location;
         
     }
    
@@ -95,9 +96,9 @@ contract Auction {
         _;
     }
 
-    function createUser(string memory _name,string memory _email,string memory _address,string memory _productname) public {
+    function createUser(string memory _name,string memory _email,string memory _address,string memory _location ,string memory _productname) public {
         usercount++;
-        user[usercount] = User(usercount,_productname,_name,_email,_address);
+        user[usercount] = User(usercount,_productname,_name,_email,_address, _location);
     }
 
     
@@ -159,7 +160,7 @@ contract Auction {
         Product storage product = products[_id];
 
         //difference between bids should be greater than 15 seconds
-        require(block.timestamp*1000 - product.currentbidtime >= 15 seconds);
+        //require(block.timestamp*1000 - product.currentbidtime >= 15 seconds);
         
         
         
@@ -175,10 +176,10 @@ contract Auction {
         
         
         if(product.currentBid>0){
-            product.currentBidder.transfer(product.currentBid -    (products[productCount].infoArray.bidinc)  );
+            product.currentBidder.transfer(product.currentBid -    (product.infoArray.bidinc)  );
         }
         
-        product.currentBid =  product.currentBid +   (products[productCount].infoArray.bidinc)   ;
+        product.currentBid =  product.currentBid +   (product.infoArray.bidinc)   ;
         
         
 
@@ -212,7 +213,7 @@ contract Auction {
         
         require(msg.sender == product.currentBidder,"you are not eligible to claim this product");
         
-        product.currentBid = product.currentBid  -   (products[productCount].infoArray.bidinc) ;
+        product.currentBid = product.currentBid  -   (product.infoArray.bidinc) ;
         
         // money sent to seller
         product.owner.transfer(product.currentBid);
