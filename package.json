@@ -4,6 +4,7 @@
   "description": "An Ethereum Marketplace",
   "author": "gregory@dappuniversity.com",
   "dependencies": {
+    "@date-io/date-fns": "^1.3.13",
     "@fontsource/metropolis": "^4.4.5",
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-regular-svg-icons": "^5.15.3",
@@ -26,6 +27,7 @@
     "chai-bignumber": "3.0.0",
     "crypto": "^1.0.1",
     "crypto-js": "^4.0.0",
+    "date-fns": "^2.22.1",
     "formik": "^2.2.9",
     "hybrid-crypto-js": "^0.2.4",
     "ipfs-http-client": "^33.1.1",
@@ -35,11 +37,13 @@
     "react-bootstrap": "^1.0.0-beta.8",
     "react-dom": "16.8.4",
     "react-icons": "^4.2.0",
+    "react-multilevel-dropdown": "^2.0.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "2.1.3",
+    "sweetalert2": "^11.0.18",
     "truffle": "5.3.3",
     "web-vitals": "^1.1.2",
-    "web3": "1.0.0-beta.55",
+    "web3": "^1.0.0-beta.55",
     "yup": "^0.32.9"
   },
   "scripts": {

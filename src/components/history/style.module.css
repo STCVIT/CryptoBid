@@ -1,0 +1,87 @@
+.main {
+    background-color: #050121;
+    color: aliceblue;
+    padding: 2%;
+  }
+  
+  .backbtn {
+    background-color: #140d4a;
+    border-color: #140d4a;
+    color: #a469ff;
+    margin-left: 2%;
+  }
+  
+.container {
+    width: 60% !important;
+}
+  
+  #date {
+    background-color: #2d396b;
+    border-color: #2d396b;
+    color: #fff;
+    margin-right: 0%;
+  }
+  
+  .toggle {
+    margin-left: 26%;
+    margin-bottom: 2%;
+  }
+  
+  .vm {
+    background-color: #6d28d9;
+    margin-left: 45%;
+    margin-top: 5%;
+    color: #fff;
+  }
+  
+  .img{
+    border-radius: 14px;
+    width: 100px;
+  }
+  
+  
+  .cost{
+    color: aqua;
+    
+  }
+  .test {
+    vertical-align: middle !important;
+  }
+  
+  
+  .table {
+    background-color: #2d396b;
+    border-radius: 14px;
+  }
+  
+  .active {
+    background-color: #6d28d9 !important;
+  }
+  
+  .btnSecondary {
+    background-color: #140d4a ;
+  }
+  .cont {
+    background-color: #2d396b;
+    border-radius: 14px;
+    width: 50%;
+  }
+  .ListCont {
+    border-radius: 1em !important;
+    padding: 1em !important;
+  }
+  
+  .abc {
+    background-color: white;
+  }
+  /* .toggleButton{
+    min-width: 40% ;
+    margin-right: 1em;
+    border-radius: 1em !important;
+  } */
+.but {
+    display: block;
+    border-radius: 0.5em;
+    border: none;
+}
+

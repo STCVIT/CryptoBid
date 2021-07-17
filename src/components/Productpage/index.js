@@ -16,17 +16,18 @@ const Productpg = (props)=>  {
       const d1 = moment.unix(parseInt(product.createdAt))
       const dz = moment(d1).format("hh:mm:ss")
       console.log(dz)
+      const time = Date.now() 
       
-      const a1 = moment.unix(parseInt(product.currentbidtime))
-      const az = moment(a1).format("hh:mm:ss")
-      console.log(az)
+      const biddate = new Date(parseInt(product.currentbidtime)).toLocaleDateString()
+
       const d2 = new Date()
       const d3 = new Date(parseInt(product.createdAt))
       // const t1 = d3.getSeconds()
        console.log(d2.getSeconds())
        console.log(d3.getSeconds())
+       const endtime = new Date(parseInt(product.infoArray.endtime)).toLocaleDateString()
 
-      console.log(new Date(parseInt(product.createdAt)).toTimeString())
+      console.log(new Date(parseInt(product.createdAt)))
       console.log(parseInt(product.bidcount))
       return(
         <div>
@@ -42,8 +43,8 @@ const Productpg = (props)=>  {
         <div className="col-md">
            <span className={styles.purpletext}><h3>{product.infoArray.category} </h3></span> 
            <h1>{product.name}</h1>
-           <h6>Created At:  <span className={styles.purpletext}>{dz}</span></h6>
-           <h6>Last Bid Time:  <span className={styles.purpletext}>{az}</span></h6>
+           <h6>End At:  <span className={styles.purpletext}>{endtime}</span></h6>
+           <h6>Last Bid Time:  <span className={styles.purpletext}>{biddate}</span></h6>
            {/* <p className="desc">{product.purchased}</p> */}
            <p className={styles.purpletext}>{product.infoArray.discription}</p>
            {product.purchased.toString() === "false" && d3.getSeconds() - d2.getSeconds() <=60 ?
@@ -79,7 +80,7 @@ const Productpg = (props)=>  {
                       </div>
                     <div className="pb-2">
 
-                    {!product.purchased && product.currentBidder === props.account && product.owner !== props.account  // && (dz.getMinutes() - d3.getMinutes() > 1)
+                    {!product.purchased && product.currentBidder === props.account && product.owner !== props.account && time > parseInt(product.infoArray.endtime) 
                       ? 
                       <button className="btn btn-dark plcbid"
                           name={product.Id}
@@ -88,6 +89,19 @@ const Productpg = (props)=>  {
                         }
                         >
                         Pay
+                        </button>
+                      : null}
+                      </div> 
+                      <div className="pb-2">
+                      {!product.purchased && product.owner === props.account 
+                      ? 
+                      <button className="btn btn-dark plcbid"
+                          name={product.Id}
+                          value = {product.currentBid}
+                          onClick={(event) => {props.closeAuctionOwner(event.target.name)}
+                        }
+                        >
+                        Close Auction
                         </button>
                       : null}
                       </div> 

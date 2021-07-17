@@ -1,0 +1,32 @@
+.dropdownItem{
+  background-color: #2D396B;
+  border-radius: 14px;
+  color: #fff;
+}
+
+.dropdownMenu{
+  border-radius: 14px;
+  
+  padding:0%;
+  background-color: #2D396B;
+  margin-left: 1%;
+  
+}
+.b2{
+  background-color:#2D396B ;
+  border-radius: 14px;
+
+  border-color: #2D396B;
+}
+
+.dropdown{
+  display: grid;
+  width: min-content;
+  background-color: #2D396B;
+  border-radius: 14px;
+  margin-left: 5%;
+  width: 154px;
+height: 84px;
+font-size: 20px;
+text-align: justify;
+}

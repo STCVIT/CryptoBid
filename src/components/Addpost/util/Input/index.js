@@ -8,6 +8,6 @@ function Component(props) {
         <Field type="string" name={props.id} className={styles.ProductForm} />
         <ErrorMessage name={props.id} />
       </div>
-    );
+    );  
   }
   export default  Component

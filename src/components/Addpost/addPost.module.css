@@ -141,8 +141,9 @@
   color: #ffffff;
 }
 #datetimeLocal {
-  color: #ffffff;
+  background-color: #2d396b;
   padding: 1em;
+  color: white !important;
 }
 #datetimeLocalLabel{
   color: #ffffff;

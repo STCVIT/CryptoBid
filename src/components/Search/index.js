@@ -1,83 +1,84 @@
-import React from 'react';
-import "./search.css";
-import itemimg from "./chair.png";
-import SearchDefaultImg from "./SearchDefault.png";
-import { CardDeck} from 'react-bootstrap';
-function Search(props) {
-    const ImageContainerStyle ={
-        height : "300px"
-    }
-     return (
-      <div>
-         <div id="content">
-            {props.products.map((product, key) => {
-                return(
-                    <CardDeck>
-                        {product.category === props.Category ?
-                            <div key={key} className="card col">
-                                <div className="card-body">
-                                <div className="p-0">
-                                <img src= { `https://ipfs.infura.io/ipfs/${props.hashes[key]}` } className="App-logo" alt="logo" />  
-                                </div>
-                                    <h5 className="card-title conatina">{product.name}</h5>
-                                    <p className="card-text">{product.discription}</p>
-                                    <p className="card-text">BasePrice : {window.web3.utils.fromWei(product.baseprice.toString(), 'Ether')} Eth </p>
-                                    <p className="card-text">Current Bid :{window.web3.utils.fromWei(product.currentBid.toString(), 'Ether')}  Eth </p>
-                                    <p className="card-text">Product discription : {product.discription}</p>
-                                    {!product.purchased? 
-                                        <button
-                                          name={product.Id}
-                                          onClick={(event) => {props.placeBid(event.target.name)}
-                                    }>
-                                  Bid
-                                  </button>
-                                : null}
+import React , {useState ,useEffect} from 'react'
+import Card from "../Posts";
+import styles from "./search.module.css"
+import {CardDeck} from 'react-bootstrap'
+import Dropdown from 'react-multilevel-dropdown';
 
-                    {!product.purchased
-                      ? 
-                      <button
-                          name={product.Id}
-                          value = {product.currentBid}
-                          onClick={(event) => {props.closeAuction(event.target.name , event.target.value)}
-                        }
-                        >
-                              Pay
-                              </button>
-                      : null}
+function SearchPg(props) {
+  var term = window.location.pathname.split('=');
+  term = term[1];
+  const [searchTerm, setSearchTerm] = useState(term);
+  const [searchResults, setSearchResults] = useState(props.products);
+  const handleInputChange = e => {
+    setSearchTerm(e.target.value);
+  }
 
-                          </div>
-                            </div>:null
-                            
-                    }
-                    </CardDeck>
-                    
-                )
-                
+
+
+ function change() {
+  const results =props.products.filter(function(l) {
+    return( l.name.toLowerCase().match(searchTerm))
+  });
+  return results;
+ }
+  useEffect(() => {
+    const results =props.products.filter(function(l) {
+      return( l.name.toLowerCase().match(searchTerm))
+    });
+    setSearchResults(results);
+  }, [searchTerm]);
+
+function RenderResults(prop) {
+  return (
+    <CardDeck>
+    {prop.Array.map((product, key) => {
+      return (
+        <div className="my-2 col-12 col-md-4 col-sm-12">
+          <Card
+            Id={parseInt(product.Id)}
+            Name={product.name}
+            Hbid={window.web3.utils.fromWei(
+              product.currentBid.toString(),
+              "Ether"
+            )}
+            discription={product.infoArray.discription}
+            img={`https://ipfs.infura.io/ipfs/${props.hashes[key]}`}
+          />
+  </div>
+      );
             })}
-        </div>
-        
-
-
-       {/* props.Category ? 
-        <div>
-               <div className="d-flex justify-content-start item">
-        <div className="p-0">
-          <img src={itemimg} alt="item-img" className="item-img" />
-        </div>
-        <div className="Desc p-3">
-          <h4 className="Item-heading">{props.Category}</h4>
-          <p className="lead fw-normal time">6hrs ago | 1d 4hrs left</p>
-          <h5 className="Item-price">4500 $</h5>
-        </div>
-      </div>
-        </div> : 
+            
+  </CardDeck>
    
-        <div className="text-center"  >
-            <img className="img-fluid my-5"  alt="Magnifying Glass" style={ImageContainerStyle} src={SearchDefaultImg}/>
-        </div> */}
-
-        </div>
-    )
+  )
 }
 
-export default Search
+  console.log(searchTerm);
+  return (
+    <div className="container">
+        <h2>Search </h2>
+      <form className="row">
+        <div className="col-md-4 my-2 "> 
+          </div>
+        <div  className="col-md-4 ">
+        <input
+            className={styles.Searchbar + " form-control mx-auto my-2"}
+            placeholder="Search for..."
+            onChange={handleInputChange}
+            value={searchTerm}
+          />
+        </div>
+          <div className="col-md-4 my-2 ">
+       
+          </div>
+          
+        </form>
+         {
+           searchTerm ? <RenderResults Array = {change()} />
+              : <RenderResults Array= {searchResults} />  
+         }
+        </div>
+  )
+}
+
+export default SearchPg

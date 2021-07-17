@@ -1,0 +1,13 @@
+.textcard{
+    width:20%;
+    border-radius:10px;
+}
+.action:hover{
+    color:black !important;
+}
+.But { 
+    background: #140D4A;
+    border-radius: 14px;
+    color: #A469FF !important;
+    border: none;
+}

@@ -8,8 +8,8 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, {useState} from "react";
 import "./search-item.css";
-import Search from "../Search";
-
+import Category from "./Cat"
+import { Button } from 'react-bootstrap';
 
 
 function Categories(props) {
@@ -61,31 +61,48 @@ function Categories(props) {
         <div className="d-flex py-4">
           {[
             {
-              Name: "NFT",
-              icon: "NFT",
+              Name: "design"
+              
             },
             {
-              Name: "Crypto Collectibles",
-              icon: "CryptoCollectibles",
+              Name: "Crypto Collectibles"
+              
             },
             {
-              Name: "Licenses",
-              icon: "Licenses",
+              Name: "Licenses"
+             
             },
             {
-              Name: "Games",
-              icon: "Games",
+              Name: "Games"
+              
             },
             {
-              Name: "Softwares",
-              icon: "Softwares",
+              Name: "Softwares"
+              
+            },
+            {
+              Name: "Softwares"
+             
+            },
+            {
+              Name: "Softwares"
+              
+            },
+            {
+              Name: "Softwares"
+              
+            },
+            {
+              Name: "NFT"
+             
             },
           ].map((categories, index) => {
             return <CatButton key={index} categories={categories}></CatButton>;
+           
           })}
         </div>
         <div>
-          <Search Category={CurrentCategory} hashes={props.hashes} hash={props.hash} products={props.products} placeBid={props.placeBid} closeAuction={props.closeAuction}  />
+          <Category Category={CurrentCategory} hashes={props.hashes} hash={props.hash} products={props.products} placeBid={props.placeBid} closeAuction={props.closeAuction}  />
         </div>
     </div>
   )

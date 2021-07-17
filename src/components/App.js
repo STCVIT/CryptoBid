@@ -1,15 +1,16 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import 'bootstrap/dist/js/bootstrap.bundle';
 import {Switch,Route, BrowserRouter as Router } from "react-router-dom";
-import Header from './Navbar/index'
 import NavigationBar from './navigation'
 import Main from './Main/index'
 import { Crypt, RSA } from 'hybrid-crypto-js';
 // import Loginpg from './Login'
-import React, { Component } from 'react';
+import React, { Component , useState} from 'react';
 import './App.css';
 import Web3 from 'web3'
 import Auction from '../abis/Auction.json'
+import { Modal, Col, Row, Button, Alert} from 'react-bootstrap'
+import Swal from 'sweetalert2'
 import Footer from './footer/Footer.js'
 import Productpg from './Productpage'
 // import generateKeyPairSync from "crypto"
@@ -22,6 +23,7 @@ var rsa = new RSA();
 // import Main from './Main'
 // import Post from "./Card";
 // import Search from './Search'
+
 
 
 const ipfsClient = require('ipfs-http-client')
@@ -146,6 +148,7 @@ class App extends Component {
     this.Capturefile = this.Capturefile.bind(this)
     this.createhash = this.createhash.bind(this)
     this.checkvalidity = this.checkvalidity.bind(this)
+    this.closeAuctionOwner = this.closeAuctionOwner.bind(this)
     // this.metamaskbutton = this.metamaskbutton.bind(this)
   }
 
@@ -158,32 +161,66 @@ class App extends Component {
 
   
 
-  createProduct(name , baseprice, discription, category, key, bidinc) {
-    this.state.auction.methods.createProduct(name,baseprice, discription, category, key, bidinc).send({from: this.state.account})
-    .on('receipt',(receipt) => {
-      this.setState.loading({loading:false })
-      console.log( "reciept",receipt)
-    }).once('receipt', () => {
-      console.log('hello')
-    })
-  }
+  // createProduct(name , baseprice, discription, category, key, bidinc,date) {
+  //   this.state.auction.methods.createProduct(name,baseprice, discription, category, key, bidinc,date).send({from: this.state.account})
+  //   .on('receipt',(receipt) => {
+  //     this.setState.loading({loading:false })
+  //     console.log( "reciept",receipt)
+  //   }).once('receipt', () => {
+  //     console.log('hello')
+  //   })
+  // }
   
  
-  createUser(name,email,address,location,productname){
-    // const a = this.state.account
-    const k = localStorage.getItem("publicKey");
-    this.state.auction.methods.createUser(crypt.encrypt(k,name),crypt.encrypt(k,email),crypt.encrypt(k,address),  crypt.encrypt(k,location),productname).send({from: this.state.account})
-    .once('receipt',(receipt) => {
-      console.log(receipt)
-    })
+  // createUser(name,email,address,location,productname){
+  //   // const a = this.state.account
+  //   const k = localStorage.getItem("publicKey");
+  //   this.state.auction.methods.createUser(crypt.encrypt(k,name),crypt.encrypt(k,email),crypt.encrypt(k,address),crypt.encrypt(k,location), productname).send({from: this.state.account})
+  //   .once('receipt',(receipt) => {
+  //     console.log(receipt)
+  //   })
 
-    //updated
-    // this.state.auction.methods.createUser(encrypt(name,a), encrypt(password,a), encrypt(email,a),encrypt(address,a)).send({from: this.state.account})
-    // .once('receipt',(receipt) => {
-    //   console.log(receipt)
-    // })
+  //   //updated
+  //   // this.state.auction.methods.createUser(encrypt(name,a), encrypt(password,a), encrypt(email,a),encrypt(address,a)).send({from: this.state.account})
+  //   // .once('receipt',(receipt) => {
+  //   //   console.log(receipt)
+  //   // })
+  // }
+  createProduct(name , baseprice, discription, category, key, bidinc,date) {
+    try{
+      this.state.auction.methods.createProduct(name,baseprice, discription, category, key, bidinc,date).send({from: this.state.account})
+      .once('confirmation',() => {
+        console.log( "confirmation")
+        //swal("success you product is live for auction","success")
+        Swal.fire(
+          {
+              title: "Success ", 
+              text: "Your product is live for auction", 
+              type: "success",
+              icon: 'success',
+          }
+      ).then(function (result) {
+          window.location.reload()
+      })
+      })
+      .on('error', function(error, receipt) { // If the transaction was rejected by the network with a receipt, the second parameter will be the receipt.
+        console.log("transaction rejected", error, receipt)
+        //alert("Transaction Failed")
+        Swal.fire(
+          {
+              title: "Failure", 
+              text: "Transaction Failed", 
+              type: "success",
+              icon: 'error'
+          }
+      ).then(function (result) {
+          window.location.reload()
+      })
+    });
+    }catch(err){
+      alert("fool")
+    }
   }
-
   
   placeBid(id, value){
     // const price = prompt("enter bid")
@@ -191,16 +228,67 @@ class App extends Component {
     // const price1 = parseInt(price)
     // const price2 =  window.web3.utils.toWei(price, 'ether');
     this.state.auction.methods.placeBid(id).send({from: this.state.account, value: value})
-    .once('receipt',(receipt) => {
-      console.log(receipt)
+    .on('confirmation',() => {
+      console.log()
+      // alert("your bid has been accepted")
+      // window.location.reload()
+      Swal.fire(
+        {
+            title: "Success ", 
+            text: "Your bid has been placed", 
+            type: "success",
+            icon: 'success',
+        }
+    ).then(function (result) {
+        window.location.reload()
     })
+      
+    })
+    .on('error', function(error, receipt) { // If the transaction was rejected by the network with a receipt, the second parameter will be the receipt.
+      console.log("transaction rejected", error, receipt)
+      // alert("Transaction Failed")
+      Swal.fire(
+        {
+            title: "Failure", 
+            text: "Transaction Failed", 
+            type: "success",
+            icon: 'error'
+        }
+    ).then(function (result) {
+        window.location.reload()
+    })
+  });
   }
 
   closeAuction(id){
     this.state.auction.methods.closeAuction(id).send({from: this.state.account })
-    .once('receipt',(receipt) => {
-      window.location.reload()
+    .on('confirmation',() => {
+      // alert("your product has been claimed")
+      Swal.fire(
+        {
+            title: "Success ", 
+            text: "Product claimed successfully", 
+            type: "success",
+            icon: 'success',
+        }
+    ).then(function (result) {
+        window.location.reload()
     })
+    })
+    .on('error', function(error, receipt) { // If the transaction was rejected by the network with a receipt, the second parameter will be the receipt.
+      console.log("transaction rejected", error, receipt)
+      // alert("Transaction Failed")
+      Swal.fire(
+        {
+            title: "Failure", 
+            text: "Transaction Failed", 
+            type: "success",
+            icon: 'error'
+        }
+    ).then(function (result) {
+        window.location.reload()
+    })
+  });
   }
 
   AuctionExpiry(id) {
@@ -218,6 +306,80 @@ class App extends Component {
       return true
     } )
   }
+
+
+  closeAuctionOwner(id){
+    this.state.auction.methods.closeAuctionOwner(id).send({from: this.state.account })
+    .on('confirmation',() => {
+      // alert("Your product is now removed from active bidding")
+      Swal.fire(
+        {
+            title: "Success ", 
+            text: "Your product is now removed from active auction", 
+            type: "success",
+            icon: 'success',
+        }
+    ).then(function (result) {
+        window.location.reload()
+    })
+    })
+    .on('error', function(error, receipt) { // If the transaction was rejected by the network with a receipt, the second parameter will be the receipt.
+      console.log("transaction rejected", error, receipt)
+      // alert("Transaction Failed")
+      Swal.fire(
+        {
+            title: "Failure", 
+            text: "Transaction Failed", 
+            type: "success",
+            icon: 'error'
+        }
+    ).then(function (result) {
+        window.location.reload()
+    })
+    })
+  }
+
+  createUser(name,email,address,location,productname){
+    // const a = this.state.account
+    const k = localStorage.getItem("publicKey");
+    this.state.auction.methods.createUser(crypt.encrypt(k,name),crypt.encrypt(k,email),crypt.encrypt(k,address),  crypt.encrypt(k,location),productname).send({from: this.state.account})
+    .on('confirmation',() => {
+      // alert("User details shared successfully")
+      Swal.fire(
+        {
+            title: "Success ", 
+            text: "User details shared successfully", 
+            type: "success",
+            icon: 'success',
+        }
+    ).then(function (result) {
+        window.location.reload()
+    })
+    })
+    .on('error', function(error, receipt) { // If the transaction was rejected by the network with a receipt, the second parameter will be the receipt.
+      console.log("transaction rejected", error, receipt)
+      // alert("Transaction Failed")
+      Swal.fire(
+        {
+            title: "Failure", 
+            text: "Transaction Failed", 
+            type: "success",
+            icon: 'error'
+        }
+    ).then(function (result) {
+        window.location.reload()
+    })
+    })
+
+    //updated
+    // this.state.auction.methods.createUser(encrypt(name,a), encrypt(password,a), encrypt(email,a),encrypt(address,a)).send({from: this.state.account})
+    // .once('receipt',(receipt) => {
+    //   console.log(receipt)
+    // })
+  }
+  
+
+  
 
   Capturefile = (event) => {
     event.preventDefault();
@@ -258,7 +420,6 @@ class App extends Component {
   
 
   render() {
-    console.log("Hello",this.state.products)
     return (
       <Router>
         {/* <Loginpg />  */}
@@ -269,7 +430,7 @@ class App extends Component {
             account={this.state.account} products={this.state.products} hashes={this.state.hashes} hash={this.state.hash}  createProduct={this.createProduct} placeBid={this.placeBid} closeAuction={this.closeAuction} AuctionExpiry={this.AuctionExpiry} createhash={this.createhash} Capturefile={this.Capturefile}  
             /> 
             <Main Data= 'prerit' 
-              account={this.state.account} products={this.state.products} users={this.state.users} hashes={this.state.hashes} hash={this.state.hash}  createProduct={this.createProduct} createUser={this.createUser} checkvalidity= {this.checkvalidity} placeBid={this.placeBid} closeAuction={this.closeAuction} AuctionExpiry={this.AuctionExpiry} createhash={this.createhash} Capturefile={this.Capturefile}  
+              account={this.state.account} products={this.state.products} users={this.state.users} hashes={this.state.hashes} hash={this.state.hash}  createProduct={this.createProduct} createUser={this.createUser} checkvalidity= {this.checkvalidity} placeBid={this.placeBid} closeAuction={this.closeAuction} closeAuctionOwner={this.closeAuctionOwner} AuctionExpiry={this.AuctionExpiry} createhash={this.createhash} Capturefile={this.Capturefile}  
               />
  </div>     
           <Footer />

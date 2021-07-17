@@ -101,9 +101,7 @@ contract Auction {
         user[usercount] = User(usercount,_productname,_name,_email,_address, _location);
     }
 
-    
-    
-    function createProduct(string memory _name, uint _baseprice, string memory _discription, string memory _category, string memory _publickey, uint _bidinc) public payable{
+    function createProduct(string memory _name, uint _baseprice, string memory _discription, string memory _category, string memory _publickey, uint _bidinc, uint _etime) public payable{
         //verify the product
         require(bytes(_name).length > 0);
         require(_baseprice >0);
@@ -118,13 +116,13 @@ contract Auction {
         products[productCount].createdAt =block.timestamp*1000;
         products[productCount].currentBid = _baseprice ;
         products[productCount].currentBidder = payable(0);
-        products[productCount].currentbidtime =block.timestamp;
+        products[productCount].currentbidtime =block.timestamp*1000;
         products[productCount].infoArray.discription =_discription;
         products[productCount].infoArray.category =_category;
         products[productCount].bidcount = 0;
         products[productCount].publickey = _publickey;
         products[productCount].infoArray.bidinc = _bidinc;
-        products[productCount].infoArray.endtime =  block.timestamp*1000+100000;
+        products[productCount].infoArray.endtime =  _etime;
 
         //create the product
         //products[productCount] = Product(productCount,_name,_baseprice,msg.sender,false, block.timestamp,_baseprice,msg.sender,block.timestamp, _discription,0, _category);
@@ -160,9 +158,9 @@ contract Auction {
         Product storage product = products[_id];
 
         //difference between bids should be greater than 15 seconds
-        //require(block.timestamp*1000 - product.currentbidtime >= 15 seconds);
+        require(block.timestamp*1000 - product.currentbidtime >= 15 seconds);
         
-        
+        require(block.timestamp*1000 < product.infoArray.endtime);
         
          // bid should be greater than minPrice
         require(msg.value>=product.baseprice,"bid value shouldn't be less than the reserve value");
@@ -185,7 +183,7 @@ contract Auction {
 
         
         product.currentBidder = payable(msg.sender);
-        product.currentbidtime = block.timestamp;
+        product.currentbidtime = block.timestamp*1000;
         product.bidcount = products[_id].bidcount + 1;
         
         
@@ -198,11 +196,7 @@ contract Auction {
     }
     
     function closeAuction(uint _id) payable public  {
-
-         
         //require(block.timestamp - products[_id].createdAt >= 120, "auction not ended"  );
-
-        
 
          Product storage product = products[_id];
         
@@ -229,11 +223,41 @@ contract Auction {
         //emit closeauction(_product.Id,_product.name ,_product.baseprice,true,_product.currentBid, _product.owner,products[_id].bidcount ,products[_id].infoArray.category);
 
     }
+    
+    
+     function closeAuctionOwner(uint _id) payable public  {
+
+         
+        //require(block.timestamp - products[_id].createdAt >= 120, "auction not ended"  );
+
+        
+
+         Product storage product = products[_id];
+        
+        //claimer must be owner
+        
+        require(msg.sender == product.owner,"you are not eligible to close this auction");
+        
+        product.currentBid = product.currentBid  -   (product.infoArray.bidinc) ;
+        
+        // money sent to seller
+        product.owner.transfer(product.currentBid);
+        
+        // set product status sold to true
+        product.purchased = true;
+        
+        
+        emit ProductEvent(product);
+         
+        
+        
+        //emit closeauction(_product.Id,_product.name ,_product.baseprice,true,_product.currentBid, _product.owner,products[_id].bidcount ,products[_id].infoArray.category);
+
+    }
 
     
     function getnow()view public returns(uint) {
         return block.timestamp*1000;
     }
-    
     
 }

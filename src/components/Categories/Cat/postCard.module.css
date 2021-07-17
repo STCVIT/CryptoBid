@@ -1,0 +1,37 @@
+.card{
+    background-color:#111c6e;
+    border-radius: 10px;
+  }
+  .heading{
+    color: #fff !important;
+    text-align: left !important;
+    padding-left: 1em !important;
+    font-size: 2rem !important;
+    line-height: 0 !important;
+  }
+  .left{
+    padding: 1em;
+  }
+  .right{
+    color: #36b9f1;
+    font-weight: bold;
+  }
+  .heart{
+    float: right;
+  }
+  .bidPrice {
+    color : #36b9f1;
+  }
+  .row{
+    padding-left: 2em;
+    font-size: large;
+    font-weight: bold;
+  }
+  .col{
+    line-height: 0.9;
+  }
+  
+  .w{
+    color: azure;
+    padding-bottom: 1em !important;
+  }

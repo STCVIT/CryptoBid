@@ -1,72 +1,46 @@
 import React from "react";
 import styles from "./postCards.module.css";
-import { AiFillThunderbolt } from "react-icons/ai";
+import { AiFillInfoCircle, AiFillThunderbolt } from "react-icons/ai";
 import { Link } from "react-router-dom";
-function Post(props) {
-
+function Card(props) {
   return (
-    <div className={styles.card + " card"} >
-      <div className={ styles.imgcont + " text-center"}>
-        <img
-          src={props.img}
-          alt="iwatch"
-          className={"card-img-top " + styles.imgWatch}
-          width="50%"
-          height="100%"
-        />
-      </div>
-      <div  >
-        <h6 className={"heading " + styles.heading}>{props.Name}</h6>
-        <div className={"row " + styles.row}>
-          <div className={"col " + styles.col}>
-            <p>
-              <AiFillThunderbolt color="gold" /> Highest Bid : <span className={styles.bidPrice}>{props.Hbid} ETH</span>
-            </p>
-            <p>
-              <AiFillThunderbolt color="gold" /> Discription : <span className={styles.bidPrice}>{props.discription} </span>
-            </p>
-            <div className="pb-2 pr-2 text-right"><Redirect Id={props.Id} /></div>
-            
-
-          </div>
-          {/* <div className="col">
-
-            <Redirect Id={props.Id} />
-         
-            {/* <a href="#">Click here</a> */}
-            {/* </div> */} 
-            
-          </div>
-          
+    <>
+      <Link className={styles.LinkTag} to={"/product/" + props.Id}>
+      <div className={styles.card + " card"}>
+        <div>
+          <img
+            src={props.img}
+            alt="Product-Img"
+            className={"card-img-top " + styles.imgWatch}
+            width="250px"
+            height="250px"
+          />
+        </div>
+        <div>
+          <h6 className={"heading " + styles.heading}>{props.Name}</h6>
           <div className={"row " + styles.row}>
-            
             <div className={"col " + styles.col}>
-             {/* ♡ {parseInt(props.bitcount)} */}
+              <p>
+                <AiFillThunderbolt color="gold" /> Highest Bid :{" "}
+                <span className={styles.bidPrice}>{props.Hbid} wETH</span>
+              </p>
             </div>
-            
-            <div className={"col " + styles.col}>
-           
-            {/* <p style={{ color: "#7d56c2" }}>
-            <AiOutlineHeart color="white" fontSize="1em"/> {props.Likes}
-            </p> */}
-            </div>
-            
-           
-
           </div>
+          <div className={"row " + styles.row}>
+            <div className={"col " + styles.col}>
+              <p>
+                <AiFillInfoCircle color="white" /> <span> Description :{" "} </span>
+                <span className={styles.bidPrice}>{props.discription} </span>
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+      </Link>
+    </>
   );
 }
 
 
-function Redirect(props) {
-  return(
-  <Link to={"/product/"+props.Id}>
-  <button className="btn btn-light plcbid">See More </button>
-  </Link>
-  )
-}
 
-
-export default Post;
+export default Card;

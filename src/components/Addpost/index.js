@@ -3,9 +3,10 @@ import styles from "./addPost.module.css";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import Button from "@material-ui/core/Button";
-import DatePicker from "./util/DatePicker";
+import DatePickerField from "./util/DatePicker";
 import Component from "./util/Input";
 import Tags from "./util/Tags";
+
 
 const signInSchema = Yup.object().shape({
   productName: Yup.string()
@@ -20,8 +21,13 @@ const signInSchema = Yup.object().shape({
   minimumBids: Yup.number().required("Minimum bids are required"),
   category: Yup.string().required("Select Category"),
   tags: Yup.string(),
-  startingDate: Yup.date().required(),
-  endingDate: Yup.date().required(),
+  startingDate: Yup.date().default(function () {
+    return new Date();
+  }).min(new Date(Date.now())).required()
+  ,
+  endingDate: Yup.date().default(function () {
+    return new Date();
+  }).min(new Date(Date.now())).required(),
 });
 const initialValues = {
   productName: "",
@@ -45,6 +51,8 @@ function Addpost(props) {
       const publicKey = localStorage.getItem("publicKey")
       console.log(JSON.stringify(values));
       console.log(values);
+      let endtime = Date.parse(values.endingDate)
+      console.log(endtime)
       console.log(values.startingPrice)
       console.log(values.startingPrice.toString())
       let baseprice = window.web3.utils.toWei(values.startingPrice.toString(), 'Ether')
@@ -53,7 +61,8 @@ function Addpost(props) {
       // let baseprice1 = parseInt(baseprice)
       // console.log(typeof(baseprice1))
       console.log(baseprice)
-      props.createProduct(values.productName, baseprice , values.productDesc, values.category,publicKey, bidinc)
+      console.log(values.endingDate)
+      props.createProduct(values.productName, baseprice , values.productDesc, values.category,publicKey, bidinc, parseInt(endtime))
     }}
   >
     {(formik) => {
@@ -142,10 +151,10 @@ function Addpost(props) {
             <h2>Starting and Ending time</h2>
             <div className="row">
               <div className="col-12 col-md-6 col-sm-12 col-lg-6 my-2">
-                <DatePicker label="Starting time" id="startingDate" />
+              <Field name="startingDate" component={DatePickerField} />
               </div>
               <div className="col-12 col-md-6 col-sm-12 col-lg-6 my-2">
-                <DatePicker label="Ending time" id="endingDate" />
+              <Field name="endingDate" component={DatePickerField} />
               </div>
             </div>
             <div className="row">

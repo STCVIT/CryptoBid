@@ -8,13 +8,15 @@ import {
 import { Switch, Route } from "react-router-dom";
 import Addpost from "../Addpost";
 import Categories from "../Categories";
-import Post from '../Card';
+import Home from '../Home';
 import Assests from '../assests'
-import Search from '../Search'
 import Ongoing from '../ongoing'
 //import Signup from '../signup'
 import UserInfo from "../UserInfo"
 import Productpg from "../Productpage"
+import Historypg from "../history"
+import Pop from "../pop"
+import SearchPg from "../Search"
 // function Main(props) {
 //   return (
 //     <div>
@@ -117,8 +119,8 @@ function Main(props) {
           <Route exact path="/AddNew">
               <Addpost   hashes={props.hashes} hash={props.hash}  createProduct={props.createProduct}  closeAuction={props.closeAuction} AuctionExpiry={props.AuctionExpiry} createhash={props.createhash} Capturefile={props.Capturefile}  />
             </Route>
-            <Route exact path="/home">
-              <Post   hashes={props.hashes} hash={props.hash} account={props.account} products={props.products} createProduct={props.createProduct}  closeAuction={props.closeAuction} placeBid={props.placeBid} AuctionExpiry={props.AuctionExpiry}  />
+            <Route exact path="/">
+              <Home   hashes={props.hashes} hash={props.hash} account={props.account} products={props.products} createProduct={props.createProduct}  closeAuction={props.closeAuction} placeBid={props.placeBid} AuctionExpiry={props.AuctionExpiry}  />
             </Route>
             <Route exact path="/categories"> 
             <Categories hashes={props.hashes} hash={props.hash}  account={props.account} products={props.products} placeBid={props.placeBid} closeAuction={props.closeAuction} />
@@ -129,11 +131,20 @@ function Main(props) {
          <Route exact path="/assests"> 
             <Assests  hashes={props.hashes} hash={props.hash} account={props.account} products={props.products} users={props.users} checkvalidity={props.checkvalidity} createUser={props.createUser}  />
          </Route>
-         <Route exact path="/signup"> 
-            <UserInfo  hashes={props.hashes} hash={props.hash} account={props.account} products={props.products} users={props.users} createUser={props.createUser} />
+         <Route exact path="/profile"> 
+            <UserInfo    hashes={props.hashes} hash={props.hash} account={props.account} products={props.products} users={props.users} createUser={props.createUser} />
          </Route>
          <Route exact path="/product/:id">
-              <Productpg hashes={props.hashes} hash={props.hash} account={props.account} products={props.products} createProduct={props.createProduct}  closeAuction={props.closeAuction} placeBid={props.placeBid} AuctionExpiry={props.AuctionExpiry}  />
+              <Productpg hashes={props.hashes} closeAuctionOwner={props.closeAuctionOwner} hash={props.hash} account={props.account} products={props.products} createProduct={props.createProduct}  closeAuction={props.closeAuction} placeBid={props.placeBid} AuctionExpiry={props.AuctionExpiry}  />
+            </Route>
+            <Route exact path="/history">
+              <Historypg hashes={props.hashes} hash={props.hash} account={props.account} products={props.products} users={props.users} createUser={props.createUser} createProduct={props.createProduct}  closeAuction={props.closeAuction} placeBid={props.placeBid} AuctionExpiry={props.AuctionExpiry}  />
+            </Route>
+            <Route exact path="/pop">
+               <Pop />
+            </Route>
+            <Route exact path="/Search=:q">
+              <SearchPg hashes={props.hashes} hash={props.hash} account={props.account} products={props.products} users={props.users} createUser={props.createUser} createProduct={props.createProduct}  closeAuction={props.closeAuction} placeBid={props.placeBid} AuctionExpiry={props.AuctionExpiry}  />
             </Route>
          {/* <Route exact path='/product/:id' component={Productpg} />
          {/* <Route>

@@ -162,3 +162,6 @@
     height: 50px;
     border-radius: 50%;
   }
+  .containerStyle {
+    width: 70% !important;
+  }
