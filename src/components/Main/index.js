@@ -117,7 +117,7 @@ function Main(props) {
         <div className="Content">
           <Switch>
           <Route exact path="/AddNew">
-              <Addpost   hashes={props.hashes} hash={props.hash}  createProduct={props.createProduct}  closeAuction={props.closeAuction} AuctionExpiry={props.AuctionExpiry} createhash={props.createhash} Capturefile={props.Capturefile}  />
+              <Addpost   hashes={props.hashes} hash={props.hash} buffer={props.buffer}  createProduct={props.createProduct}  closeAuction={props.closeAuction} AuctionExpiry={props.AuctionExpiry} createhash={props.createhash} Capturefile={props.Capturefile}  />
             </Route>
             <Route exact path="/">
               <Home   hashes={props.hashes} hash={props.hash} account={props.account} products={props.products} createProduct={props.createProduct}  closeAuction={props.closeAuction} placeBid={props.placeBid} AuctionExpiry={props.AuctionExpiry}  />

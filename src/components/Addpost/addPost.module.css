@@ -32,10 +32,10 @@
   transition: all 0.2s ease;
 }
 
-.fileUploadContent {
+/* .fileUploadContent {
   display: none;
   text-align: center;
-}
+} */
 
 .fileUploadInput {
   position: absolute;
@@ -148,4 +148,14 @@
 #datetimeLocalLabel{
   color: #ffffff;
   padding: 0.5em;
+}
+.MuiToolbar-root {
+  background-color: "#2D396B";
+}
+
+.upload{
+  width: 100%;
+  margin-top:9px !important;
+  color: white !important;
+  
 }

@@ -5,24 +5,94 @@ import {CardDeck} from 'react-bootstrap'
 import Dropdown from 'react-multilevel-dropdown';
 
 function SearchPg(props) {
+  var Arr = [...props.products];
   var term = window.location.pathname.split('=');
   term = term[1];
   const [searchTerm, setSearchTerm] = useState(term);
-  const [searchResults, setSearchResults] = useState(props.products);
+  const [searchResults, setSearchResults] = useState(Arr);
   const handleInputChange = e => {
     setSearchTerm(e.target.value);
   }
 
+  const [filter,setFilter] = useState(0);
+
+function RenderOne(props) {
+  return (
+    <Dropdown.Item className={styles.Filter} >
+    {props.Name}
+    <Dropdown.Submenu>
+      <Dropdown.Item onClick={() => {
+        if( props.Name==='Price' ){
+        setFilter(1); }
+       else if(props.Name==='Popularity') {
+          setFilter(3);}
+        }}>
+        Low to High
+      </Dropdown.Item>
+      <Dropdown.Item onClick={() => {
+        if( props.Name==='Price' ){
+        setFilter(2);
+        ; }
+       else if(props.Name==='Popularity') {setFilter(4);
+        }}}>
+      High to Low
+      </Dropdown.Item>
+    </Dropdown.Submenu>
+  </Dropdown.Item>
+  );
+}
+
+function SortDropdown() {
+  return (
+    <>
+     <Dropdown title="Filter" >
+     <RenderOne Name="Price" />
+     <RenderOne Name="Popularity" />
+     </Dropdown>
+    </>
+  );
+}
+function SortList(Arr,filter) {
+  if (filter===1) { 
+   Arr = Arr.sort((a, b) => {
+     const diff = parseInt(a.currentBid) - parseInt(b.currentBid);
+     if(diff===0) return 0;
+     const sign= Math.abs(diff) / diff;
+     return sign;
+   });
+  } 
+  if( filter===2 ) { 
+    Arr =  Arr.sort((a, b) => (parseInt(b.currentBid )- parseInt(a.currentBid)));
+  }
+  if ( filter===3 ) { 
+   console.log(filter)
+    Arr =  Arr.sort((a, b) => (parseInt(a.bidcount) - parseInt(b.bidcount)))
+    console.log(Arr)
+ }
+if (filter===4) { 
+    Arr =  Arr.sort((a, b) => (parseInt(b.bidcount) - parseInt(a.bidcount)))
+    console.log(Arr)
+
+   }
+   return Arr;
+}
+ useEffect(()=>{
+   console.log(filter)
+    setSearchResults(SortList(props.products,filter));
+    setFilter(0);
+},[filter,searchResults])
 
 
  function change() {
-  const results =props.products.filter(function(l) {
+  const results =Arr.filter(function(l) {
     return( l.name.toLowerCase().match(searchTerm))
   });
+  console.log(results)
   return results;
+ 
  }
   useEffect(() => {
-    const results =props.products.filter(function(l) {
+    const results =Arr.filter(function(l) {
       return( l.name.toLowerCase().match(searchTerm))
     });
     setSearchResults(results);
@@ -33,6 +103,7 @@ function RenderResults(prop) {
     <CardDeck>
     {prop.Array.map((product, key) => {
       return (
+       
         <div className="my-2 col-12 col-md-4 col-sm-12">
           <Card
             Id={parseInt(product.Id)}
@@ -46,6 +117,7 @@ function RenderResults(prop) {
           />
   </div>
       );
+
             })}
             
   </CardDeck>
@@ -69,7 +141,7 @@ function RenderResults(prop) {
           />
         </div>
           <div className="col-md-4 my-2 ">
-       
+          <SortDropdown />
           </div>
           
         </form>

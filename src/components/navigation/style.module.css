@@ -10,16 +10,13 @@
 }
 .Searchbox
  {
-     text-align: center;
-     height: 2.2rem;
-     background: #2D396B;
+     height: 2.5rem;
+     background: #2D396B !important;
      outline: none;
      border: none;
      border-radius:14px;
-     padding: 0 3.5rem 0 1.5rem;
-     margin: 0 0.3rem;
-     color: white !important;
-     font-size: 1rem;
+     /* margin: 0 0.3rem;
+     font-size: 1rem; */
  }
 .navbarNav {
     align-items: center;
@@ -36,4 +33,17 @@
 }
 .Right {
     margin-right: 13%;
+}
+
+input[type=search] {
+    background: #2D396B !important;
+    color : white !important; 
+    border : none !important;
+    outline: none !important;
+}
+
+.Cont {
+   text-align: center !important;
+   align-items: center !important;
+   align-self: center !important;
 }

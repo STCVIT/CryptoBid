@@ -7,8 +7,8 @@ import LoginDropdown from "../login-dropdown"
 const a = localStorage.getItem("generated");
 const NavItem = ({ navItem }) => {
   return (
-    <li className="nav-item p-2">
-      <Link className={"nav-link " + navItem.style} to={`/${navItem.link}`}>
+    <li className="nav-item p-2 text-center ">
+      <Link className={"nav-link " + styles.navLink} to={`/${navItem.link}`}>
         {navItem.text} <span className="sr-only">(current)</span>
       </Link>
     </li>
@@ -31,41 +31,50 @@ function NavigationBar() {
     }
   };
   return (
-    <div>
-      <nav className="navbar navbar-expand-lg navbar-dark" id={styles.Navbar}>
-        <Link className="navbar-brand pl-5" to="/">
+
+      <nav className=" navbar navbar-expand-lg navbar-dark " id={styles.Navbar}>
+        <Link className="navbar-brand pl-5 " to="/">
           <img src={logo} height="80" width="80"></img>
         </Link>
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+        <button
+          className="navbar-toggler text-center"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse  " id="navbarSupportedContent">
           <ul className="navbar-nav p-2 mr-auto ">
-            <div className="search-box">
-              <div className="input-group rounded">
+            <div className="mx-auto">
+              <div className="input-group rounded ">
                 <form>
-                
+               
                 <input
                   type="search"
                   id="search"
-                  className="form-control rounded"
+                  className={"form-control   " + styles.Searchbox}
                   placeholder="&#128269; Search"
                   aria-label="Search"
                   aria-describedby="search-addon"
-                  className={styles.Searchbox}
                   ref={(input) => { search1.search= input }}
                   onChange={handleChange}
                   onKeyPress={handleKeypress}
-                />
-                
+                /> 
+
                     <button hidden onClick={handleSubmit} type="submit">
                       Submit
                     </button>
                 </form>
-              
-                
-                
+
+
+
               </div>
             </div>
-            <div></div>
-            {[
+           {[
               {
                 link: "",
                 text: "Home",
@@ -83,7 +92,7 @@ function NavigationBar() {
             })}
           </ul>
           {a === "true" ? (
-            <ul className={"navbar-nav p-2 " + styles.navbarNav + " " + styles.Right}>
+            <ul className={"navbar-nav p-2 mr-auto " + styles.navbarNav + " " + styles.Right}>
               {[
                 {
                   link: "addnew",
@@ -101,7 +110,7 @@ function NavigationBar() {
             <ul className={"navbar-nav  ml-auto p-2 "+  styles.navbarNav}>
               {[
                 {
-                  link: "signup",
+                  link: "profile",
                   text: "Signup",
                   style: "connect",
                 },
@@ -112,7 +121,7 @@ function NavigationBar() {
           )}
         </div>
       </nav>
-    </div>
+
   );
             }
 export default NavigationBar;

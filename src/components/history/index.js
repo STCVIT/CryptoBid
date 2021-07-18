@@ -4,13 +4,15 @@ import { ButtonGroup, ToggleButton } from "react-bootstrap";
 import exampleimg from "./maxresdefault.jpg";
 import Listele from "./util/listele";
 import HistComponent from "./util/withDetails";
-const a = localStorage.getItem("generated")
+
+import { Crypt, RSA } from "hybrid-crypto-js";
+var crypt = new Crypt();
+var rsa = new RSA();
+const pk = localStorage.getItem("privateKey");
+const a = localStorage.getItem("generated");
 function Historypg(props) {
   const [radioValue, setRadioValue] = useState("1");
-  const radios = [
-    { name: "Bought", value: "1" },
-    { name: "Sold", value: "2" },
-  ];
+  const radios = [{ name: "Bought", value: "1" }, { name: "Sold", value: "2" }];
   const ActiveStyle = {
     backgroundColor: "#6d28d9",
   };
@@ -77,58 +79,110 @@ function Historypg(props) {
               <th scope="col">Claim</th>
             </tr>
           </thead>
-          {a === "true" ?
-          <>
-          {radioValue === '1' ?
-          <tbody>
-            {props.products.map((product, k) => {
-              return (
-                <>
-                {product.currentBidder === props.account && product.purchased ?
-                          <Listele  Name= {product.name}  createUser={props.createUser} Cost = {window.web3.utils.fromWei(
-                        product.currentBid.toString(),
-                        "Ether" 
-                      )} radioValue={radioValue} />
-            
-               
-              
-              :null}
-    </>
-              )
-            })}
+          {a === "true" ? (
+            <>
+              {radioValue === "1" ? (
+                <tbody>
+                  {props.products.map((product, k) => {
+                    return (
+                      <>
+                        {product.currentBidder === props.account &&
+                        product.purchased ? (
+                          <Listele
+                            Name={product.name}
+                            createUser={props.createUser}
+                            Cost={window.web3.utils.fromWei(
+                              product.currentBid.toString(),
+                              "Ether"
+                            )}
+                            radioValue={radioValue}
+                          />
+                        ) : null}
+                      </>
+                    );
+                  })}
+                </tbody>
+              ) : (
+                <tbody>
+                  {props.products.map((product, k) => {
+                    return (
+                      <>
+                        {product.owner === props.account &&
+                        product.purchased ? (
+                         <>
+                            {props.users.map((user, key) => {
+                              console.log(crypt.decrypt(pk, user.name).message);
+                              return (
+                                <>
+                                  {/* <p>Name : {crypt.decrypt(pk, user.name).message}</p> 
+                        <p>Address : {crypt.decrypt(pk, user.addres).message}</p>  
+                        <p>Email : {crypt.decrypt(pk, user.location).message}</p> 
+                        <p>Email : {crypt.decrypt(pk, user.email).message}</p>      */}
+                        
+                                  {/* <HistComponent
+                                    Name={crypt.decrypt(pk, user.name).message}
+                                    Cost={window.web3.utils.fromWei(
+                                      product.currentBid.toString(),
+                                      "Ether"
+                                    )}
+                                    pname={product.name}
+                                    Email={
+                                      crypt.decrypt(pk, user.email).message
+                                    }
+                                    Add={crypt.decrypt(pk, user.addres).message}
+                                  /> */}
+                                    {props.users.map((user ,key) => {
+                                      return (
+                                        <>
+                                       {user.productname === product.name ?
+                                       <>
+                                            {/* <p>Name : {crypt.decrypt(pk, user.name).message}</p>  */}
+                                            {/* <p>Address : {crypt.decrypt(pk, user.addres).message}</p>  
+                                            <p>Email : {crypt.decrypt(pk, user.location).message}</p> 
+                                            <p>Email : {crypt.decrypt(pk, user.email).message}</p>   */}
+                                            <HistComponent
+                                    Name={crypt.decrypt(pk, user.name).message}
+                                    Cost={window.web3.utils.fromWei(
+                                      product.currentBid.toString(),
+                                      "Ether"
+                                    )}
+                                    pname={product.name}
+                                    Email={
+                                      crypt.decrypt(pk, user.email).message
+                                    }
+                                    Add={crypt.decrypt(pk, user.addres).message}
+                                    hash={props.hashes[k]}
+                                  />   
+                                            {/* <p>Email: {decrypt(user.email)} </p>
+                                            <p>Address: {decrypt(user.addres)}</p> */}
 
-         
-        </tbody>
-        :
-
-        <tbody>
-            {props.products.map((product, k) => {
-              return (
-                <>
-                {product.owner === props.account && product.purchased ?
-                          <HistComponent  Name= {product.name} Cost = {window.web3.utils.fromWei(
-                        product.currentBid.toString(),
-                        "Ether"
-                      )} pname={product.name}/>
-              :null}
-    </>
-              )
-            })}
-
-         
-        </tbody>
-        }
-
-          </>
-          
-          :
-          <tbody>
-          <td><p>You need to be logged in to view data</p></td>
-          </tbody>
-}
-         
-          
-
+                                       </>
+                                       
+                                    :null}
+                                    </>
+                                      )
+                                  })}
+                                  {/* <p>Email: {decrypt(user.email)} </p>
+                        <p>Address: {decrypt(user.addres)}</p> */}
+                                </>
+                              );
+                            })}
+                          </>
+                        ) : null}
+                      </>
+                    );
+                  })}
+                </tbody>
+              )}
+            </>
+          ) 
+          : (
+            <tbody>
+              <td>
+                <p>You need to be logged in to view data</p>
+              </td>
+            </tbody>
+          )}
         </table>
       </div>
 
@@ -138,3 +192,4 @@ function Historypg(props) {
 }
 
 export default Historypg;
+

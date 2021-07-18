@@ -1,0 +1,20 @@
+.MuiPickersBasePicker-pickerView{
+    background-color: #2D396B;
+}
+.MuiDialogActions-root  { 
+    background-color: #2D396B;
+}
+.MuiButton-textPrimary
+ {
+     background-color: #140D4A !important;
+     border-radius: 0.5rem !important;
+     color: #A469FF !important;
+ }
+.MuiIconButton-label
+ {
+     color: white  ;
+ }
+ .MuiPickersDay-dayDisabled {
+    color: #616D95 !important;
+    opacity: 0.2;
+ }

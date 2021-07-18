@@ -135,6 +135,7 @@ export default function UserInfo() {
                     variant="contained"
                     fullWidth
                     type="submit"
+                    href="/"
                   >
                     Save Changes
                   </Button>

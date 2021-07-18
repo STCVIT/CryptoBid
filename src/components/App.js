@@ -430,7 +430,7 @@ class App extends Component {
             account={this.state.account} products={this.state.products} hashes={this.state.hashes} hash={this.state.hash}  createProduct={this.createProduct} placeBid={this.placeBid} closeAuction={this.closeAuction} AuctionExpiry={this.AuctionExpiry} createhash={this.createhash} Capturefile={this.Capturefile}  
             /> 
             <Main Data= 'prerit' 
-              account={this.state.account} products={this.state.products} users={this.state.users} hashes={this.state.hashes} hash={this.state.hash}  createProduct={this.createProduct} createUser={this.createUser} checkvalidity= {this.checkvalidity} placeBid={this.placeBid} closeAuction={this.closeAuction} closeAuctionOwner={this.closeAuctionOwner} AuctionExpiry={this.AuctionExpiry} createhash={this.createhash} Capturefile={this.Capturefile}  
+              account={this.state.account} products={this.state.products} users={this.state.users} hashes={this.state.hashes} hash={this.state.hash} buffer={this.state.buffer}  createProduct={this.createProduct} createUser={this.createUser} checkvalidity= {this.checkvalidity} placeBid={this.placeBid} closeAuction={this.closeAuction} closeAuctionOwner={this.closeAuctionOwner} AuctionExpiry={this.AuctionExpiry} createhash={this.createhash} Capturefile={this.Capturefile}  
               />
  </div>     
           <Footer />

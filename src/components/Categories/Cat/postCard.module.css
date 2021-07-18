@@ -35,3 +35,10 @@
     color: azure;
     padding-bottom: 1em !important;
   }
+
+@media only screen and (max-width: 768px){
+  [class*="col-"] {
+    width: 100%;
+  }
+  
+}

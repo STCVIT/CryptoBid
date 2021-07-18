@@ -1,5 +1,16 @@
 
 .CatButton:hover { 
     color: white !important;
-    background-color: #2F80EC !important;
+    background-color: #140D4A !important;
+}
+.CatButton{
+    color: #A469FF !important;
+    background-color: #050121 ;
+    height: 80% ;
+    border : none;
+}
+
+#Active {
+    background-color: #140D4A !important;
+    border : 1px solid #A469FF !important;
 }

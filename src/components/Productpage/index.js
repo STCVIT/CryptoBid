@@ -2,6 +2,8 @@ import React, { Component} from 'react'
 import styles from './styles.module.css'
 import exampleimg from "./example.jpg"
 import moment from 'moment';
+import Card from "../Posts"
+import { CardDeck } from "react-bootstrap";
 moment().format();
 const Productpg = (props)=>  {
   var productid = window.location.pathname.split('/');
@@ -9,6 +11,7 @@ const Productpg = (props)=>  {
   const tagarray=['automobile','cheems']
   // console.log("Hels",Dat);
   console.log(props.products[productid[2]])
+  
   return(
     <div>
 
@@ -34,7 +37,6 @@ const Productpg = (props)=>  {
         {key === productid[2]-1 ? 
 
                <div key={key} className={styles.product}>
-        <button className="btn btn-dark backbtn"  > <span>&#60;</span> Back</button>
         <div className="container">
         <div className="row">
         <div className="col-md">
@@ -113,12 +115,41 @@ const Productpg = (props)=>  {
               {/* <button className={`btn btn-dark ${styles.backbtn} ${styles.tag}`}>#{tagarray[0]}</button>
               <button className={`btn btn-dark ${styles.backbtn} ${styles.tag}`}>#{tagarray[1]}</button>
                */}
-              <h6 className={styles.disclaimer}> <br /> Pls Give permission to share details to seller in the Assests tab</h6>
+              
+           </div>
+
+         
+        </div>
+        </div>
+        </div>
+        <div>
+             <h3 className="p-3 my-2 ">Explore More</h3>
+             <CardDeck>
+             {props.products.map((product, key) => {
+               return(
+                 <>
+                 { key < 3 ?
+                  <div className="my-2 col-12 col-md-4 col-sm-12">
+                  <Card
+                    Id={parseInt(product.Id)}
+                    Name={product.name}
+                    Hbid={window.web3.utils.fromWei(
+                      product.currentBid.toString(),
+                      "Ether"
+                    )}
+                    discription={product.infoArray.discription}
+                    img={`https://ipfs.infura.io/ipfs/${props.hashes[key]}`}
+                  />
+                  </div>
+                
+                : null}
+                </>
+               )
+               
+              })}
+              </CardDeck>
            </div>
           
-        </div>
-        </div>
-        </div>
       </div> 
         
 

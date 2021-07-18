@@ -26,10 +26,10 @@ function Ongoing(props) {
   { localStorage.getItem("generated") ? 
      <div className={styles.main}>
       <h1 className="text-center">Ongoing</h1>
-      <button className={"btn btn-dark " + styles.backbtn}>
+      {/* <button className={"btn btn-dark " + styles.backbtn}>
         {" "}
         <span>&#60;</span> Back
-      </button>
+      </button> */}
       <div className={"text-center p-2 my-3 container  " + styles.cont}>
         <ButtonGroup toggle className="d-flex  ">
           {radios.map((radio, idx) => (

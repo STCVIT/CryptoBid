@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 function Card(props) {
   return (
     <>
-      <Link className={styles.LinkTag} to={"/product/" + props.Id}>
+      <a className={styles.LinkTag} href={"/product/" + props.Id}>
       <div className={styles.card + " card"}>
         <div>
           <img
@@ -36,7 +36,7 @@ function Card(props) {
           </div>
         </div>
       </div>
-      </Link>
+      </a>
     </>
   );
 }

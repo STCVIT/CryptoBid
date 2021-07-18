@@ -2,6 +2,10 @@ import React from "react";
 import { Dropdown } from "react-bootstrap";
 import { AiOutlineUser } from "react-icons/ai";
 import styles from "./styles.module.css";
+function Logout() {
+  localStorage.removeItem("generated")
+  window.location.reload();
+}
 function LoginDropdown() {
   return (
     <Dropdown>
@@ -37,7 +41,7 @@ function LoginDropdown() {
       );
     })}
 
-        <Dropdown.Item style={{ color: "red" }} href="#/action-3">
+        <Dropdown.Item style={{ color: "red" }} href="#/action-3" onClick={Logout}>
           <i className="fas fa-sign-in-alt fa-rotate-180"></i> Logout
         </Dropdown.Item>
       </Dropdown.Menu>

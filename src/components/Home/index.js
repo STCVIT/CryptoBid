@@ -3,6 +3,7 @@ import styles from "./postCard.module.css";
 import Card from "../Posts";
 import { CardDeck } from "react-bootstrap";
 import Categories from "../Categories"
+import Divider from "../Categories/divider"
 function Home(props) {
   return (
     <div class="container">
@@ -31,12 +32,14 @@ function Home(props) {
           })}
         </CardDeck>
       </div>
-      <>
-      <Categories products={props.products} hashes={props.hashes} account={props.account} placeBid={props.placeBid} closeAuction={props.closeAuction}   />
-      </>
+      <div className={styles.w + " container mt-3" }>
+      <h2>Explore Categories</h2>
+      {/* <Categories products={props.products} hashes={props.hashes} account={props.account} placeBid={props.placeBid} closeAuction={props.closeAuction}   /> */}
+      <Divider products={props.products} hashes={props.hashes} account={props.account} placeBid={props.placeBid} closeAuction={props.closeAuction}   />
+      </div>
      
 
-      <div className={styles.w + " container mt-3" }>
+      {/* <div className={styles.w + " container mt-3" }>
         <h2>All Products</h2>
         <CardDeck>
           {props.products.map((product, key) => {
@@ -57,7 +60,7 @@ function Home(props) {
             );
           })}
         </CardDeck>
-      </div>
+      </div> */}
     </div>
   );
 }

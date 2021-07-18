@@ -10,102 +10,55 @@ import {
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
-
+import './style.css';
 
 const materialTheme = createMuiTheme({
   overrides: {
+    MuiPaperRoot: { 
+      backgroundColor: "#2D396B",
+    },
     MuiPickersToolbar: {
       toolbar: {
-        backgroundColor: lightBlue.A200,
+        backgroundColor: "#2D396B",
       },
     },
     MuiPickersCalendarHeader: {
       switchHeader: {
-        backgroundColor: lightBlue.A200,
-        color: "white",
+        backgroundColor: "#2D396FB",
+        color: "#ffffff",
+      },
+      iconButton : {
+       backgroundColor: "#ffffff",
+      },
+      dayLabel: {
+        color: "#ffffff"
       },
     },
     MuiPickersDay: {
-      day: {
-        color: lightBlue.A700,
-      },
       daySelected: {
-        backgroundColor: lightBlue["400"],
-      },
-      dayDisabled: {
-        color: lightBlue["100"],
-      },
-      current: {
-        color: lightBlue["900"],
-      },
+        backgroundColor: "#6D28D9",
+      }
     },
     MuiPickersModal: {
       dialogAction: {
-        color: lightBlue["400"],
+        color: "#140D4A",
+        backgroundColor: "#2D396B"
       },
     },
   },
 });
-
-
-
-
-// function DatePicker(props) {
-//     const [field] = useField(props.id);
-//     console.log(field)
-//     var { Newdate } = useFormikContext();
-//     const [selectedDate, setSelectedDate] = React.useState(new Date());
-//     const handleDateChange = (date) => {
-//       setSelectedDate(date);
-//     };
-//     console.log(selectedDate)
-//     return (
-//       <div className={styles.ProductForm}>
-         
-//          <MuiPickersUtilsProvider utils={DateFnsUtils}>
-//          <ThemeProvider theme={materialTheme}>
-//          <KeyboardDatePicker
-//           disableToolbar
-//           variant="inline"
-//           {...field}
-//           format="yyyy/MM/dd"
-//           margin="normal"
-//           id={"date-picker-inline " + styles.datetimeLocal}
-//           label="Date picker inline"
-//           value={selectedDate}
-//           onChange={handleDateChange}
-//           KeyboardButtonProps={{
-//             'aria-label': 'change date',
-//           }}
-//         />
-//         </ThemeProvider>
-//  </MuiPickersUtilsProvider>
-// {/*       
-//         <TextField
-//           {...field}
-//           id={styles.datetimeLocal}
-//           label={props.label}
-//           type="date"
-//           InputLabelProps={{
-//             shrink: true,
-//           }}
-//         /> */}
-//         <ErrorMessage name={props.id} />
-//       </div>
-//     );
-//   }
-
-
-
-    
+ 
 const DatePickerField = ({ field, form, ...other }) => {
   const currentError = form.errors[field.name];
 
   return (
+    <>
+    <h2>Closing Time</h2>
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          <ThemeProvider theme={materialTheme}>
+          <ThemeProvider theme={materialTheme} >
     <KeyboardDatePicker
       clearable
+      className={styles.DatePicker}
       disablePast
       name={field.name}
       value={field.value}
@@ -125,6 +78,7 @@ const DatePickerField = ({ field, form, ...other }) => {
     />
     </ThemeProvider>
     </MuiPickersUtilsProvider>
+    </>
   );
 };
 
