@@ -1,47 +1,24 @@
-import {
-  faCoins,
-  faCompactDisc,
-  faDiceThree,
-  faIdBadge,
-  faLaptopCode,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./search-item.css";
 import Category from "./Cat";
-import { Button } from "react-bootstrap";
 
 function Categories(props) {
   const [CurrentCategory, setCurrentCategory] = useState("");
   const [Active, setActive] = useState(1);
 
-  function handleChange(id,name) {
+  function handleChange(id, name) {
     setCurrentCategory(name);
     setActive(id);
-    console.log(Active)
   }
   function CatButton(prop) {
-      return (
+    return (
       <button
         className="btn btn-primary mx-2 CatButton"
-        id={Active===prop.categories.id ? "Active" : null}
+        id={Active === prop.categories.id ? "Active" : null}
         onClick={(e) => {
-          handleChange(prop.categories.id,prop.categories.Name);
+          handleChange(prop.categories.id, prop.categories.Name);
         }}
       >
-        {/* <FontAwesomeIcon
-          style={IconStyle}
-          className="w-100 my-2"
-          icon={
-            {
-              NFT: faCoins,
-              CryptoCollectibles: faCompactDisc,
-              Licenses: faIdBadge,
-              Games: faDiceThree,
-              Softwares: faLaptopCode,
-            }[props.categories.icon]
-          }
-        /> */}
         {prop.categories.Name}
       </button>
     );
@@ -91,7 +68,7 @@ function Categories(props) {
             id: 10,
           },
         ].map((categories, index) => {
-          return   <CatButton key={index} categories={categories}></CatButton>;
+          return <CatButton key={index} categories={categories}></CatButton>;
         })}
       </div>
       <div>

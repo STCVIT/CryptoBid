@@ -1,8 +1,8 @@
 {
-  "name": "eth-marketplace",
+  "name": "cryptoauction",
   "version": "0.1.0",
-  "description": "An Ethereum Marketplace",
-  "author": "gregory@dappuniversity.com",
+  "description": "Blockchain Auction",
+  "author": "Prerit Rawtani",
   "dependencies": {
     "@date-io/date-fns": "^1.3.13",
     "@fontsource/metropolis": "^4.4.5",
@@ -14,6 +14,7 @@
     "@material-ui/lab": "^4.0.0-alpha.58",
     "@material-ui/pickers": "^3.3.10",
     "@testing-library/react": "^12.0.0",
+    "@truffle/hdwallet-provider": "^1.4.1",
     "babel-polyfill": "6.26.0",
     "babel-preset-env": "1.7.0",
     "babel-preset-es2015": "6.24.1",
@@ -38,6 +39,7 @@
     "react-dom": "16.8.4",
     "react-icons": "^4.2.0",
     "react-multilevel-dropdown": "^2.0.0",
+    "react-responsive": "^8.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "2.1.3",
     "sweetalert2": "^11.0.18",

@@ -20,9 +20,6 @@
 
 .Filter 
 {
-  background-color: #2D396B;
-}
-
-.Dropdown_dropdown__ghEpQ{
-  background-color: black;
+  background-color: #2D396B !important;
+  color:white;
 }

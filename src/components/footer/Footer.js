@@ -1,10 +1,7 @@
 import React from "react";
 import styles from "./Footer.module.css";
-import { BsFillSquareFill } from 'react-icons/bs';
-import { FiGithub } from 'react-icons/fi';
-import { FiInstagram } from 'react-icons/fi';
-import { FiFacebook } from 'react-icons/fi';
-import { FiLinkedin } from 'react-icons/fi';
+import { BsFillSquareFill } from "react-icons/bs";
+import { FiGithub, FiInstagram, FiFacebook, FiLinkedin } from "react-icons/fi";
 
 function Footer() {
   return (
@@ -13,7 +10,9 @@ function Footer() {
         <div className="row">
           {/* Column1 */}
           <div className="col col-md-3">
-            <h3><BsFillSquareFill color="#6D28D9"/> Crypto Auction</h3>
+            <h3>
+              <BsFillSquareFill color="#6D28D9" /> Crypto Auction
+            </h3>
           </div>
           {/* Space */}
           <div className="col col-md-3"> </div>
@@ -37,16 +36,22 @@ function Footer() {
             </ui>
           </div>
         </div>
-        <hr color="#2D396B"/>
+        <hr color="#2D396B" />
         <div className={styles.last + " row"}>
           <p className="col-sm-3">
-            &copy;{new Date().getFullYear()} CryptoAuction, Inc. All Rights Reserved
+            &copy;{new Date().getFullYear()} CryptoAuction, Inc. All Rights
+            Reserved
           </p>
-          <a className={"col-sm-3 " + styles.last}>T&C
-          </a>
-          <a className="col-sm-3 last">Privacy Policy
-          </a>
-          <p className="col-sm-3 last"><FiGithub />&nbsp;<FiInstagram />&nbsp;<FiFacebook />&nbsp;<FiLinkedin />
+          <a className={"col-sm-3 " + styles.last}>T&C</a>
+          <a className="col-sm-3 last">Privacy Policy</a>
+          <p className="col-sm-3 last">
+            <FiGithub />
+            &nbsp;
+            <FiInstagram />
+            &nbsp;
+            <FiFacebook />
+            &nbsp;
+            <FiLinkedin />
           </p>
         </div>
       </div>

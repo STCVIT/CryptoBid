@@ -4,26 +4,18 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import Button from "@material-ui/core/Button";
 import Component from "./util/Input";
-import { Crypt, RSA } from "hybrid-crypto-js";
-import { AiOutlineUser } from "react-icons/ai";
+import { RSA } from "hybrid-crypto-js";
 
-var crypt = new Crypt({
-  md: "sha1",
-  aesStandard: "AES-CBC",
-  aesKeySize: 128,
-});
 var rsa = new RSA();
-function Generate() {
+ function Generate() {
     rsa.generateKeyPair(function (keyPair) {
         // Callback function receives new key pair as a first argument
         var publicKey = keyPair.publicKey;
         var privateKey = keyPair.privateKey;
-        console.log(publicKey);
-        console.log(privateKey);
         localStorage.setItem("publicKey", publicKey);
         localStorage.setItem("privateKey", privateKey);
         localStorage.setItem("generated", "true");
-      }, 1024);
+      }, 1024)
 }
 
 
@@ -61,8 +53,6 @@ export default function UserInfo() {
           initialValues={initialValues}
           validationSchema={signInSchema}
           onSubmit={(values) => {
-            console.log(JSON.stringify(values));
-            console.log(values);
             const name = values.fullName;
             const email = values.email;
             const address = values.streetAdress1;
@@ -72,21 +62,16 @@ export default function UserInfo() {
             localStorage.setItem("location", location);
             localStorage.setItem("address", address);
             if(localStorage.getItem("generated") === null){
-                Generate();
-            }            
+                 Generate();
+            }   
+            window.location.reload()         
           }}
         >
           {(formik) => {
-            const {} = formik;
             return (
               <div className={styles.containerStyle + " container"} style={containerStyle}>
                 <Form onSubmit={formik.handleSubmit} >
                   <div className="row">
-                    {/* <div className="col-12 col-md-4 col-sm-12 col-lg-4 col-xs-12 my-2">
-                      <div className={styles.avatar}><AiOutlineUser/> </div>
-                      <button className={styles.btntop}>Upload New Image</button>
-                      <button className={styles.btntop}>Remove Image</button>
-                    </div> */}
                   </div>
                   <div className="row">
                     <div className="col-12">
@@ -135,7 +120,7 @@ export default function UserInfo() {
                     variant="contained"
                     fullWidth
                     type="submit"
-                    href="/"
+    
                   >
                     Save Changes
                   </Button>
@@ -148,4 +133,3 @@ export default function UserInfo() {
       );
 }
   
-

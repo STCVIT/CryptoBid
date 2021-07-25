@@ -52,6 +52,8 @@ contract Auction {
         string category;
         uint bidinc;
         uint endtime;
+        string hash;
+        
     }
     
     event ProductCreated(
@@ -101,7 +103,7 @@ contract Auction {
         user[usercount] = User(usercount,_productname,_name,_email,_address, _location);
     }
 
-    function createProduct(string memory _name, uint _baseprice, string memory _discription, string memory _category, string memory _publickey, uint _bidinc, uint _etime) public payable{
+    function createProduct(string memory _name, uint _baseprice, string memory _discription, string memory _category, string memory _publickey, uint _bidinc, uint _etime, string memory _hash) public payable{
         //verify the product
         require(bytes(_name).length > 0);
         require(_baseprice >0);
@@ -123,7 +125,8 @@ contract Auction {
         products[productCount].publickey = _publickey;
         products[productCount].infoArray.bidinc = _bidinc;
         products[productCount].infoArray.endtime =  _etime;
-
+        products[productCount].infoArray.hash = _hash;
+        
         //create the product
         //products[productCount] = Product(productCount,_name,_baseprice,msg.sender,false, block.timestamp,_baseprice,msg.sender,block.timestamp, _discription,0, _category);
        
@@ -158,9 +161,9 @@ contract Auction {
         Product storage product = products[_id];
 
         //difference between bids should be greater than 15 seconds
-        require(block.timestamp*1000 - product.currentbidtime >= 15 seconds);
+        require(block.timestamp*1000 - product.currentbidtime >= 15 seconds, "abcd");
         
-        require(block.timestamp*1000 < product.infoArray.endtime);
+        require(block.timestamp*1000 < product.infoArray.endtime , "efg");
         
          // bid should be greater than minPrice
         require(msg.value>=product.baseprice,"bid value shouldn't be less than the reserve value");
@@ -226,11 +229,6 @@ contract Auction {
     
     
      function closeAuctionOwner(uint _id) payable public  {
-
-         
-        //require(block.timestamp - products[_id].createdAt >= 120, "auction not ended"  );
-
-        
 
          Product storage product = products[_id];
         

@@ -1,16 +1,8 @@
 import React from "react";
-//import "./search.css";
 import { CardDeck } from "react-bootstrap";
 import Card from "../../Posts";
-import styles from "./postCard.module.css";
-
-
 
 function Category(props) {
-  const ImageContainerStyle = {
-    height: "300px",
-  };
-
   return (
     <div>
       <div id="content">
@@ -28,7 +20,7 @@ function Category(props) {
                         "Ether"
                       )}
                       discription={product.infoArray.discription}
-                      img={`https://ipfs.infura.io/ipfs/${props.hashes[key]}`}
+                      img={`https://ipfs.infura.io/ipfs/${product.infoArray.hash}`}
                     />
                   </div>
                 ) : (
@@ -43,7 +35,7 @@ function Category(props) {
                             "Ether"
                           )}
                           discription={product.infoArray.discription}
-                          img={`https://ipfs.infura.io/ipfs/${props.hashes[key]}`}
+                          img={`https://ipfs.infura.io/ipfs/${product.infoArray.hash}`}
                         />
                       </div>
                     ) : null}

@@ -1,7 +1,6 @@
 import React from "react";
 import styles from "./postCards.module.css";
 import { AiFillInfoCircle, AiFillThunderbolt } from "react-icons/ai";
-import { Link } from "react-router-dom";
 function Card(props) {
   return (
     <>
@@ -40,7 +39,4 @@ function Card(props) {
     </>
   );
 }
-
-
-
 export default Card;

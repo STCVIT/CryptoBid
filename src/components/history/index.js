@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import styles from "./style.module.css";
 import { ButtonGroup, ToggleButton } from "react-bootstrap";
-import exampleimg from "./maxresdefault.jpg";
 import Listele from "./util/listele";
 import HistComponent from "./util/withDetails";
 
-import { Crypt, RSA } from "hybrid-crypto-js";
+import { Crypt } from "hybrid-crypto-js";
 var crypt = new Crypt();
-var rsa = new RSA();
 const pk = localStorage.getItem("privateKey");
 const a = localStorage.getItem("generated");
 function Historypg(props) {
@@ -95,6 +93,7 @@ function Historypg(props) {
                               product.currentBid.toString(),
                               "Ether"
                             )}
+                            hash={product.infoArray.hash}
                             radioValue={radioValue}
                           />
                         ) : null}
@@ -109,61 +108,40 @@ function Historypg(props) {
                       <>
                         {product.owner === props.account &&
                         product.purchased ? (
-                         <>
+                          <>
                             {props.users.map((user, key) => {
-                              console.log(crypt.decrypt(pk, user.name).message);
                               return (
                                 <>
-                                  {/* <p>Name : {crypt.decrypt(pk, user.name).message}</p> 
-                        <p>Address : {crypt.decrypt(pk, user.addres).message}</p>  
-                        <p>Email : {crypt.decrypt(pk, user.location).message}</p> 
-                        <p>Email : {crypt.decrypt(pk, user.email).message}</p>      */}
-                        
-                                  {/* <HistComponent
-                                    Name={crypt.decrypt(pk, user.name).message}
-                                    Cost={window.web3.utils.fromWei(
-                                      product.currentBid.toString(),
-                                      "Ether"
-                                    )}
-                                    pname={product.name}
-                                    Email={
-                                      crypt.decrypt(pk, user.email).message
-                                    }
-                                    Add={crypt.decrypt(pk, user.addres).message}
-                                  /> */}
-                                    {props.users.map((user ,key) => {
-                                      return (
-                                        <>
-                                       {user.productname === product.name ?
-                                       <>
-                                            {/* <p>Name : {crypt.decrypt(pk, user.name).message}</p>  */}
-                                            {/* <p>Address : {crypt.decrypt(pk, user.addres).message}</p>  
-                                            <p>Email : {crypt.decrypt(pk, user.location).message}</p> 
-                                            <p>Email : {crypt.decrypt(pk, user.email).message}</p>   */}
+                                  {props.users.map((user, key) => {
+                                    return (
+                                      <>
+                                        {user.productname === product.name ? (
+                                          <>
                                             <HistComponent
-                                    Name={crypt.decrypt(pk, user.name).message}
-                                    Cost={window.web3.utils.fromWei(
-                                      product.currentBid.toString(),
-                                      "Ether"
-                                    )}
-                                    pname={product.name}
-                                    Email={
-                                      crypt.decrypt(pk, user.email).message
-                                    }
-                                    Add={crypt.decrypt(pk, user.addres).message}
-                                    hash={props.hashes[k]}
-                                  />   
-                                            {/* <p>Email: {decrypt(user.email)} </p>
-                                            <p>Address: {decrypt(user.addres)}</p> */}
-
-                                       </>
-                                       
-                                    :null}
-                                    </>
-                                      )
+                                              Name={
+                                                crypt.decrypt(pk, user.name)
+                                                  .message
+                                              }
+                                              Cost={window.web3.utils.fromWei(
+                                                product.currentBid.toString(),
+                                                "Ether"
+                                              )}
+                                              pname={product.name}
+                                              Email={
+                                                crypt.decrypt(pk, user.email)
+                                                  .message
+                                              }
+                                              Add={
+                                                crypt.decrypt(pk, user.addres)
+                                                  .message
+                                              }
+                                              hash={product.infoArray.hash}
+                                            />
+                                          </>
+                                        ) : null}
+                                      </>
+                                    );
                                   })}
-                                  {/* <p>Email: {decrypt(user.email)} </p>
-                        <p>Address: {decrypt(user.addres)}</p> */}
                                 </>
                               );
                             })}
@@ -175,8 +153,7 @@ function Historypg(props) {
                 </tbody>
               )}
             </>
-          ) 
-          : (
+          ) : (
             <tbody>
               <td>
                 <p>You need to be logged in to view data</p>
@@ -192,4 +169,3 @@ function Historypg(props) {
 }
 
 export default Historypg;
-

@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import styles from "./hstyle.module.css";
 
 function HistComponent(props) {
-  
   const [info, setName] = useState({ name: "", phn: "", add: "" });
-  const [info2, setVal] = useState(["", "", ""])
+  const [info2, setVal] = useState(["", "", ""]);
   const [btn, setState] = useState({ state: true, classn: styles.drpdwn });
-  console.log(info)
+  console.log(info);
   const setData = () => {
     if (btn.state === true) {
       setState({ state: false, classn: styles.drpdwninverted });
@@ -21,8 +20,12 @@ function HistComponent(props) {
   return (
     <>
       <tr className={"" + styles.tbrow}>
-        <td className={"" + styles.imgrow} scope="col">
-          <img src={`https://ipfs.infura.io/ipfs/${props.hash}`} alt="img " className={styles.img + " p-2  "} />
+        <td className={"" + styles.imgrow} >
+          <img
+            src={`https://ipfs.infura.io/ipfs/${props.hash}`}
+            alt="img "
+            className={styles.img + " p-2  "}
+          />
           <span>{props.pname}</span>
         </td>
         <td className={styles.test}>

@@ -1,26 +1,15 @@
-.img{
+.img {
   border-radius: 14px;
   width: 100px;
 }
 
-/* table{
-  border-radius: 14px;
-  font-weight: bold;
-  background-color: #2D396B;
- 
-} */
-
-
-
-.cost{
+.cost {
   color: aqua;
-  
 }
 .test {
   vertical-align: middle !important;
   align-content: center;
 }
-
 
 .table {
   background-color: #2d396b;
@@ -33,7 +22,7 @@
 }
 
 .btnSecondary {
-  background-color: #140d4a ;
+  background-color: #140d4a;
 }
 .cont {
   background-color: #2d396b;
@@ -49,22 +38,20 @@
   background-color: white;
 }
 
-.drpdwn{
+.drpdwn {
   border-radius: 15px;
-  background-color: #6D28D9;
-  border-color:#6D28D9 ;
+  background-color: #6d28d9;
+  border-color: #6d28d9;
 }
 
-.drpdwninverted{
+.drpdwninverted {
   transform: rotate(180deg);
   border-radius: 15px;
-  background-color: #6D28D9;
-  border-color:#6D28D9 ;
-  
+  background-color: #6d28d9;
+  border-color: #6d28d9;
 }
 
-.info{
+.info {
   text-align: left;
   padding-left: 10%;
-  
 }

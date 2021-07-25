@@ -1,19 +1,15 @@
-import React , {useState,useEffect}from "react";
+import React, { useState } from "react";
 import styles from "./addPost.module.css";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import Button from "@material-ui/core/Button";
 import DatePickerField from "./util/DatePicker";
 import Component from "./util/Input";
-import Tags from "./util/Tags";
-import img from "./maxresdefault.jpg";
 function DateInc() {
   var date = new Date();
   date.setDate(date.getDate() + 1);
   return date;
 }
-
-
 const signInSchema = Yup.object().shape({
   productName: Yup.string()
     .required("Product Name is required")
@@ -27,8 +23,7 @@ const signInSchema = Yup.object().shape({
   minimumBids: Yup.number().required("Minimum bids are required"),
   category: Yup.string().required("Select Category"),
   tags: Yup.string(),
-  endingDate: Yup.date()
-    .default(DateInc())
+  endingDate: Yup.date().default(DateInc()),
 });
 const initialValues = {
   productName: "",
@@ -41,40 +36,30 @@ const initialValues = {
   endingDate: null,
 };
 function Addpost(props) {
-   console.log(props.buffer)
   let containerStyle = {
     width: "70%",
   };
-  console.log(props.buffer)
   const [picture, setPicture] = useState(null);
   const [imgData, setImgData] = useState(null);
 
-
-  const onChangePicture = e => {
+  const onChangePicture = (e) => {
     if (e.target.files[0]) {
-      console.log("picture: ", e.target.files);
       setPicture(e.target.files[0]);
       const reader = new FileReader();
       reader.addEventListener("load", () => {
         setImgData(reader.result);
       });
       reader.readAsDataURL(e.target.files[0]);
-      props.Capturefile(e)
+      props.Capturefile(e);
     }
   };
-console.log(imgData)
   return (
     <Formik
       initialValues={initialValues}
       validationSchema={signInSchema}
       onSubmit={(values) => {
         const publicKey = localStorage.getItem("publicKey");
-        console.log(JSON.stringify(values));
-        console.log(values);
         let endtime = Date.parse(values.endingDate);
-        console.log(endtime);
-        console.log(values.startingPrice);
-        console.log(values.startingPrice.toString());
         let baseprice = window.web3.utils.toWei(
           values.startingPrice.toString(),
           "Ether"
@@ -83,11 +68,6 @@ console.log(imgData)
           values.minimumBids.toString(),
           "Ether"
         );
-        // const bidinc1 = parseInt(values.minimumBids , 2)
-        // let baseprice1 = parseInt(baseprice)
-        // console.log(typeof(baseprice1))
-        console.log(baseprice);
-        console.log(values.endingDate);
         props.createProduct(
           values.productName,
           baseprice,
@@ -109,44 +89,36 @@ console.log(imgData)
                   <h2>Product Image</h2>
                   <div className={styles.formContainer}>
                     <div className={styles.imageUploadWrap}>
-                    <input
-                               className={styles.fileUploadInput}
-                               type="file"
-                              onChange={onChangePicture}
-                             
-                               accept="image/*"
-                               // required
-                             />
-                        {
-                        
-                         imgData===null ? (
-                              <>
-                             
-                             <div className={styles.dragText}>
-                               <h3>Drop a file or select to Add</h3>
-                             </div>
-                             </>)
-                        : (
-                              <>
-                              <img
-                              className={styles.fileUploadImage}
-                              src={imgData}
-                              alt="abcd"
-                            />
-                            </>
-                              )
-                          }
-                     
-                        
-                        
+                      <input
+                        className={styles.fileUploadInput}
+                        type="file"
+                        onChange={onChangePicture}
+                        accept="image/*"
+                      />
+                      {imgData === null ? (
+                        <>
+                          <div className={styles.dragText}>
+                            <h3>Drop a file or select to Add</h3>
+                          </div>
+                        </>
+                      ) : (
+                        <div className="text-center">
+                          <img
+                            className={styles.fileUploadImage + " text-center "}
+                            src={imgData}
+                            alt="abcd"
+                          />
+                        </div>
+                      )}
                     </div>
-                    <Button className={styles.upload}  onClick={props.createhash} variant="primary">
+                    <Button
+                      className={styles.upload}
+                      onClick={props.createhash}
+                      variant="primary"
+                    >
                       Upload Image
                     </Button>
-                    <div className={styles.fileUploadContent}>
-                    
-                      
-                    </div>
+                    <div className={styles.fileUploadContent}></div>
                   </div>
                 </div>
                 <div className="col-12 col-md-6 col-sm-12 col-lg-6 my-2">
@@ -231,5 +203,4 @@ console.log(imgData)
     </Formik>
   );
 }
-
 export default Addpost;

@@ -30,7 +30,8 @@ function Divider(props) {
         const { width } = useViewport();
         const breakpoint = 992;
       
-      return width > breakpoint ?<Categories products={props.products} hashes={props.hashes} account={props.account} placeBid={props.placeBid} closeAuction={props.closeAuction} />:<Mobileview/>
+      return width > breakpoint ?<Categories products={props.products} hashes={props.hashes} account={props.account} placeBid={props.placeBid} closeAuction={props.closeAuction} />:
+      <Mobileview  products={props.products} hashes={props.hashes} account={props.account} placeBid={props.placeBid} closeAuction={props.closeAuction}  />
       }
        
        

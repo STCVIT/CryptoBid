@@ -1,5 +1,4 @@
 import React from 'react'
-
 function Eth() {
     return (
         <svg width="1rem" height="1rem" viewBox="0 0 16 24"  xmlns="http://www.w3.org/2000/svg">
@@ -7,5 +6,4 @@ function Eth() {
         </svg>
     )
 }
-
 export default Eth

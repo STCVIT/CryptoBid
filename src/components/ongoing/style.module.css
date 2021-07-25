@@ -30,7 +30,7 @@
 .cont {
   background-color: #2d396b;
   border-radius: 14px;
-  width: 50%;
+  width: 70%;
 }
 .ListCont {
   border-radius: 1em !important;
@@ -41,8 +41,10 @@
   background-color: white;
 }
 .toggleButton{
-  min-width: 40% ;
+  min-width: 45% ;
   border-radius: 0.25rem !important;
+  font-size: 0.9rem !important;
+  align-items: center !important;
 }
 
 .text {

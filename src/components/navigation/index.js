@@ -34,7 +34,7 @@ function NavigationBar() {
 
       <nav className=" navbar navbar-expand-lg navbar-dark " id={styles.Navbar}>
         <Link className="navbar-brand pl-5 " to="/">
-          <img src={logo} height="80" width="80"></img>
+          <img src={logo} alt="logo" height="80" width="80"></img>
         </Link>
         <button
           className="navbar-toggler text-center"

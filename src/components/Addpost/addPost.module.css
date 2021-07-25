@@ -79,7 +79,7 @@
 
 .fileUploadImage {
   max-height: 200px;
-  max-width: 200px;
+  max-width: 100%;
   margin: auto;
   padding: 20px;
 }
