@@ -36,8 +36,7 @@ const initialValues = {
   streetAdress1: "",
   streetAdress2: "",
   state: "",
-  location1: "",
-  location2: "",
+  location: "",
   pincode: "",
   phoneNumber: "",
   email: "",
@@ -57,7 +56,7 @@ export default function UserInfo() {
             const name = values.fullName;
             const email = values.email;
             const address = values.streetAdress1;
-            const location = values.state + "," + values.location1;
+            const location = values.state + "," + values.location;
             localStorage.setItem("name", name);
             localStorage.setItem("email", email);
             localStorage.setItem("location", location);
@@ -95,7 +94,7 @@ export default function UserInfo() {
                       <Component name="State" formik id={"state"} />
                     </div>
                     <div className="col-12 col-md-6 col-sm-12 col-lg-6 my-2">
-                      <Component name="City/District" formik id={"location1"} />
+                      <Component name="City/District" formik id={"location"} />
                     </div>
                   </div>
                   <div className="row">
@@ -103,7 +102,7 @@ export default function UserInfo() {
                       <Component name="Pincode" formik id={"pincode"} />
                     </div>
                     <div className="col-12 col-md-6 col-sm-12 col-lg-6 my-2">
-                      <Component name="Country" formik id={"location2"} />
+                      <Component name="Country" formik id={"location"} />
                     </div>
                   </div>
                   <div className="row">
