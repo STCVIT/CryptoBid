@@ -113,7 +113,7 @@ class App extends Component {
         )
         .send({ from: this.state.account })
         .once("confirmation", () => {
-          
+          const lenght = this.state.products.length()
           
           Swal.fire({
             title: "Success ",
@@ -121,7 +121,8 @@ class App extends Component {
             type: "success",
             icon: "success",
           }).then(function(result) {
-            window.location.reload();
+            //<a className={styles.LinkTag} href={"/product/" + props.Id}></a>
+            window.location("/product/" + lenght);
           });
         })
         .on("error", function(error, receipt) {
