@@ -127,7 +127,7 @@ const Productpg = (props) => {
                               props.closeAuction(event.target.name);
                             }}
                           >
-                            Pay
+                            Claim Product
                           </button>
                         ) : null}
                       </div>

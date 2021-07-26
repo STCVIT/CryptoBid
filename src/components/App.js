@@ -245,7 +245,8 @@ class App extends Component {
           type: "success",
           icon: "error",
         }).then(function(result) {
-          window.location.reload();
+          console.log(error)
+          // window.location.reload();
         });
       });
   }
