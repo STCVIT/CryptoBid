@@ -102,7 +102,7 @@ export default function UserInfo() {
                       <Component name="Pincode" formik id={"pincode"} />
                     </div>
                     <div className="col-12 col-md-6 col-sm-12 col-lg-6 my-2">
-                      <Component name="Country" formik id={"location"} />
+                      <Component name="Country" formik id={"location1"} />
                     </div>
                   </div>
                   <div className="row">
