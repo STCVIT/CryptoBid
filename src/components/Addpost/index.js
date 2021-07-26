@@ -14,11 +14,11 @@ const signInSchema = Yup.object().shape({
   productName: Yup.string()
     .required("Product Name is required")
     .min(0, " Name is too short - should be 10 chars min")
-    .max(10, "Product Name is too long - should be less than 100 chars"),
+    .max(30, "Product Name is too long - should be less than 100 chars"),
   productDesc: Yup.string()
     .required("Description is required")
     .min(2, " Description is too short - should be 20 chars min")
-    .max(300, "Description is too long - should be less than 300 chars"),
+    .max(400, "Description is too long - should be less than 300 chars"),
   startingPrice: Yup.number().required("Price is Required"),
   minimumBids: Yup.number().required("Minimum bids are required"),
   category: Yup.string().required("Select Category"),

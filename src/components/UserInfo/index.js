@@ -22,7 +22,7 @@ var rsa = new RSA();
 const signInSchema = Yup.object().shape({
   fullName: Yup.string()
     .required("Name is required")
-    .max(50, "Name is too long - should be less than 100 chars"),
+    .max(60, "Name is too long - should be less than 100 chars"),
   streetAdress1: Yup.string().required("Address is required"),
   streetAdress2: Yup.string(),
   state: Yup.string().required("State is Required"),
