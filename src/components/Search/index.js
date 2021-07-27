@@ -5,6 +5,7 @@ import { CardDeck } from "react-bootstrap";
 import Dropdown from "react-multilevel-dropdown";
 import "./stl.css";
 function SearchPg(props) {
+  console.log(props.products)
   var Arr = [...props.products];
   var term = window.location.pathname.split("=");
   term = term[1];
@@ -90,14 +91,15 @@ function SearchPg(props) {
 
   function change() {
     const results = Arr.filter(function(l) {
-      return l.name.toLowerCase().match(searchTerm);
+      console.log(searchTerm);
+      return l.name.toString().toLowerCase().match(searchTerm);
     });
     console.log(results);
     return results;
   }
   useEffect(() => {
     const results = Arr.filter(function(l) {
-      return l.name.toLowerCase().match(searchTerm);
+      return l.name.toString().toLowerCase().match(searchTerm);
     });
     setSearchResults(results);
   }, [searchTerm]);
@@ -116,7 +118,7 @@ function SearchPg(props) {
                   "Ether"
                 )}
                 discription={product.infoArray.discription}
-                img={`https://ipfs.infura.io/ipfs/${props.hashes[key]}`}
+                img={`https://ipfs.infura.io/ipfs/${product.infoArray.hash}`}
               />
             </div>
           );
