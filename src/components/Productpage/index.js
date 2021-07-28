@@ -159,6 +159,8 @@ const Productpg = (props) => {
                   </div>
                 </div>
                 <div>
+                 
+                  <div  className="container my-2 " >
                   <h3 className="p-3 my-2 ">Explore More</h3>
                   <CardDeck>
                     {props.products.map((product, key) => {
@@ -182,6 +184,7 @@ const Productpg = (props) => {
                       );
                     })}
                   </CardDeck>
+                  </div>
                 </div>
               </div>
             ) : null}

@@ -36,9 +36,9 @@ const initialValues = {
   endingDate: null,
 };
 function Addpost(props) {
-  let containerStyle = {
-    width: "70%",
-  };
+  // let containerStyle = {
+  //   width: "70%",
+  // };
   const [picture, setPicture] = useState(null);
   const [imgData, setImgData] = useState(null);
 
@@ -82,7 +82,7 @@ function Addpost(props) {
       {(formik) => {
         const { errors, touched } = formik;
         return (
-          <div className="container" style={containerStyle}>
+           <div className={"container " + styles.container} >
             <Form onSubmit={formik.handleSubmit}>
               <div className="row">
                 <div className="col-12 col-md-6 col-sm-12 col-lg-6 col-xs-12 my-2">
@@ -175,19 +175,11 @@ function Addpost(props) {
                 </div>
               </div>
               <div className="row">
+              
                 <div className="col-12 col-md-6 col-sm-12 col-lg-6 my-2">
                   <Button
-                    color="primary"
-                    variant="contained"
-                    fullWidth
-                    type="submit"
-                  >
-                    Submit
-                  </Button>
-                </div>
-                <div className="col-12 col-md-6 col-sm-12 col-lg-6 my-2">
-                  <Button
-                    color="primary"
+                    //color="primary"
+                    className={styles.cb}
                     variant="contained"
                     fullWidth
                     type="submit"
@@ -195,6 +187,17 @@ function Addpost(props) {
                     Cancel
                   </Button>
                 </div>
+                <div className="col-12 col-md-6 col-sm-12 col-lg-6 my-2">
+                  <Button
+                    className={styles.sb}
+                    variant="contained"
+                    fullWidth
+                    type="submit"
+                  >
+                    Submit
+                  </Button>
+                </div>
+                
               </div>
             </Form>
           </div>

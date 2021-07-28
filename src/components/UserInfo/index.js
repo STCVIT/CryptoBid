@@ -78,7 +78,6 @@ export default function UserInfo() {
                       <Component name="Full Name" formik id={"fullName"} />
                     </div>
                   </div>
-                  <h2>Location</h2>
                   <div className="row">
                     <div className="col-12">
                       <h4>Street Adress 1</h4>

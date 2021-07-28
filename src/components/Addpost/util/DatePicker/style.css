@@ -18,3 +18,20 @@
     color: #616D95 !important;
     opacity: 0.2;
  }
+
+.MuiInput-root   {
+    background-color: #2d396b;
+    color: #f3ebff;
+    margin: 0 10px 1em 10px !important;
+    letter-spacing: -0.02em !important; 
+    border: none !important;
+    outline: none !important;
+    border-radius: 14px !important;
+    padding-left: 1em !important;
+    min-height: 3rem !important;
+    height: auto !important;
+}
+
+.MuiFormControl-root {
+    width: 100% !important;
+}

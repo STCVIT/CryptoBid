@@ -1,7 +1,7 @@
 import React , {useState} from "react";
 import { Link } from "react-router-dom";
 import styles from "./style.module.css";
-import logo from "./Logo.png";
+import logo from "./CryptoLogo.png";
 import "@fontsource/metropolis";
 import LoginDropdown from "../login-dropdown"
 const a = localStorage.getItem("generated");
@@ -34,7 +34,7 @@ function NavigationBar() {
 
       <nav className=" navbar navbar-expand-lg navbar-dark " id={styles.Navbar}>
         <Link className="navbar-brand pl-5 " to="/">
-          <img src={logo} alt="logo" height="80" width="80"></img>
+          <img src={logo} alt="logo" height="47" width="47"></img>
         </Link>
         <button
           className="navbar-toggler text-center"

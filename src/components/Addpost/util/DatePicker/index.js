@@ -51,11 +51,12 @@ const DatePickerField = ({ field, form, ...other }) => {
   return (
     <>
       <h2>Closing Time</h2>
+      {/* <div   className={styles.DatePicker}> */}
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <ThemeProvider theme={materialTheme}>
           <KeyboardDatePicker
             clearable
-            className={styles.DatePicker}
+          
             disablePast
             name={field.name}
             value={field.value}
@@ -75,6 +76,7 @@ const DatePickerField = ({ field, form, ...other }) => {
           />
         </ThemeProvider>
       </MuiPickersUtilsProvider>
+      {/* </div> */}
     </>
   );
 };

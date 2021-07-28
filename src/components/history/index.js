@@ -109,9 +109,7 @@ function Historypg(props) {
                         {product.owner === props.account &&
                         product.purchased ? (
                           <>
-                            {props.users.map((user, key) => {
-                              return (
-                                <>
+                            
                                   {props.users.map((user, key) => {
                                     return (
                                       <>
@@ -143,9 +141,7 @@ function Historypg(props) {
                                     );
                                   })}
                                 </>
-                              );
-                            })}
-                          </>
+                          
                         ) : null}
                       </>
                     );

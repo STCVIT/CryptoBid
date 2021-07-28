@@ -11,6 +11,7 @@
 .Searchbox
  {
      height: 2.5rem;
+     margin-top : 0.4rem;
      background: #2D396B !important;
      outline: none;
      border: none;

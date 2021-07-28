@@ -10,7 +10,7 @@ import UserInfo from "../UserInfo";
 import Productpg from "../Productpage";
 import Historypg from "../history";
 import SearchPg from "../Search";
-
+import Error from '../Error'
 function Main(props) {
   return (
     <div className="main-container">
@@ -111,6 +111,9 @@ function Main(props) {
               placeBid={props.placeBid}
               AuctionExpiry={props.AuctionExpiry}
             />
+          </Route>
+          <Route>
+            <Error />
           </Route>
         </Switch>
       </div>

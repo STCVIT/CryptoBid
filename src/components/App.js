@@ -2,6 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle";
 import { Route, BrowserRouter as Router } from "react-router-dom";
 import NavigationBar from "./navigation";
+import { Switch , Redirect } from "react-router-dom";
 import Main from "./Main/index";
 import { Crypt } from "hybrid-crypto-js";
 // import Loginpg from './Login'
@@ -12,6 +13,7 @@ import Auction from "../abis/Auction.json";
 import Swal from "sweetalert2";
 import Footer from "./footer/Footer.js";
 import Productpg from "./Productpage";
+import Error from './Error'
 // import generateKeyPairSync from "crypto"
 var crypt = new Crypt();
 
@@ -22,32 +24,64 @@ const ipfs = ipfsClient({
   protocol: "https",
   apiPath: "/ipfs/api/v0",
 }); // leaving out the arguments will default to these values
-
+var K;
 class App extends Component {
   async componentWillMount() {
     await this.loadWeb3();
     await this.loadBlockchainData();
   }
-
   async loadWeb3() {
     if (window.ethereum) {
-      window.web3 = new Web3(window.ethereum);
-      await window.ethereum.enable();
+      try {
+        window.web3 = new Web3(window.ethereum);
+        await window.ethereum.enable();
+      }
+      catch(err) {
+        if(err.code=4001) {
+          K=3;
+        }
+      }
+     
     } else if (window.web3) {
       window.web3 = new Web3(window.web3.currentProvider);
-    } else {
-      window.alert(
-        "Non-Ethereum browser detected. You should consider trying MetaMask!"
-      );
+    } else  {
+      // window.alert(
+      //   "Non-Ethereum browser detected. You should consider trying MetaMask!"
+      // ); 
+      K = 4;
+      
     }
   }
 
   async loadBlockchainData() {
-    const web3 = window.web3;
-    //load account
-    const accounts = await web3.eth.getAccounts();
+
     
-    this.setState({ account: accounts[0] });
+
+    const web3 = window.web3;
+
+    if (web3 !== undefined){
+
+      try{
+        const accounts = await web3.eth.getAccounts()
+        this.setState({ account: accounts[0] });
+      }
+      catch(error){
+        console.log(error)
+      }
+
+      //load account
+    // const accounts = await web3.eth.getAccounts().catch(e) {
+    //   if(e.code===4001) 
+    //   {
+        
+    //   }
+    // };
+    // console.log(accounts.lenght)
+    // if (accounts.length === undefined){
+    //   K=4;
+    // }
+    
+    
     
     const networkId = await web3.eth.net.getId();
     
@@ -73,7 +107,38 @@ class App extends Component {
     } else {
       window.alert("Auction contract not deployed to detected network.");
     }
+
+    }
+    else{
+      //write here 
+      
+
+    }
+
+  //   else{
+  // // (()=> {
+  // //   render() {
+  // //   return (
+  // //     <Switch>
+  // //     <Route>
+  // // <Error />
+  // // </Route>
+  // //   </Switch>
+  // //   )
+  // //   }
+
+    
+ 
+  // // })
+    
+       
+  //     }
+       
+    
   }
+       
+    
+  
 
   constructor(props) {
     super(props);
@@ -321,41 +386,105 @@ class App extends Component {
   render() {
     return (
       <Router>
+     
+       { (K ===4) ?
+               
+             <Route >
+               <Error id={K} />
+             </Route>
+         : 
+          <>
+          {(K === 3) ?
+           <Route >
+           <Error id={K} />
+         </Route>
+          
+        :
+
+        <>
         <div className="App"></div>
-        <div className="flex-fill sidebar">
-          <NavigationBar
-            account={this.state.account}
-            products={this.state.products}
-            hashes={this.state.hashes}
-            hash={this.state.hash}
-            createProduct={this.createProduct}
-            placeBid={this.placeBid}
-            closeAuction={this.closeAuction}
-            AuctionExpiry={this.AuctionExpiry}
-            createhash={this.createhash}
-            Capturefile={this.Capturefile}
-          />
-          <Main
-            Data="prerit"
-            account={this.state.account}
-            products={this.state.products}
-            users={this.state.users}
-            hashes={this.state.hashes}
-            hash={this.state.hash}
-            buffer={this.state.buffer}
-            createProduct={this.createProduct}
-            createUser={this.createUser}
-            checkvalidity={this.checkvalidity}
-            placeBid={this.placeBid}
-            closeAuction={this.closeAuction}
-            closeAuctionOwner={this.closeAuctionOwner}
-            AuctionExpiry={this.AuctionExpiry}
-            createhash={this.createhash}
-            Capturefile={this.Capturefile}
-          />
-        </div>
-        <Footer />
-        <Route exact path="/product" component={Productpg} />
+   <div className="flex-fill sidebar">
+     <NavigationBar
+       account={this.state.account}
+       products={this.state.products}
+       hashes={this.state.hashes}
+       hash={this.state.hash}
+       createProduct={this.createProduct}
+       placeBid={this.placeBid}
+       closeAuction={this.closeAuction}
+       AuctionExpiry={this.AuctionExpiry}
+       createhash={this.createhash}
+       Capturefile={this.Capturefile}
+     />
+     <Main
+       Data="prerit"
+       account={this.state.account}
+       products={this.state.products}
+       users={this.state.users}
+       hashes={this.state.hashes}
+       hash={this.state.hash}
+       buffer={this.state.buffer}
+       createProduct={this.createProduct}
+       createUser={this.createUser}
+       checkvalidity={this.checkvalidity}
+       placeBid={this.placeBid}
+       closeAuction={this.closeAuction}
+       closeAuctionOwner={this.closeAuctionOwner}
+       AuctionExpiry={this.AuctionExpiry}
+       createhash={this.createhash}
+       Capturefile={this.Capturefile}
+     />
+   </div>
+   <Footer />
+   <Route exact path="/product" component={Productpg} />
+     </>
+        
+        }
+          </>
+
+         
+
+         
+        //   <>
+        //      <div className="App"></div>
+        // <div className="flex-fill sidebar">
+        //   <NavigationBar
+        //     account={this.state.account}
+        //     products={this.state.products}
+        //     hashes={this.state.hashes}
+        //     hash={this.state.hash}
+        //     createProduct={this.createProduct}
+        //     placeBid={this.placeBid}
+        //     closeAuction={this.closeAuction}
+        //     AuctionExpiry={this.AuctionExpiry}
+        //     createhash={this.createhash}
+        //     Capturefile={this.Capturefile}
+        //   />
+        //   <Main
+        //     Data="prerit"
+        //     account={this.state.account}
+        //     products={this.state.products}
+        //     users={this.state.users}
+        //     hashes={this.state.hashes}
+        //     hash={this.state.hash}
+        //     buffer={this.state.buffer}
+        //     createProduct={this.createProduct}
+        //     createUser={this.createUser}
+        //     checkvalidity={this.checkvalidity}
+        //     placeBid={this.placeBid}
+        //     closeAuction={this.closeAuction}
+        //     closeAuctionOwner={this.closeAuctionOwner}
+        //     AuctionExpiry={this.AuctionExpiry}
+        //     createhash={this.createhash}
+        //     Capturefile={this.Capturefile}
+        //   />
+        // </div>
+        // <Footer />
+        // <Route exact path="/product" component={Productpg} />
+        //   </>
+         
+         }
+       
       </Router>
     );
   }

@@ -9,27 +9,31 @@ function Footer() {
       <div className="container">
         <div className="row">
           {/* Column1 */}
-          <div className="col col-md-3">
+          <div className={"col col-md-3 "+ styles.respfooter}>
             <h3>
-              <BsFillSquareFill color="#6D28D9" /> Crypto Auction
+              <BsFillSquareFill color="#6D28D9" /> CryptoBid
             </h3>
           </div>
           {/* Space */}
           <div className="col col-md-3"> </div>
           {/* Column2 */}
-          <div className="col col-md-3">
+          <div className={"col col-md-3 "+ styles.pagescol}>
             <h3>Pages</h3>
-            <ui className="list-unstyled">
-              <li>Seasonal</li>
-              <li>Add Product</li>
-              <li>History</li>
-              <li>Ongoing</li>
+            <ui className="list-unstyled  " >
+              <li >
+              <a style={{ color: "white" }} href="/">Home</a></li>
+              <li>
+              <a style={{ color: "white" }} href="/history">History</a></li>
+              <li>
+              <a style={{ color: "white" }} href="/ongoing">Ongoing</a></li>
+              <li>
+              <a style={{ color: "white" }} href="/addnew">Add New</a></li>
             </ui>
           </div>
           {/* Column3 */}
-          <div className="col col-md-3">
+          <div className={"col col-md-3 "+ styles.connectcol}>
             <h3>Connect</h3>
-            <ui className="list-unstyled">
+            <ui className="list-unstyled ">
               <li>FAQ</li>
               <li>Support</li>
               <li>Feedback</li>
@@ -37,14 +41,14 @@ function Footer() {
           </div>
         </div>
         <hr color="#2D396B" />
-        <div className={styles.last + " row"}>
-          <p className="col-sm-3">
+        <div className={ " row"}>
+          <p className={"col-sm-3 "}>
             &copy;{new Date().getFullYear()} CryptoAuction, Inc. All Rights
             Reserved
           </p>
-          <a className={"col-sm-3 " + styles.last}>T&C</a>
-          <a className="col-sm-3 last">Privacy Policy</a>
-          <p className="col-sm-3 last">
+          <a className={"col-sm-3 " + styles.last1}>T&C</a>
+          <a className={"col-sm-3 "+styles.last}>Privacy Policy</a>
+          <p className={"col-sm-3 "+styles.last2}>
             <FiGithub />
             &nbsp;
             <FiInstagram />

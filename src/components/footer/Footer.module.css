@@ -6,8 +6,34 @@
   position: relative;
   width: 100%;
 }
-.last{
+.last1,.last,.last2{
   color: #A469FF;
   font-size: 1.1rem;
+}
+
+
+@media only screen and (max-width: 768px){
+  .pagescol{
+    display: none;
+  }
+  .connectcol{
+    display: none;
+  }
+  .respfooter{
+    text-align: center;
+    margin-left: 30%;
+  }
+  .last{
+    margin-left: 30%;
+    color: #A469FF;
+  }
+  .last1{
+    margin-left: 40%;
+    color: #A469FF;
+  }
+  .last2{
+    margin-left: 32%;
+    color: #A469FF;
+  }
 }
 
