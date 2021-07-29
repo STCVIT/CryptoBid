@@ -3,7 +3,7 @@ import styles from "./style.module.css";
 import { ButtonGroup, ToggleButton } from "react-bootstrap";
 import Listele from "./util/listele";
 import HistComponent from "./util/withDetails";
-
+import Error from "../Error"
 import { Crypt } from "hybrid-crypto-js";
 var crypt = new Crypt();
 const pk = localStorage.getItem("privateKey");
@@ -65,7 +65,10 @@ function Historypg(props) {
           ))}
         </ButtonGroup>
       </div>
-      <div className=" table-responsive ">
+     
+          {a === "true" ? (
+            <>
+             <div className=" table-responsive ">
         <table
           class={"table table-borderless table-dark  mx-auto " + styles.table}
         >
@@ -77,8 +80,6 @@ function Historypg(props) {
               <th scope="col">Claim</th>
             </tr>
           </thead>
-          {a === "true" ? (
-            <>
               {radioValue === "1" ? (
                 <tbody>
                   {props.products.map((product, k) => {
@@ -148,17 +149,19 @@ function Historypg(props) {
                   })}
                 </tbody>
               )}
-            </>
-          ) : (
-            <tbody>
-              <td>
-                <p>You need to be logged in to view data</p>
-              </td>
-            </tbody>
-          )}
-        </table>
+                 </table>
       </div>
 
+            </>
+          ) : (
+            // <tbody>
+            //   <td>
+            //     <p>You need to be logged in to view data</p>
+            //   </td>
+            // </tbody>
+            <Error id={2} />
+          )}
+     
       <button className={"btn " + styles.vm}>View More</button>
     </div>
   );

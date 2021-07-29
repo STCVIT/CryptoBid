@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Box from "./util/box.js";
 import { ButtonGroup, ToggleButton } from "react-bootstrap";
 import styles from "./style.module.css";
-
+import Error from '../Error'
 function Ongoing(props) {
   const [radioValue, setRadioValue] = useState("1");
   const radios = [
@@ -120,7 +120,7 @@ function Ongoing(props) {
           )}
         </div>
       ) : (
-        <div className="container"> Sign In to view </div>
+        <div className="container"> <Error id={2}/></div>
       )}
     </>
   );
