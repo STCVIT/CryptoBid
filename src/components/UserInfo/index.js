@@ -17,10 +17,11 @@ var rsa = new RSA();
       var privateKey = keyPair.privateKey;
       localStorage.setItem("publicKey", publicKey);
       localStorage.setItem("privateKey", privateKey);
-      localStorage.setItem("generated", "true");
+      
     }, 1024)
-     
    }
+   localStorage.setItem("generated", "true");
+
     
 }
 
