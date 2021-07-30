@@ -436,7 +436,10 @@ class App extends Component {
        Capturefile={this.Capturefile}
      />
    </div>
-   <Footer />
+   <footer>
+    <Footer />
+   </footer>
+   
    <Route exact path="/product" component={Productpg} />
      </>
         
