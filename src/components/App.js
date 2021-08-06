@@ -104,7 +104,7 @@ class App extends Component {
           users: [...this.state.users, user],
         });
       }
-      console.log(this.state.products)
+     
     } else {
       window.alert("Auction contract not deployed to detected network.");
     }
