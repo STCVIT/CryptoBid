@@ -9,22 +9,26 @@ function Error(props){
         1 : {
             Name : "Page Not Found" ,
             img : i404,
-            Link: '/'
+            Link: '/',
+            Text: 'Head back to home page'
         },
         2 : {
             Name : "Not Signed in" ,
             img: Login,
-            Link: '/profile'
+            Link: '/profile',
+            Text: 'Proceed to Sign In'
         },
         3 : {
             Name : "Account not connected" ,
             img: Account,
-            Link: '/'
+            Link: '/',
+            Text: 'Open metamask.'
         },
         4 : {
             Name : "Metamask not installed" ,
             img : Metamask,
-            Link: 'https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en'
+            Link: 'https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en',
+            Text: 'Proceed to download Metamask.'
         }
 
 };
@@ -32,7 +36,7 @@ console.log(Err);
     return(
         <div className={styles.Cont + " text-center container my-3 "}>
             <h3>{Err[props.id].Name}</h3>
-            <p>Head back to the homepage <a href={Err[props.id].Link} >CryptoAuction</a></p>
+            <p> <a href={Err[props.id].Link} > {Err[props.id].Text}</a></p>
             <img src={Err[props.id].img } className={styles.e404} width="50%" alt="error" />
             </div>
          

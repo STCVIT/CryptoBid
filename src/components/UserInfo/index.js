@@ -70,7 +70,8 @@ export default function UserInfo() {
             if(localStorage.getItem("generated") === null){
                  Generate();
             }   
-            window.location.reload()         
+            window.location.href = '/'
+                   
           }}
         >
           {(formik) => {

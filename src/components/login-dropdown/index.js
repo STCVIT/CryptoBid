@@ -21,14 +21,6 @@ function LoginDropdown() {
       {
         Name: "Edit Profile",
         Link: "/profile",
-      },
-      {
-        Name: "Feedback",
-        Link: "/feedback",
-      },
-      {
-        Name: "Contact Us",
-        Link: "/contact-us",
       }].map((List) => {
       return (
         <Dropdown.Item

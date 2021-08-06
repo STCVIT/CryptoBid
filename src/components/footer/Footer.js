@@ -16,29 +16,8 @@ function Footer() {
           </div>
           {/* Space */}
           <div className="col col-md-3"> </div>
-          {/* Column2 */}
-          <div className={"col col-md-3 "+ styles.pagescol}>
-            <h3>Pages</h3>
-            <ui className="list-unstyled  " >
-              <li >
-              <a style={{ color: "white" }} href="/">Home</a></li>
-              <li>
-              <a style={{ color: "white" }} href="/history">History</a></li>
-              <li>
-              <a style={{ color: "white" }} href="/ongoing">Ongoing</a></li>
-              <li>
-              <a style={{ color: "white" }} href="/addnew">Add New</a></li>
-            </ui>
-          </div>
-          {/* Column3 */}
-          <div className={"col col-md-3 "+ styles.connectcol}>
-            <h3>Connect</h3>
-            <ui className="list-unstyled ">
-              <li>FAQ</li>
-              <li>Support</li>
-              <li>Feedback</li>
-            </ui>
-          </div>
+   
+        
         </div>
         <hr color="#2D396B" />
         <div className={ " row"}>
@@ -46,17 +25,10 @@ function Footer() {
             &copy;{new Date().getFullYear()} CryptoAuction, Inc. All Rights
             Reserved
           </p>
-          <a className={"col-sm-3 " + styles.last1}>T&C</a>
-          <a className={"col-sm-3 "+styles.last}>Privacy Policy</a>
-          <p className={"col-sm-3 "+styles.last2}>
-            <FiGithub />
-            &nbsp;
-            <FiInstagram />
-            &nbsp;
-            <FiFacebook />
-            &nbsp;
-            <FiLinkedin />
+          <p className={"col-sm-3 ml-auto "}>
+           Made with &#9829; by STC
           </p>
+         
         </div>
       </div>
     </footer>

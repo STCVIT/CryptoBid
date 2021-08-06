@@ -4,6 +4,7 @@ import moment from "moment";
 import Card from "../Posts";
 import { CardDeck } from "react-bootstrap";
 moment().format();
+const a = localStorage.getItem("generated");
 const Productpg = (props) => {
   var productid = window.location.pathname.split("/");
 
@@ -95,6 +96,9 @@ const Productpg = (props) => {
                           ETH{" "}
                         </span>
                       </h4>
+                      { a === "true" ?
+
+                      <>
                       <div className="pb-2">
                         {!product.purchased &&
                         product.currentBidder !== props.account &&
@@ -147,6 +151,11 @@ const Productpg = (props) => {
                         ) : null}
                       </div>
 
+                      </>
+                      
+                    
+                    : null}
+                      
                       <div className="tags">
                         <div>
                           {" "}
