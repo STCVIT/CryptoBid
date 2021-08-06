@@ -10,7 +10,7 @@ var rsa = new RSA();
  function Generate() {
    const pk = localStorage.getItem("publicKey")
    const pvk = localStorage.getItem("privateKey")
-   if (pk === pvk === null){
+   if (pk === pvk){
     rsa.generateKeyPair(function (keyPair) {
       // Callback function receives new key pair as a first argument
       var publicKey = keyPair.publicKey;
