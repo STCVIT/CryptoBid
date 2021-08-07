@@ -50,7 +50,7 @@
 
 .imageUploadWrap {
   margin-top: 20px;
-  border: 5px dashed #ffffff;
+  border: 2px dashed #ffffff;
   border-radius: 14px;
   position: relative;
 }
@@ -58,7 +58,7 @@
 .imageDropping,
 .imageUploadWrap:hover {
   background-color: #140d4a;
-  border: 4px dashed #ffffff;
+  border: 2px dashed #ffffff;
 }
 
 .imageTitleWrap {

@@ -106,7 +106,13 @@ class App extends Component {
       }
      
     } else {
-      window.alert("Auction contract not deployed to detected network.");
+      // window.alert("Make Sure you connected metamask to the Rinkeby Network");
+      Swal.fire({
+        title: "Failure to Load Data",
+        text: "Make sure you connected metamask to the Rinkeby Network",
+        type: "success",
+        icon: "error",
+      })
     }
 
     }

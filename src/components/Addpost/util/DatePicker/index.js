@@ -50,7 +50,7 @@ const DatePickerField = ({ field, form, ...other }) => {
 
   return (
     <>
-      <h2>Closing Time</h2>
+      <h2>Closing Date</h2>
       {/* <div   className={styles.DatePicker}> */}
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <ThemeProvider theme={materialTheme}>

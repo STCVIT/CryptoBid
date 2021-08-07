@@ -41,16 +41,25 @@ function Addpost(props) {
   // };
   const [picture, setPicture] = useState(null);
   const [imgData, setImgData] = useState(null);
-
+  function validateFile (file) {
+    const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/x-icon'];
+    if (validTypes.indexOf(file.type) === -1) {
+        return false;
+    }
+    return true;
+}
   const onChangePicture = (e) => {
     if (e.target.files[0]) {
-      setPicture(e.target.files[0]);
+      if(validateFile(e.target.files[0]))
+      {
+        setPicture(e.target.files[0]);
       const reader = new FileReader();
       reader.addEventListener("load", () => {
         setImgData(reader.result);
       });
       reader.readAsDataURL(e.target.files[0]);
       props.Capturefile(e);
+    }
     }
   };
   return (
@@ -106,7 +115,9 @@ function Addpost(props) {
                           <img
                             className={styles.fileUploadImage + " text-center "}
                             src={imgData}
-                            alt="abcd"
+                            type="image"
+                            alt="Productimage"
+                            required
                           />
                         </div>
                       )}

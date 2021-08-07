@@ -17,11 +17,17 @@ const Productpg = (props) => {
         const biddate = new Date(
           parseInt(product.currentbidtime)
         ).toLocaleDateString();
+        const bidtime = new Date(
+          parseInt(product.currentbidtime)
+        ).toLocaleTimeString();
 
      
-        const endtime = new Date(
+        const enddate = new Date(
           parseInt(product.infoArray.endtime)
         ).toLocaleDateString();
+        const endtime =  new Date(
+          parseInt(product.infoArray.endtime)
+        ).toLocaleTimeString();
 
     
         return (
@@ -51,16 +57,16 @@ const Productpg = (props) => {
                       <h1>{product.name}</h1>
                       <h6>
                         End At:{" "}
-                        <span className={styles.purpletext}>{endtime}</span>
+                        <span className={styles.purpletext}>{endtime}  {enddate}</span>
                       </h6>
                       <h6>
                         Last Bid Time:{" "}
-                        <span className={styles.purpletext}>{biddate}</span>
+                        <span className={styles.purpletext}>{bidtime}  {biddate}</span>
                       </h6>
                       <p className={styles.purpletext}>
                         {product.infoArray.discription}
                       </p>
-                      {product.purchased.toString() === "false" ? (
+                      {product.purchased.toString() === "false" && time < product.infoArray.endtime ? (
                         <p className={styles.price}>Status : Available</p>
                       ) : (
                         <p className={styles.price}>Sold</p>
@@ -102,7 +108,7 @@ const Productpg = (props) => {
                       <div className="pb-2">
                         {!product.purchased &&
                         product.currentBidder !== props.account &&
-                        product.owner !== props.account ? (
+                        product.owner !== props.account  && time < product.infoArray.endtime ? (
                           <button
                             className="btn btn-dark plcbid"
                             name={product.Id}

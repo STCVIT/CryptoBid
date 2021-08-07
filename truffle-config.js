@@ -1,6 +1,5 @@
 const HDWalletProvider = require('@truffle/hdwallet-provider');
-require('babel-register');
-require('babel-polyfill');
+
 
 module.exports = {
   networks: {
@@ -21,7 +20,7 @@ module.exports = {
       confirmations: 0, // # of confs to wait between deployments. (default: 0)
       timeoutBlocks: 200, // # of blocks before a deployment times out  (minimum/default: 50)
       skipDryRun: true, // Skip dry run before migrations? (default: false for public nets )
-      from:"0x4a4133d00648f0d88D8aC7A2927dea97c542201A"
+      // from:"0xAB121dd7eec5999d9bbf72Ceb96A1EE028E3B2DC"
     },
   },
   
