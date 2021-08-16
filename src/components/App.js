@@ -14,6 +14,7 @@ import Swal from "sweetalert2";
 import Footer from "./footer/Footer.js";
 import Productpg from "./Productpage";
 import Error from './Error'
+import LoadingOverlay from 'react-loading-overlay';
 // import generateKeyPairSync from "crypto"
 var crypt = new Crypt();
 
@@ -170,6 +171,7 @@ class App extends Component {
   }
 
   createProduct(name, baseprice, discription, category, key, bidinc, date) {
+    this.setState({loading: true})
     try {
       const hash = this.state.hash;
       this.state.auction.methods
@@ -185,6 +187,7 @@ class App extends Component {
         )
         .send({ from: this.state.account })
         .once("confirmation", () => {
+          this.setState({loading:false})
           const lenght = this.state.products.length
           
           Swal.fire({
@@ -197,7 +200,8 @@ class App extends Component {
             window.location.href = "/product/" + (lenght+1) ;
           });
         })
-        .on("error", function(error, receipt) {
+        .on("error", (error, receipt) =>  {
+          this.setState({loading:false})
           // If the transaction was rejected by the network with a receipt, the second parameter will be the receipt.
           
           //alert("Transaction Failed")
@@ -216,21 +220,30 @@ class App extends Component {
   }
 
   placeBid(id, value) {
+    this.setState({loading: true})
+    
     this.state.auction.methods
       .placeBid(id)
       .send({ from: this.state.account, value: value })
+     
+      
+      
       .on("confirmation", () => {
+        this.setState({loading:false})
+        
         
         Swal.fire({
           title: "Success ",
           text: "Your bid has been placed",
           type: "success",
           icon: "success",
+          
         }).then(function(result) {
           window.location.reload();
         });
       })
-      .on("error", function(error, receipt) {
+      .on("error", (error, receipt) => {
+        this.setState({loading:false})
        
         // alert("Transaction Failed")
         Swal.fire({
@@ -250,6 +263,7 @@ class App extends Component {
       .send({ from: this.state.account })
       .on("confirmation", () => {
         // alert("your product has been claimed")
+        this.setState({loading:false})
         Swal.fire({
           title: "Success ",
           text: "Product claimed successfully",
@@ -259,7 +273,8 @@ class App extends Component {
           window.location.reload();
         });
       })
-      .on("error", function(error, receipt) {
+      .on("error",(error, receipt) => {
+        this.setState({loading:false})
         
         // alert("Transaction Failed")
         Swal.fire({
@@ -279,6 +294,7 @@ class App extends Component {
       .closeAuction(id)
       .send({ from: this.state.account })
       .once("receipt", (receipt) => {
+        this.setState({loading:false})
         return true;
       });
   }
@@ -294,10 +310,12 @@ class App extends Component {
   }
 
   closeAuctionOwner(id) {
+    this.setState({ loading: true });
     this.state.auction.methods
       .closeAuctionOwner(id)
       .send({ from: this.state.account })
       .on("confirmation", () => {
+        this.setState({loading:false})
         // alert("Your product is now removed from active bidding")
         Swal.fire({
           title: "Success ",
@@ -308,7 +326,8 @@ class App extends Component {
           window.location.reload();
         });
       })
-      .on("error", function(error, receipt) {
+      .on("error", (error, receipt) => {
+        this.setState({loading:false})
        
         // alert("Transaction Failed")
         Swal.fire({
@@ -335,6 +354,7 @@ class App extends Component {
       )
       .send({ from: this.state.account })
       .on("confirmation", () => {
+        this.setState({loading:false})
         // alert("User details shared successfully")
         Swal.fire({
           title: "Success ",
@@ -345,7 +365,8 @@ class App extends Component {
           window.location.reload();
         });
       })
-      .on("error", function(error, receipt) {
+      .on("error", (error, receipt) => {
+        this.setState({loading:false})
         // If the transaction was rejected by the network with a receipt, the second parameter will be the receipt.
         
         // alert("Transaction Failed")
@@ -367,12 +388,28 @@ class App extends Component {
     reader.readAsArrayBuffer(file);
     reader.onloadend = () => {
       this.setState({ buffer: Buffer.from(reader.result) });
+      ipfs.add(this.state.buffer, (error, result) => {
       
+        //  this.setState({hash: result[0].hash})
+        if (error) {
+          console.error(error);
+          return;
+        }
+        this.setState({ hash: result[0].hash });
+        // hashing.push(result[0].hash)
+       
+        
+        this.setState({
+          hashes: [...this.state.hashes, result[0].hash],
+        });
+      });
     };
+
+    
+    
   };
 
   createhash = (event) => {
-    event.preventDefault();
     
     ipfs.add(this.state.buffer, (error, result) => {
       
@@ -383,6 +420,7 @@ class App extends Component {
       }
       this.setState({ hash: result[0].hash });
       // hashing.push(result[0].hash)
+      console.log(result[0].hash)
       
       this.setState({
         hashes: [...this.state.hashes, result[0].hash],
@@ -393,6 +431,24 @@ class App extends Component {
   render() {
     return (
       <Router>
+        {this.state.loading ?  <div active={this.state.loading}
+        className="cont">
+        <LoadingOverlay
+            active={this.state.loading}
+            spinner
+            className="Loader"
+            text='Please Wait...'
+            style={{
+              fontSize: 50,
+              animation: 'spin 1s infinite linear'
+            }}
+        >     
+        </LoadingOverlay>
+          </div> : null
+
+       }
+       
+        
      
        { (K ===4) ?
                

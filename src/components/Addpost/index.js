@@ -23,8 +23,9 @@ const signInSchema = Yup.object().shape({
   minimumBids: Yup.number().required("Minimum bids are required"),
   category: Yup.string().required("Select Category"),
   tags: Yup.string(),
-  endingDate: Yup.date().default(DateInc()),
+  endingDate: Yup.string(),
 });
+
 const initialValues = {
   productName: "",
   productDesc: "",
@@ -33,7 +34,7 @@ const initialValues = {
   category: "",
   tags: "",
   startingDate: "",
-  endingDate: null,
+  endingDate: Date.now(),
 };
 function Addpost(props) {
   // let containerStyle = {
@@ -49,6 +50,8 @@ function Addpost(props) {
     return true;
 }
   const onChangePicture = (e) => {
+   
+    
     if (e.target.files[0]) {
       if(validateFile(e.target.files[0]))
       {
@@ -59,7 +62,7 @@ function Addpost(props) {
       });
       reader.readAsDataURL(e.target.files[0]);
       props.Capturefile(e);
-    }
+      }
     }
   };
   return (
@@ -122,13 +125,15 @@ function Addpost(props) {
                         </div>
                       )}
                     </div>
-                    <Button
+                    {/* <Button
                       className={styles.upload}
                       onClick={props.createhash}
                       variant="primary"
+                      required
+                     
                     >
                       Upload Image
-                    </Button>
+                    </Button> */}
                     <div className={styles.fileUploadContent}></div>
                   </div>
                 </div>
