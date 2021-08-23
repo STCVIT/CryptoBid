@@ -1,0 +1,33 @@
+<p align="center">
+    <a href="https://stcvit.in/" target="_blank"><img src="https://github.com/STCVIT/STC-README/blob/master/gitbanner.png" title="STC-VIT" alt="STC-VIT"></a>
+</p>
+<h1>CryptoBid </h1>
+
+> If you're looking for a global marketplace which offers you hassle free transactions within the reach of your hands, CryptoBid is the answer.CryptoBid is a next gen auction website which allows you to make transactions on items using the Ethereum blockchain. It also provides encryption of your details
+as you discover and bid on popular products. 
+
+
+
+## Built With
+<!-- Add tech stack images -->
+
+## Getting started
+* Open the <a href="https://cryptobid.netlify.app/"> website</a>  or clone this repository
+* Install the Metamask chrome extension and get some test ether in the rinkeby network
+* Sign up on the website
+* You're good to go! Bid/sell on products you like or discover trending items!
+
+## Contributors
+* 
+*
+*
+*
+*
+## Connect with Us
+
+[![Instagram](https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://www.instagram.com/stcvit/)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/company/micvitvellore/mycompany/)
+
+<p align="center">
+	Made with :heart: by <a href="https://stcvit.in/">STC-VIT</a>
+</p>
