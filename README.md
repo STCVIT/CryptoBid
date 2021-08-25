@@ -18,11 +18,12 @@ as you discover and bid on popular products.
 * You're good to go! Bid/sell on products you like or discover trending items!
 
 ## Contributors
-* 
-*
-*
-*
-*
+*   <a href="https://github.com/HarshitaRajput">Harshita Rajput</a>
+*   <a href="https://github.com/Kaushal-A">Kaushal Agrawal</a>
+*   <a href="https://github.com/mayankdhnkr">Mayank Dhankar</a>
+*   <a href="https://github.com/Mohitx04-dev">Mohit Chourasia</a>
+*   <a href="https://github.com/Prerit2002">Prerit Rawtani</a>
+*   <a href="https://github.com/vyomguptaa">Vyom Gupta</a>
 ## Connect with Us
 
 [![Instagram](https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://www.instagram.com/stcvit/)
