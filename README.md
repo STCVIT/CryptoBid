@@ -10,7 +10,12 @@ as you discover and bid on popular products.
 
 ## Built With
 <!-- Add tech stack images -->
+<p float="left">
+	<img src="https://github.com/STCVIT/CryptoAuction/blob/b541fecf108f1ef673d7a1f163c8eae1e2fdeffd/Build%20With/react%20png.png" alt="ReactJS" width="30%" >
+	<img src="https://github.com/STCVIT/CryptoAuction/blob/b541fecf108f1ef673d7a1f163c8eae1e2fdeffd/Build%20With/trufflepng.png" alt="Truffle Blockchain" width="30%" >
+	<img src="https://github.com/STCVIT/CryptoAuction/blob/b541fecf108f1ef673d7a1f163c8eae1e2fdeffd/Build%20With/node.png" alt="NodeJS" width="30%" >
 
+</p>
 ## Getting started
 * Open the <a href="https://cryptobid.netlify.app/"> website</a>  or clone this repository
 * Install the Metamask chrome extension and get some test ether in the rinkeby network
