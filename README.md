@@ -6,8 +6,10 @@
 > If you're looking for a global marketplace which offers you hassle free transactions within the reach of your hands, CryptoBid is the answer.CryptoBid is a next gen auction website which allows you to make transactions on items using the Ethereum blockchain. It also provides encryption of your details
 as you discover and bid on popular products. 
 <p float="left">
-<img src="https://github.com/STCVIT/CryptoAuction/blob/main/Build%20With/Home%20page.png" alt="Home Page" width="35%">
+
 <img src="https://github.com/STCVIT/CryptoAuction/blob/main/Build%20With/product%20page.png" alt="Product Page" width="50%">
+<img src="https://github.com/STCVIT/CryptoAuction/blob/main/Build%20With/after%20uploading.png" alt="Home Page" width="35%">
+<img src="https://github.com/STCVIT/CryptoAuction/blob/main/Build%20With/ongoing.png" alt="Home Page" width="35%">
 
 </p>
 
