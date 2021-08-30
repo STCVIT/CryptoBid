@@ -7,9 +7,9 @@
 as you discover and bid on popular products. 
 <p float="left">
 
-<img src="https://github.com/STCVIT/CryptoAuction/blob/main/Build%20With/product%20page.png" alt="Product Page" width="35%">
-<img src="https://github.com/STCVIT/CryptoAuction/blob/main/Build%20With/after%20uploading.png" alt="Home Page" width="35%">
-<img src="https://github.com/STCVIT/CryptoAuction/blob/main/Build%20With/ongoing.png" alt="Home Page" width="35%">
+<img src="https://github.com/STCVIT/CryptoAuction/blob/main/Build%20With/product%20page.png" alt="Product Page" width="30%">
+<img src="https://github.com/STCVIT/CryptoAuction/blob/main/Build%20With/after%20uploading.png" alt="Home Page" width="30%">
+<img src="https://github.com/STCVIT/CryptoAuction/blob/main/Build%20With/ongoing.png" alt="Home Page" width="30%">
 
 </p>
 
