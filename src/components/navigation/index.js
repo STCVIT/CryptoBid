@@ -1,7 +1,7 @@
 import React , {useState} from "react";
 import { Link } from "react-router-dom";
 import styles from "./style.module.css";
-import logo from "./CryptoLogo.png";
+import logo from "./CryptoLogo.svg";
 import "@fontsource/metropolis";
 import LoginDropdown from "../login-dropdown"
 const a = localStorage.getItem("generated");
