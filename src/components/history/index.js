@@ -132,7 +132,7 @@ function Historypg(props) {
                                                 product.currentBid.toString(),
                                                 "Ether"
                                               )}
-                                              pname={product.name}
+                                              // pname={product.name}
                                               Email={
                                                 crypt.decrypt(pk, user.email)
                                                   .message
