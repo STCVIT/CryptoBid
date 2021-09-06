@@ -63,7 +63,11 @@ function Listele(props) {
                   ) : 
                   null
                   }
-                  <button
+                  
+                </>
+              );
+            })}
+            <button
                       className="btn btn-primary"
                       onClick={(event) => {
                         event.preventDefault();
@@ -81,9 +85,6 @@ function Listele(props) {
                     >
                       Claim
                     </button>
-                </>
-              );
-            })}
            
           </>
         ) : null}
