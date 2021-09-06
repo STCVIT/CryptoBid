@@ -70,17 +70,7 @@ class App extends Component {
         console.log(error)
       }
 
-      //load account
-    // const accounts = await web3.eth.getAccounts().catch(e) {
-    //   if(e.code===4001) 
-    //   {
-        
-    //   }
-    // };
-    // console.log(accounts.lenght)
-    // if (accounts.length === undefined){
-    //   K=4;
-    // }
+      
     
     
     
