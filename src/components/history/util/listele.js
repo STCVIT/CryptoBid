@@ -67,24 +67,7 @@ function Listele(props) {
                 </>
               );
             })}
-            <button
-                      className="btn btn-primary"
-                      onClick={(event) => {
-                        event.preventDefault();
-
-                        //const productname =
-
-                        props.createUser(
-                          crypt.encrypt(props.publicKey, name),
-                          crypt.encrypt(props.publicKey, email),
-                          crypt.encrypt(props.publicKey, address),
-                          crypt.encrypt(props.publicKey, location),
-                          pname
-                        );
-                      }}
-                    >
-                      Claim
-                    </button>
+           
            
           </>
         ) : null}
