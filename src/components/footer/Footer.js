@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./Footer.module.css";
 import { BsFillSquareFill } from "react-icons/bs";
 import { FiGithub, FiInstagram, FiFacebook, FiLinkedin } from "react-icons/fi";
-
+import logo from "../navigation/CryptoLogo.svg";
 function Footer() {
   return (
     <footer className={styles.mainFooter}>
@@ -11,7 +11,7 @@ function Footer() {
           {/* Column1 */}
           <div className={"col col-md-3 "+ styles.respfooter}>
             <h3>
-              <BsFillSquareFill color="#6D28D9" /> CryptoBid
+              <img alt="icon" src={logo} /> CryptoBid
             </h3>
           </div>
           {/* Space */}

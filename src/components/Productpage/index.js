@@ -165,7 +165,7 @@ const Productpg = (props) => {
                       <div className="tags">
                         <div>
                           {" "}
-                          <button className="btn btn-dark like">
+                          <button className="btn btn-dark like " disabled>
                             ♡ {parseInt(product.bidcount)}
                           </button>
                         </div>

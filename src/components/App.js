@@ -343,13 +343,13 @@ class App extends Component {
   }
 
   createUser(name, email, address, location, productname) {
-    const k = localStorage.getItem("publicKey");
+    
     this.state.auction.methods
       .createUser(
-        crypt.encrypt(k, name),
-        crypt.encrypt(k, email),
-        crypt.encrypt(k, address),
-        crypt.encrypt(k, location),
+         name,
+        email,
+        address,
+        location,
         productname
       )
       .send({ from: this.state.account })

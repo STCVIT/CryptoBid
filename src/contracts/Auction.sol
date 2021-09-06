@@ -53,6 +53,7 @@ contract Auction {
         uint bidinc;
         uint endtime;
         string hash;
+        bool claimed;
         
     }
     
@@ -126,6 +127,7 @@ contract Auction {
         products[productCount].infoArray.bidinc = _bidinc;
         products[productCount].infoArray.endtime =  _etime;
         products[productCount].infoArray.hash = _hash;
+        products[productCount].infoArray.claimed = false;
         
         //create the product
         //products[productCount] = Product(productCount,_name,_baseprice,msg.sender,false, block.timestamp,_baseprice,msg.sender,block.timestamp, _discription,0, _category);

@@ -84,10 +84,13 @@ function Historypg(props) {
                 <tbody>
                   {props.products.map((product, k) => {
                     return (
+
                       <>
+                      {console.log(product.publickey)}
                         {product.currentBidder === props.account &&
                         product.purchased ? (
                           <Listele
+                            Claimed={product.claimed}
                             Name={product.name}
                             createUser={props.createUser}
                             Cost={window.web3.utils.fromWei(
@@ -96,7 +99,11 @@ function Historypg(props) {
                             )}
                             hash={product.infoArray.hash}
                             radioValue={radioValue}
+                            publicKey={product.publickey}
+                            users={props.users}
+                            
                           />
+                          
                         ) : null}
                       </>
                     );
