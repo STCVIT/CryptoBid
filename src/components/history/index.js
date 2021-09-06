@@ -86,7 +86,7 @@ function Historypg(props) {
                     return (
 
                       <>
-                      {console.log(product.publickey)}
+                      
                         {product.currentBidder === props.account &&
                         product.purchased ? (
                           <Listele

@@ -336,8 +336,8 @@ class App extends Component {
           type: "success",
           icon: "error",
         }).then(function(result) {
-          console.log(error)
-          // window.location.reload();
+          
+          window.location.reload();
         });
       });
   }
@@ -420,7 +420,7 @@ class App extends Component {
       }
       this.setState({ hash: result[0].hash });
       // hashing.push(result[0].hash)
-      console.log(result[0].hash)
+     
       
       this.setState({
         hashes: [...this.state.hashes, result[0].hash],
