@@ -22,7 +22,7 @@ function Footer() {
         <hr color="#2D396B" />
         <div className={ " row"}>
           <p className={"col-sm-3 "}>
-            &copy;{new Date().getFullYear()} CryptoAuction, Inc. All Rights
+            &copy;{new Date().getFullYear()} CryptoBid, Inc. All Rights
             Reserved
           </p>
           <p className={"col-sm-3 ml-auto "}>

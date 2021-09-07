@@ -4,7 +4,7 @@ import React from "react";
 function Box(props) {
   const Hbid = props.HBid;
   const Ubid = props.UBid;
-  console.log(Hbid);
+
   const Data = [
     {
       Title: "Highest Bid",

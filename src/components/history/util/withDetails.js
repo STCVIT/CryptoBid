@@ -5,7 +5,7 @@ function HistComponent(props) {
   const [info, setName] = useState({ name: "", phn: "", add: "" });
   const [info2, setVal] = useState(["", "", ""]);
   const [btn, setState] = useState({ state: true, classn: styles.drpdwn });
-  console.log(info);
+  
   const setData = () => {
     if (btn.state === true) {
       setState({ state: false, classn: styles.drpdwninverted });
