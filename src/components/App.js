@@ -205,7 +205,7 @@ class App extends Component {
           });
         });
     } catch (err) {
-      alert("fool");
+      alert("Error");
     }
   }
 
